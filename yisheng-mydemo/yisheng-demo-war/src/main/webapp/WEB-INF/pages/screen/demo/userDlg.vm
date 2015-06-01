@@ -1,0 +1,80 @@
+#set( $layout = "/layout/page-layout.vm")
+
+<form method="post" id="userForm" enctype="multipart/form-data">
+	<input name="id" type="hidden" value="$!{user.id}"/>
+	<table class="editTable">
+		<tr>
+			<td style="width:80px">姓名：</td>
+			<td><input name="name" class="easyui-validatebox" data-options="required:true" value="$!{user.name}" style="width: 500px;" /></td>
+		</tr>
+		<tr>
+			<td>性别：</td>
+			<td>
+				<input type="radio" name="sex" #if($!{user.sex} == 0 || !$!{user.sex}) checked #end value="0"/>&nbsp;男&nbsp;
+				<input type="radio" name="sex" #if($!{user.sex} == 1) checked #end value="1"/>&nbsp;女
+			</td>
+		</tr>
+		<tr>
+			<td>手机号：</td>
+			<td><input name="mobile" class="easyui-validatebox" data-options="required:true,validType:'mobile'" value="$!{user.mobile}" style="width: 500px;"/></td>
+		</tr>
+		<tr>
+			<td>地址：</td>
+			<td><input name="address" class="easyui-validatebox" data-options="required:true" value="$!{user.address}" style="width: 500px;"/></td>
+		</tr>
+		<tr>
+			<td>简介：</td>
+			<td>
+				<textarea id="_description" name="description" >$!{user.description}</textarea>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2" style="text-align: center">
+				<input type="button" class="btn" onmouseover="this.className='btn_over'" onmouseout="this.className='btn'" onclick="doSubmit()" value="确定"/>
+				<button class="btn" onmouseover="this.className='btn_over'" onmouseout="this.className='btn'" onclick="return close1()">取消</button>
+			</td>
+		</tr>
+    </table>
+	<br/>
+</form>
+	
+<script>
+
+    // 提交
+	function doSubmit(){
+		$('#userForm').form('submit',{ 
+            url:'/demo/user/save', 
+            onSubmit:function(){  
+            	return $(this).form('validate');  
+            },  
+            success:function(data){  
+            	if(data == 1){
+            		parent.$("#user_div").window("close"); 
+    				parent.$("#userTable").datagrid("reload");
+            	}else {
+            		jQuery.messager.alert("错误", "提交失败~", "error");
+            	}
+          	}  
+		});
+	}
+	
+	// 取消
+    function close1(){
+    	parent.$("#user_div").window("close");
+    	return false;
+    }
+    
+    var editor1 = KindEditor.create('textarea[id="_description"]', {
+    	uploadJson:'${webPath}/kindEditorUpload',
+    	allowFileManager : true,
+    	width:"400px",
+    	height:"300px",
+    	afterBlur:function(){
+    	    this.html();
+    	},
+    	afterChange:function(){
+    	   $("#_description").val(this.html());
+    	}
+    });
+ 
+</script>

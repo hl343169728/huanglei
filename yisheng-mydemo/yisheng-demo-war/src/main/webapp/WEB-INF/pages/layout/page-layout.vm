@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="pragma" Content="no-cache">
+	<meta http-equiv="Cache-Control" Content="no-cache, must-revalidate,no-store">
+	<meta http-equiv="Expires" Content="0">
+	<title>雷锋网活动管理</title>
+	<link rel="stylesheet" type="text/css" href="${staticRoot}/common/oldAdmin/css/reset.source.css" />
+	<link rel="stylesheet" type="text/css" href="${staticRoot}/common/oldAdmin/css/baselayout.css" />
+	<link rel="stylesheet" type="text/css" href="${staticRoot}/common/oldAdmin/css/putin.css" />
+	<link rel="stylesheet" type="text/css" href="${staticRoot}/common/jquery-easyui/themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="${staticRoot}/common/jquery-easyui/themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="${staticRoot}/common/jquery-easyui/demo/demo.css">
+	<link type="text/css" href="${staticRoot}/common/css/common.css" rel="stylesheet" />
+    <link type="text/css" href="${staticRoot}/common/css/wbox.css" rel="stylesheet" />
+	<script type="text/javascript" src="${staticRoot}/common/oldAdmin/base.js"></script>
+	<script type="text/javascript" src="${staticRoot}/common/jquery-easyui/jquery-1.8.0.min.js"></script>
+	<script type="text/javascript" src="${staticRoot}/common/jquery-easyui/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="${staticRoot}/common/jquery-easyui/myself-easyui-tools.js"></script>
+	<script type="text/javascript" src="${staticRoot}/common/kindeditor-4.1.7/kindeditor.js" charset="utf-8"></script>
+	<script type="text/javascript" src="${staticRoot}/common/My97DatePicker/WdatePicker.js"></script>
+	<script type="text/javascript" src="${staticRoot}/common/jquery-easyui/locale/easyui-lang-zh_CN.js"></script>
+	<script type="text/javascript" src="${staticRoot}/common/js/city.js"></script>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=9a75c7bec8b0edf8624cd7f86c6560f6"></script>
+	<!-- 图片上传预览 -->
+	<script type="text/javascript" src="${staticRoot}/common/js/uploadPreview.js"></script>
+	<script type="text/javascript" src="${staticRoot}/common/js/picture.js"></script>
+
+</head>
+<body>
+ $screen_content
+</body>
+</html>

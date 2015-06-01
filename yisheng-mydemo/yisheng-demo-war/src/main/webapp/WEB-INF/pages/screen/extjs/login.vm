@@ -1,0 +1,3 @@
+#set( $layout = "/layout/extjs-layout.vm")
+
+<script type="text/javascript" src="${staticRoot}/demo/extjs/login.js"></script>

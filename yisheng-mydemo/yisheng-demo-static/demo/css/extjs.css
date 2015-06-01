@@ -1,0 +1,57 @@
+html, body {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11pt;
+	margin: 0;
+	padding: 0;
+	border: 0 none;
+	overflow: hidden;
+	height: 100%;
+}
+
+.loginicon {
+	background-image: url(/demo/images/login_logo.png) !important;
+}
+
+p {
+	margin: 5px;
+}
+
+.settings {
+	background-image: url(images/folder_wrench.png);
+}
+
+.nav {
+	background-image: url(images/folder_go.png);
+}
+
+.tabs {
+	background-image: url(/demo/images/gears.gif) !important;
+}
+
+.file-upload {
+	border-color: #4CA0FF;
+	background-color: #EAE8FF;
+	border-style: solid;
+	border-width: 1px;
+	height: 18px;
+}
+
+.div-search-company {
+	padding: 5px 5px 5px 5px;
+	/*height:100px;*/
+	/*border: solid red 1px;*/
+}
+
+.folder .x-tree-node-icon {
+	background: transparent
+		url(/common/extjs/resources/images/default/tree/folder.gif);
+}
+
+.x-tree-node-expanded .x-tree-node-icon {
+	background: transparent
+		url(/common/extjs/resources/images/default/tree/folder-open.gif);
+}
+
+.search {
+	background-image: url(images/rss_go.png) !important;
+}

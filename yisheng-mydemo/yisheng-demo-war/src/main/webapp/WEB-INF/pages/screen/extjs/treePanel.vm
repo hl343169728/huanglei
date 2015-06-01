@@ -1,0 +1,168 @@
+#set( $layout = "/layout/extjs-layout.vm")
+
+<!-- 
+<script type="text/javascript" src="${staticRoot}/demo/extjs/form3.js"></script>
+-->
+
+<!-- 
+<script type="text/javascript" src="${staticRoot}/demo/extjs/form4.js"></script>
+-->
+
+<!--
+<a href="#" ext:qtip="my tooltip">Link</a>　　
+<a href="#" ext:qtip="my tooltip1">Link2</a>　　 
+<input type="button" ext:qtip="my tooltip3" value="Button"/>        
+<script type="text/javascript">         
+	Ext.onReady(function(){            
+		Ext.QuickTips.init();        
+	});        
+</script>
+-->
+
+<!--
+<script type="text/javascript"> 
+    Ext.onReady(function(){
+       new Ext.Viewport({
+          enableTabScroll: true,
+          layout: "border",
+          items: [{
+             title: "面板",
+             region: "north",
+             height: 50,
+             html: "<h1>网站后台管理系统!</h1>"
+          }, {
+             title:"菜单",
+             region:"west",
+             width:200,
+             collapsible:true, 
+             html:"菜单栏"
+          }, {
+             xtype: "tabpanel",
+             region: "center",
+             items: [{
+                title: "面板一"
+             }, {
+                title: "面板二"
+             }]
+          }]
+       });
+    });
+</script> 
+-->
+
+<!--
+<script type="text/javascript">
+    Ext.onReady(function(){
+
+        var tree = new Ext.tree.TreePanel({
+            el:'tree'
+        });
+
+        var root = new Ext.tree.TreeNode({text:'我是根'});
+        var node1 = new Ext.tree.TreeNode({text:'我是根的第一个枝子'});
+        var node2 = new Ext.tree.TreeNode({text:'我是根的第一个枝子的第一个叶子'});
+        var node3 = new Ext.tree.TreeNode({text:'我是根的第一个叶子'});
+        //使用appendChild()为一人结点添加子结点
+        node1.appendChild(node2);
+        root.appendChild(node1);
+        root.appendChild(node3);
+
+        tree.setRootNode(root);
+        tree.render();
+        //没有root.expand(true, true);就每次都要点击根或枝前面的加号才能展开整棵树。
+        //root.expand(true, true);第一个参数表示是否递归展开所有子结点，如果为false，就只展开第一级子结点，下面的结点仍然是折叠状态。第二个参数表示是否要动画效果，如果为true可以明显看出这些结点是逐渐展开的。
+        root.expand(true, true);
+    });
+</script>
+<div id="tree" style="height:300px;"></div>
+-->
+
+<!--
+<script type="text/javascript">
+    function GridBasic() {
+        // 1. 定义表格
+        var cm = new Ext.grid.ColumnModel([
+        { header: '编号', dataIndex: 'id', sortable: true },
+        { header: '性别', dataIndex: 'sex' },
+        { header: '名称', dataIndex: 'name' },
+        { header: '描述', dataIndex: 'desc' }
+        ]);
+        // 2. 创建数据源
+        var data = [
+        ['1', '男', '张三丰', '是个作家'],
+        ['2', '男', '石曼迪', '会武功'],
+        ['3', '男', '姜子牙', '能捉鬼'],
+        ['4', '女', '穆桂英', '好像是皇帝'],
+        ['5', '男', '孙悟空', '高级程序员']
+        ];
+        // 3. 解析数据源
+        var ds = new Ext.data.Store({
+            proxy: new Ext.data.MemoryProxy(data),
+            reader: new Ext.data.ArrayReader({}, [{ name: 'id' }, { name: 'sex' }, { name: 'name' }, { name: 'desc' }])
+        });
+        ds.load();
+        // 4. 装配表格
+        var grid = new Ext.grid.GridPanel({
+            el: 'grid',
+            ds: ds,
+            cm: cm,
+            height:200,
+            width:500
+        });
+        grid.render();
+    }
+    Ext.onReady(GridBasic); //开始执行
+</script>
+<div id="grid"></div>
+-->
+
+<!--面板作为一个很基础的容器控件，使用方式比较特殊，需要指定一个被渲染对象，一般是用一个div实现，意思是需要在页面预先定义好一个div，然后在Ext中用id找到这个div并把相应的效果渲染在里面-->
+<!--
+<script type="text/javascript"> 
+    function PannelBasic(){ 
+        var btn = new Ext.Button({text:"按钮1"});
+        var p = new Ext.Panel({ 
+            title: '面板标题', 
+            collapsible:true,//是否允许收缩 
+            renderTo: 'basic',//指定渲染对象的ID 
+            width:400, 
+            // html: '<b>内容</b><br>Hello 曼迪!', //html中的内容会显示在panel里面
+            //autoload:"news.html",//panel加载url
+            items:[btn,{xtype:"button",text:"按钮2"},{title:"面板3",height:50,border:false}],
+
+            //    按照布局方位，按钮在面板中出现的地方有这么几种：
+            //    bbar：显示在底部的工具栏
+            //    buttons：显示在底部的按钮集合,如要改变其对齐方式用buttonAlign
+            //    tbar：顶部工具栏
+            //    bbar：底部工具栏
+            //    tools：头部工具栏
+            //    如果要显示一个Ext的按钮，可以使用下面代码实现： 
+            //    new Ext.Button({ text: '新增' })//表示新建一个按钮对象
+            //  '-' 是按钮之间的分隔线
+            //    由于Ext提供的按钮类型比较丰富，按钮还可以简单的描述为“{ text: '取消'}”
+            tbar: [new Ext.Button({ text: '新增' }),'-', new Ext.Button({ text: '保存' }), new Ext.Button({ text: '修改' }) ] , 
+            bbar: [{text: '添加内容',handler:function(){
+                    p.add({title:"添加面板"});
+                    var p2 = p.getComponent(2);
+                    alert(p2.title);
+                    p.remove(p2);
+                    p.doLayout();//重新布局，否则不会显示添加的面板
+                    //p.load("news.html");
+                    p.body.update("<h1>新的内容</h1>"+new Date());
+                
+                }},{text: '上一页'},{text: '下一页'}],
+            tools: [{id:'save'},{id:'help'},{id:'close'},{id:'print',handler:function(){window.print();}}],
+            buttonAlign:"center",
+            buttons: [{ text: '保存', handler: worning }, { text: '取消'}]
+            }); 
+    }
+    function worning() { 
+        Ext.MessageBox.alert('提示','你点击了保存按钮！'); 
+    } 
+    Ext.onReady(PannelBasic);//开始执行 
+</script> 
+<div id="basic"></div>
+-->
+
+
+

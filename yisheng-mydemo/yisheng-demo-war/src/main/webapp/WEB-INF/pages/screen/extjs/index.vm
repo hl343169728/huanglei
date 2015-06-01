@@ -1,0 +1,19 @@
+#set( $layout = "/layout/extjs-layout.vm")
+
+<script type="text/javascript" src="${staticRoot}/demo/extjs/layout/index.js"></script>
+<script type="text/javascript" src="${staticRoot}/demo/extjs/layout/west.js"></script>
+<!-- 进度条 -->
+<script type="text/javascript" src="${staticRoot}/demo/extjs/process.js"></script>
+<!-- 皮肤应用 -->
+<script type="text/javascript" src="${staticRoot}/demo/extjs/peeler.js"></script>
+<!-- 表单 -->
+<script type="text/javascript" src="${staticRoot}/demo/extjs/form.js"></script>
+<script type="text/javascript" src="${staticRoot}/demo/extjs/form1.js"></script>
+<!-- 面板 -->
+<script type="text/javascript" src="${staticRoot}/demo/extjs/panel.js"></script>
+<!-- JSON -->
+<script type="text/javascript" src="${staticRoot}/demo/extjs/json.js"></script>
+<!-- GridPanel -->
+<script type="text/javascript" src="${staticRoot}/demo/extjs/gridPanel.js"></script>
+
+

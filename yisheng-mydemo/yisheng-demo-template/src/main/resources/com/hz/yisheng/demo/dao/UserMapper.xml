@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hz.yisheng.demo.dao.UserMapper">
+
+	<resultMap id="userMap" type="com.hz.yisheng.demo.orm.User">
+		<result property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="address" column="address" />
+		<result property="sex" column="sex" />
+		<result property="mobile" column="mobile" />
+		<result property="description" column="description" />
+		<result property="creator" column="creator" />
+		<result property="createTime" column="create_time" />
+		<result property="updater" column="updater" />
+		<result property="updateTime" column="update_time" />
+	</resultMap>
+
+	<sql id="USER_SQL">
+		`name`,address,sex,mobile,description,creator,create_time,is_deleted
+	</sql>
+
+	<!-- 新增 -->
+	<insert id="insert" parameterType="com.hz.yisheng.demo.orm.User"
+		useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+		insert into
+		t_user(
+		<include refid="USER_SQL" />
+		)VALUES(#{name},#{address},#{sex},#{mobile},#{description},#{creator},now(),1)
+	</insert>
+
+	<!-- 更新 -->
+	<update id="update" parameterType="com.hz.yisheng.demo.orm.User">
+		update t_user set id=#{id}
+		<if test="name != null and name != ''">
+			<![CDATA[ , `name` = #{name} ]]>
+		</if>
+		<if test="address != null and address != ''">
+			<![CDATA[ , address = #{address} ]]>
+		</if>
+		<if test="sex != null and sex != ''">
+			<![CDATA[ , sex = #{sex} ]]>
+		</if>
+		<if test="mobile != null and mobile != ''">
+			<![CDATA[ , mobile = #{mobile} ]]>
+		</if>
+		<if test="description != null and description != ''">
+			<![CDATA[ , description = #{description} ]]>
+		</if>
+		<if test="updater != null">
+		    <![CDATA[ ,updater = #{updater}]]>
+		</if>
+		<if test="updateTime != null">
+		    <![CDATA[ ,update_time = #{updateTime}]]>
+		</if>
+		where id =#{id} and is_deleted = 1
+	</update>
+
+	<!-- 获取分页数据 -->
+	<select id="findAll" parameterType="java.util.HashMap"
+		resultMap="userMap">
+		select id,
+		<include refid="USER_SQL" />
+		from t_user
+		<where>
+			is_deleted=1
+			<if test="name != null and name != ''">
+				<![CDATA[ and `name` like CONCAT('%',#{name},'%')]]>
+			</if>
+			<if test="address != null and address != ''">
+				<![CDATA[ and address like CONCAT('%',#{address},'%')]]>
+			</if>
+			<if test="sex != null and sex != ''">
+				<![CDATA[ and sex = #{sex}]]>
+			</if>
+			<if test="mobile != null and mobile != ''">
+				<![CDATA[ and mobile = #{mobile}]]>
+			</if>
+			<if test="description != null and description != ''">
+				<![CDATA[ and description = #{description}]]>
+			</if>
+		</where>
+		order by create_time desc
+		<if test="rowStart != null and pageSize != null">
+			<![CDATA[limit #{rowStart},#{pageSize}]]>
+		</if>
+	</select>
+
+	<!-- 获取记录总条数 -->
+	<select id="findCount" parameterType="java.util.HashMap"
+		resultType="java.lang.Long">
+		select COUNT(*) FROM t_user
+		<where>
+			is_deleted=1
+			<if test="name != null and name != ''">
+				<![CDATA[ and `name` like CONCAT('%',#{name},'%')]]>
+			</if>
+			<if test="address != null and address != ''">
+				<![CDATA[ and address like CONCAT('%',#{address},'%')]]>
+			</if>
+			<if test="sex != null and sex != ''">
+				<![CDATA[ and sex = #{sex}]]>
+			</if>
+			<if test="mobile != null and mobile != ''">
+				<![CDATA[ and mobile = #{mobile}]]>
+			</if>
+			<if test="description != null and description != ''">
+				<![CDATA[ and description = #{description}]]>
+			</if>	
+		</where>
+	</select>
+
+	<!-- 根据ID，获取信息 -->
+	<select id="findById" resultMap="userMap">
+		select id,
+		<include refid="USER_SQL" />
+		from t_user
+		where id=#{id} and is_deleted=1
+	</select>
+
+	<!-- 根据ID，删除信息 -->
+	<delete id="deleteById" parameterType="java.lang.Long">
+		update t_user
+		set
+		is_deleted=0,update_time=now()
+		where id=#{id} and is_deleted = 1
+	</delete>
+
+	<!-- 批量获取信息 -->
+	<select id="getUserByIds" resultMap="userMap" parameterType="long">
+		SELECT id,
+		<include refid="USER_SQL" />
+		FROM t_user WHERE id in
+		<foreach collection="list" index="index" item="item" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+
+</mapper>
+	
