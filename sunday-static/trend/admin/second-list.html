@@ -1,0 +1,66 @@
+<div style="margin:10px 0;"></div>
+
+<div id="secondSearchForm" style="padding:5px;height:auto">
+	<div style="margin-bottom:5px">
+		<a href="#"  onclick="addSecond()" class="easyui-linkbutton" iconCls="icon-add" plain="true">新增LOGO</a>
+	</div>
+	<div>
+		<form id="querySecondForm">
+			标题：<input class="easyui-validatebox" name="filter_S_title"> &nbsp;&nbsp;
+			<a href="javascript:doSearchObject('secondTable','querySecondForm')" class="easyui-linkbutton" iconCls="icon-search">搜索</a>
+		</form>
+	</div>
+</div>
+
+<div id="second_div" class="easyui-window" title="次级页面LOGO" data-options="modal:true,closed:true,collapsible:false,minimizable:false,maximizable:false" style="width:900px; height:600px;">
+	<iframe src="#" id="second_ifr" marginwidth="0" marginheight="0" width="880px" height="550px" frameborder="0" scrolling="false" allowtransparency="true"></iframe>	
+</div>
+
+<table id="secondTable" style="width:1200px"></table>
+
+<script type="text/javascript">
+	$('#secondTable').datagrid({   
+		url:'/admin/second/list?filter_I_mType=12',   
+		toolbar: '#secondSearchForm',
+		pagination:true,
+		singleSelect:true,
+		rownumbers:true,
+		autoRowHeight:true,
+		columns:[[   
+					{field:'title',title:'标题',width:200},
+					{field:'operate',title:'操作',width:100,
+						formatter: function(value,row,index){
+							return outPutFunction("editSecond",row.id,"编辑") + "	" + outPutFunction("deleteSecondById",row.id,"删除");
+						}
+					}
+				]]
+		});
+	
+	// 新增
+	function addSecond(){
+		$("#second_ifr").attr("src","/admin/second/add/dispatch");
+		$('#second_div').window('open');
+	}
+	
+	// 编辑
+	function editSecond(id){
+		$("#second_ifr").attr("src","/admin/second/edit/dispatch?id=" + id);
+		$('#second_div').window('open');
+	}
+	
+	// 删除
+	function deleteSecondById(id){
+		jQuery.messager.confirm("次级页面LOGO", "确定要删除次级页面LOGO吗？", function(r) {
+			if (r) {
+				jQuery.get("/admin/second/deleteById?id=" + id,function(data){
+					if(data == "0"){
+						jQuery.messager.alert('错误', "删除失败~", "error");
+					}else{
+						 $("#secondTable").datagrid('reload'); 
+					}
+				});
+			}
+		})
+	}
+	
+</script>

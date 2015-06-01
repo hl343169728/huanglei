@@ -1,0 +1,64 @@
+<div style="margin:10px 0;"></div>
+
+<div id="contactSearchForm" style="padding:5px;height:auto">
+	<div style="margin-bottom:5px">
+		<a href="#"  onclick="addContact()" class="easyui-linkbutton" iconCls="icon-add" plain="true">新增联系方式</a>
+	</div>
+</div>
+
+<div id="contact_div" class="easyui-window" title="联系方式" data-options="modal:true,closed:true,collapsible:false,minimizable:false,maximizable:false" style="width:900px; height:600px;">
+	<iframe src="#" id="contact_ifr" marginwidth="0" marginheight="0" width="880px" height="550px" frameborder="0" scrolling="false" allowtransparency="true"></iframe>	
+</div>
+
+<table id="contactTable" style="width:1200px"></table>
+
+<script type="text/javascript">
+	$('#contactTable').datagrid({   
+		url:'/admin/contact/list?filter_I_mType=8',   
+		toolbar: '#contactSearchForm',
+		pagination:true,
+		singleSelect:true,
+		rownumbers:true,
+		autoRowHeight:true,
+		columns:[[   
+					{field:'title',title:'公司名称',width:200},
+					{field:'actionTime2',title:'工作时间',width:100},
+					{field:'actionAddr',title:'地址',width:200},
+					{field:'subhead',title:'售后部',width:150},
+					{field:'summary',title:'产品中心',width:150},
+					{field:'operate',title:'操作',width:100,
+						formatter: function(value,row,index){
+							return outPutFunction("editContact",row.id,"编辑") + "	" + outPutFunction("deleteContactById",row.id,"删除");
+						}
+					}
+				]]
+		});
+	
+	// 新增新闻
+	function addContact(){
+		$("#contact_ifr").attr("src","/admin/contact/add/dispatch");
+		$('#contact_div').window('open');
+	}
+	
+	// 编辑新闻
+	function editContact(id){
+		$("#contact_ifr").attr("src","/admin/contact/edit/dispatch?id=" + id);
+		$('#contact_div').window('open');
+	}
+	
+	// 删除
+	function deleteContactById(id){
+		jQuery.messager.confirm("联系方式", "确定要删除该联系方式吗？", function(r) {
+			if (r) {
+				jQuery.get("/admin/contact/deleteById?id=" + id,function(data){
+					if(data == "0"){
+						jQuery.messager.alert('错误', "删除失败~", "error");
+					}else{
+						 $("#contactTable").datagrid('reload'); 
+					}
+				});
+			}
+		})
+	}
+	
+</script>

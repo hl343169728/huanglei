@@ -1,0 +1,66 @@
+<div style="margin:10px 0;"></div>
+
+<div id="brandSearchForm" style="padding:5px;height:auto">
+	<div style="margin-bottom:5px">
+		<a href="#"  onclick="addBrand()" class="easyui-linkbutton" iconCls="icon-add" plain="true">新增品牌</a>
+	</div>
+	<div>
+		<form id="queryBrandForm">
+			品牌名称：<input class="easyui-validatebox" name="filter_S_title"> &nbsp;&nbsp;
+			<a href="javascript:doSearchObject('brandTable','queryBrandForm')" class="easyui-linkbutton" iconCls="icon-search">搜索</a>
+		</form>
+	</div>
+</div>
+
+<div id="brand_div" class="easyui-window" title="知名品牌" data-options="modal:true,closed:true,collapsible:false,minimizable:false,maximizable:false" style="width:900px; height:600px;">
+	<iframe src="#" id="brand_ifr" marginwidth="0" marginheight="0" width="880px" height="550px" frameborder="0" scrolling="false" allowtransparency="true"></iframe>	
+</div>
+
+<table id="brandTable" style="width:1200px"></table>
+
+<script type="text/javascript">
+	$('#brandTable').datagrid({   
+		url:'/admin/brand/list?filter_I_mType=10',   
+		toolbar: '#brandSearchForm',
+		pagination:true,
+		singleSelect:true,
+		rownumbers:true,
+		autoRowHeight:true,
+		columns:[[   
+					{field:'title',title:'品牌名称',width:200},
+					{field:'operate',title:'操作',width:100,
+						formatter: function(value,row,index){
+							return outPutFunction("editBrand",row.id,"编辑") + "	" + outPutFunction("deleteBrandById",row.id,"删除");
+						}
+					}
+				]]
+		});
+	
+	// 新增
+	function addBrand(){
+		$("#brand_ifr").attr("src","/admin/brand/add/dispatch");
+		$('#brand_div').window('open');
+	}
+	
+	// 编辑
+	function editBrand(id){
+		$("#brand_ifr").attr("src","/admin/brand/edit/dispatch?id=" + id);
+		$('#brand_div').window('open');
+	}
+	
+	// 删除
+	function deleteBrandById(id){
+		jQuery.messager.confirm("知名品牌", "确定要删除该知名品牌吗？", function(r) {
+			if (r) {
+				jQuery.get("/admin/brand/deleteById?id=" + id,function(data){
+					if(data == "0"){
+						jQuery.messager.alert('错误', "删除失败~", "error");
+					}else{
+						 $("#brandTable").datagrid('reload'); 
+					}
+				});
+			}
+		})
+	}
+	
+</script>

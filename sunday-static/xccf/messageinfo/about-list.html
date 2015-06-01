@@ -1,0 +1,46 @@
+<div style="margin:10px 0;"></div>
+
+<div id="aboutSearchForm" style="padding:5px;height:auto">
+</div>
+
+<div id="about_div" class="easyui-window" title="论坛介绍信息" data-options="modal:true,closed:true,collapsible:false,minimizable:false,maximizable:false" style="width:900px; height:560px;">
+	<iframe src="#" id="about_ifr" marginwidth="0" marginheight="0" width="880px" height="512px" frameborder="0" scrolling="false" allowtransparency="true"></iframe>	
+</div>
+
+<table id="aboutTable" style="width:1200px"></table>
+
+<script>
+	$('#aboutTable').datagrid({   
+		url:'/admin/about/list?filter_I_mtype=1',   
+		toolbar: '#aboutSearchForm',
+		pagination:true,
+		singleSelect:true,
+		rownumbers:true,
+		autoRowHeight:true,
+		columns:[[   
+					{field:'title',title:'论坛主题',width:100},
+					{field:'subhead',title:'时间',width:100},
+					{field:'summary',title:'地点',width:200},
+					{field:'reource',title:'论坛规模',width:100},
+					{field:'description',title:'主持人',width:200},
+					{field:'operate',title:'操作',width:100,
+						formatter: function(value,row,index){
+							return outPutFunction("editAdvert",row.id,"编辑");
+						}
+					}
+				]]
+		});
+	
+	// 新增
+	function addAbout(){
+		$("#about_ifr").attr("src","/admin/about/add/dispatch");
+		$('#about_div').window('open');
+	}
+	
+	// 编辑
+	function editAdvert(id){
+		$("#about_ifr").attr("src","/admin/about/edit/dispatch?id=" + id);
+		$('#about_div').window('open');
+	}
+	
+</script>

@@ -1,0 +1,68 @@
+<div style="margin:10px 0;"></div>
+
+<div id="guestSearchForm" style="padding:5px;height:auto">
+	<div style="margin-bottom:5px">
+		<a href="#"  onclick="addGuest()" class="easyui-linkbutton" iconCls="icon-add" plain="true">新增嘉宾</a>
+	</div>
+	<div>
+		<form id="queryGuestForm">
+			姓名：<input class="easyui-validatebox" name="filter_S_title"> &nbsp;&nbsp;
+			<a href="javascript:doSearchObject('guestTable','queryGuestForm')" class="easyui-linkbutton" iconCls="icon-search">搜索</a>
+		</form>
+	</div>
+</div>
+
+<div id="guest_div" class="easyui-window" title="嘉宾信息" data-options="modal:true,closed:true,collapsible:false,minimizable:false,maximizable:false" style="width:900px; height:560px;">
+	<iframe src="#" id="guest_ifr" marginwidth="0" marginheight="0" width="880px" height="512px" frameborder="0" scrolling="false" allowtransparency="true"></iframe>	
+</div>
+
+<table id="guestTable" style="width:1200px"></table>
+
+<script>
+	$('#guestTable').datagrid({   
+		url:'/admin/guest/list?filter_I_mtype=4',   
+		toolbar: '#guestSearchForm',
+		pagination:true,
+		singleSelect:true,
+		rownumbers:true,
+		autoRowHeight:true,
+		columns:[[   
+					{field:'title',title:'姓名',width:150},
+					{field:'subhead',title:'职务',width:200},
+					{field:'comment',title:'简介',width:400},
+					{field:'operate',title:'操作',width:100,
+						formatter: function(value,row,index){
+							return outPutFunction("editGuest",row.id,"编辑") + "	" + outPutFunction("deleteGuestById",row.id,"删除");
+						}
+					}
+				]]
+		});
+	
+	// 新增
+	function addGuest(){
+		$("#guest_ifr").attr("src","/admin/guest/add/dispatch");
+		$('#guest_div').window('open');
+	}
+	
+	// 编辑
+	function editGuest(id){
+		$("#guest_ifr").attr("src","/admin/guest/edit/dispatch?id=" + id);
+		$('#guest_div').window('open');
+	}
+	
+	// 删除
+	function deleteGuestById(id){
+		jQuery.messager.confirm("提示", "确定要删除该嘉宾信息吗？", function(r) {
+			if (r) {
+				jQuery.get("/admin/guest/deleteById?id=" + id,function(data){
+					if(data == "0"){
+						jQuery.messager.alert('错误', "删除失败~", "error");
+					}else{
+						 $("#guestTable").datagrid('reload'); 
+					}
+				});
+			}
+		})
+	}
+	
+</script>

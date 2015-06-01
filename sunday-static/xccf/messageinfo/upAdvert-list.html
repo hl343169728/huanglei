@@ -1,0 +1,60 @@
+<div style="margin:10px 0;"></div>
+
+<div id="upAdvertSearchForm" style="padding:5px;height:auto">
+	<div style="margin-bottom:5px">
+		<a href="#"  onclick="addUpAdvert()" class="easyui-linkbutton" iconCls="icon-add" plain="true">新增广告位</a>
+	</div>
+</div>
+
+<div id="up_advert_div" class="easyui-window" title="广告位信息" data-options="modal:true,closed:true,collapsible:false,minimizable:false,maximizable:false" style="width:900px; height:560px;">
+	<iframe src="#" id="up_advert_ifr" marginwidth="0" marginheight="0" width="880px" height="512px" frameborder="0" scrolling="false" allowtransparency="true"></iframe>	
+</div>
+
+<table id="upAdvertTable" style="width:1200px"></table>
+
+<script>
+	$('#upAdvertTable').datagrid({   
+		url:'/admin/upAdvert/list?filter_I_mtype=14',   
+		toolbar: '#upAdvertSearchForm',
+		pagination:true,
+		singleSelect:true,
+		rownumbers:true,
+		autoRowHeight:true,
+		columns:[[   
+					{field:'title',title:'标题',width:500},
+					{field:'operate',title:'操作',width:100,
+						formatter: function(value,row,index){
+							return outPutFunction("editUpAdvert",row.id,"编辑") + "	" + outPutFunction("deleteUpAdvertById",row.id,"删除");
+						}
+					}
+				]]
+		});
+	
+	// 新增
+	function addUpAdvert(){
+		$("#up_advert_ifr").attr("src","/admin/upAdvert/add/dispatch");
+		$('#up_advert_div').window('open');
+	}
+	
+	// 编辑
+	function editUpAdvert(id){
+		$("#up_advert_ifr").attr("src","/admin/upAdvert/edit/dispatch?id=" + id);
+		$('#up_advert_div').window('open');
+	}
+	
+	// 删除
+	function deleteUpAdvertById(id){
+		jQuery.messager.confirm("提示", "确定要删除该广告位吗？", function(r) {
+			if (r) {
+				jQuery.get("/admin/upAdvert/deleteById?id=" + id,function(data){
+					if(data == "0"){
+						jQuery.messager.alert('错误', "删除失败~", "error");
+					}else{
+						 $("#upAdvertTable").datagrid('reload'); 
+					}
+				});
+			}
+		})
+	}
+	
+</script>
