@@ -1,0 +1,68 @@
+#set( $layout = "/layout/common-layout.vm")
+
+<script>
+	 #if("$!message"!="")
+		#if("$!message"=="success")
+			parent.jQuery('#contact_div').window('close');
+			parent.jQuery("#contatctTable").datagrid('reload');
+		#else
+			jQuery.messager.alert('错误', "操作失败~", 'error');
+		#end
+	#end
+</script>
+
+<form action="/admin/contact/save" method="post" id="contactForm" enctype="multipart/form-data">
+	<input name="id" type="hidden" value="$!{messnoti.id}"/>
+	<input name="mtype" type="hidden" value="9"/>
+	<div class="box info-list">
+		<table class="unity-table" id="J_adboardList">
+			<tr>
+				<td style="width:100px">电话：</td>
+				<td style="width:320px"><input name="reource" maxlength="64" value="$!{messnoti.reource}" style="width:500px"/></td>
+			</tr>
+			<tr>
+				<td>总部地址：</td>
+				<td><input name="actionTime2" maxlength="64" value="$!{messnoti.actionTime2}" style="width:500px"/></td>
+			</tr>
+			<tr>
+				<td>分公司地址：</td>
+				<td><input name="actionAddr" maxlength="120" value="$!{messnoti.actionAddr}" style="width:500px"/></td>
+			</tr>
+			<tr>
+				<td>网址：</td>
+                <td><input name="title" maxlength="64" value="$!{messnoti.title}" style="width:500px"/></td>
+			</tr>
+			<!--
+			<tr>
+				<td>邮箱：</td>
+				<td><input name="subhead" maxlength="64" value="$!{messnoti.subhead}" style="width:500px"/></td>
+			</tr>
+			-->
+			<tr>
+				<td>熙川集团官方网站：</td>
+				<td><input name="summary" maxlength="200" value="$!{messnoti.summary}" style="width:500px"/></td>
+			</tr>
+			<tr>
+				<td>熙川商品官方网站：</td>
+				<td><input name="comment" value="$!{messnoti.comment}" style="width:500px"/></td>
+			</tr>
+			<tr>
+				<td>熙川文化官方网站：</td>
+				<td><input name="description" value="$!{messnoti.description}" style="width:500px"/></td>
+			</tr>
+			<tr>
+				<td colspan="2" style="text-align: center">
+					<input type="button" style="width:60px;height:25px;" onclick="doSubmit()" value="确定"/>
+				</td>
+			</tr>
+        </table>
+    </div>
+</form>
+	
+<script>
+
+    function doSubmit(){
+    	$("#contactForm").submit();
+    }
+ 
+</script>

@@ -1,0 +1,70 @@
+﻿<html>
+<head>
+<meta charset="utf-8">
+<link href="/favicon.ico" rel="icon" type="image/x-icon">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<title>手机报名</title>
+<link href="${staticRoot}/xccf/wechat/wechat.css" rel="stylesheet">
+<script src="${staticRoot}/xccf/js/jquery.js?date=20150123"></script>
+</head>
+<body>
+	<div class="SignUp">
+		<div class="banner"><img src="${staticRoot}/xccf/wechat/weBanner.jpg" /></div>
+		<div class="loginWrapper">
+			<div class="inputPanel">
+				<div class="txtPanel"><span class="title">姓名</span><input type="text" placeholder="请输入真实姓名" id="userName" name="name" maxlength="16" /></div>
+				<div class="txtPanel"><span class="title">公司</span><input type="text" placeholder="请输入公司名称" id="company" name="company" maxlength="64" /></div>
+				<div class="txtPanel"><span class="title">职务</span><input type="text" placeholder="请输入您的职务" id="post" name="post" maxlength="16" /></div>
+				<div class="txtPanel"><span class="title">手机</span><input type="text" placeholder="请输入手机号码" id="phone" name="phone" maxlength="11" /></div>
+				<div class="txtPanel"><span class="title">您的意向</span><input type="text" id="goal" name="goal"  /></div>
+				<div class="txtPanel"><span class="title">人数</span><input type="text" id="number" name="number" maxlength="20" /></div>
+			</div>
+			<div class="Action">
+				<input type="button" value="点击提交信息" onclick="doRegister();" />
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+
+<script type="text/javascript">
+function doRegister(){
+	var name = $("#userName").val();
+	var company = $("#company").val();
+	var post = $("#post").val();
+	var phone = $("#phone").val();
+	var number = $("#number").val();
+	var goal = $("#goal").val(); 
+	var make = $("#make").val(); 
+	
+	if(jQuery.trim(name)=="" ||  jQuery.trim(company)=="" || jQuery.trim(post)=="" || jQuery.trim(phone)=="" || jQuery.trim(number)=="" || jQuery.trim(goal)==""){
+		alert("姓名，公司，职务，手机，您的意向，人数都是必填项~");
+		return;
+	}
+	jQuery.post("/xccf/wechat/save",{name:name,company:company,post:post,phone:phone,number:number,goal:goal,make:make},function(data){
+		if (data == "1") {
+			window.location.href = "/xccf/wechat/success"
+		} else if (data == "-2") {
+			alert("姓名不能用为空~");
+		} else if (data == "-3") {
+			alert("公司不能用为空~");
+		} else if (data == "-4") {
+			alert("职务不能用为空~");
+		} else if (data == "-5") {
+			alert("手机号不能用为空~");
+		} else if (data == "-6") {
+			alert("意向不能用为空~");
+		} else if (data == "-7") {
+			alert("人数不能用为空~");
+		} else if (data == "-8") {
+			alert("该手机号已存在~");
+		} else {
+			alert("信息提交失败~");
+		}
+	});
+}
+</script>
+

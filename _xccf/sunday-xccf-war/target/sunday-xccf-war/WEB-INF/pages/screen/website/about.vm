@@ -1,0 +1,15 @@
+#set( $layout = "/layout/web-layout.vm")
+
+<div class="wrapper">
+	<div class="item ltjs detail">
+		<h1>论坛介绍</h1>
+		<div class="list">
+			<div class="content">
+				#foreach($ft in $!{aboutList})
+					$!{ft.comment}
+				#end
+			</div>
+		</div>
+	</div>
+</div>
+	

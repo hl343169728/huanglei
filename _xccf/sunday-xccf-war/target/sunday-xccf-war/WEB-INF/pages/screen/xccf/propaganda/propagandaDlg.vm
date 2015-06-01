@@ -1,0 +1,54 @@
+#set( $layout = "/layout/common-layout.vm")
+
+<script>
+	 #if("$!message"!="")
+		#if("$!message"=="success")
+			parent.jQuery('#propaganda_div').window('close');
+			parent.jQuery("#proTable").datagrid('reload');
+		#else
+			jQuery.messager.alert('错误', "操作失败~", 'error');
+		#end
+	#end
+</script>
+
+<form action="/admin/propaganda/save" method="post" id="propagandaForm" enctype="multipart/form-data">
+	<input name="id" type="hidden" value="$!{messnoti.id}"/>
+	<input name="mtype" type="hidden" value="13"/>
+	<input name="title" type="hidden" value="销售宣传语"/>
+	<div class="box info-list">
+		<table class="unity-table" id="J_adboardList">
+			<tr>
+				<td>销售宣传语：</td>
+				<td>
+					<textarea id="_comment" name="comment">$!{messnoti.comment}</textarea>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" style="text-align: center">
+					<input type="button" style="width:60px;height:25px;" onclick="doSubmit()" value="确定"/>
+				</td>
+			</tr>
+        </table>
+    </div>
+</form>
+	
+<script>
+
+    function doSubmit(){
+    	$("#propagandaForm").submit();
+    }
+     
+    var editor1 = KindEditor.create('textarea[id="_comment"]', {
+    	uploadJson:'${webPath}/kindEditorUpload',
+    	allowFileManager : true,
+    	width:"550px",
+    	height:"410px",
+    	afterBlur:function(){
+    	    this.html();
+    	},
+    	afterChange:function(){
+    	   $("#_comment").val(this.html());
+    	}
+    });
+ 
+</script>

@@ -1,0 +1,13 @@
+#set( $layout = "/layout/web-layout.vm")
+
+<div class="item hzmt detail">
+	<h1>合作媒体</h1>
+	<div class="list">
+		<ul>
+			#foreach($ft in $!{cooperationList})
+				<li><a href="#"><img #foreach($item in $!{ft.attList}) src="${imageRoot}/$!{item.path}" #end width="185px" height="65px" /></a></li>
+			#end
+		</ul>
+	</div>
+</div>
+	

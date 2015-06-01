@@ -1,0 +1,22 @@
+#set( $layout = "/layout/web-layout.vm")
+
+<div class="wrapper">
+	<div class="leftWrapper">
+		<div class="item xwzx NewsDetail">
+			<h1>新闻中心</h1>
+			<div class="list">
+				<div class="title">$!{newsInfo.title}</div>
+				#if($!{newsInfo.actionTime})
+					<div class="time">发布时间：$!timeUtils.format($!{newsInfo.actionTime},"yyyy-MM-dd")</div>
+				#end
+				<div class="content">
+					<p>$!{newsInfo.comment}</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="rightWrapper">
+		#parse("/layout/right-layout.vm")
+	</div>
+</div>
+	

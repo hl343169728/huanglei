@@ -1,0 +1,97 @@
+#set( $layout = "/layout/common-layout.vm")
+
+<script>
+	 #if("$!message"!="")
+		#if("$!message"=="success")
+			parent.jQuery('#structure_div').window('close');
+			parent.jQuery("#structureTable").datagrid('reload');
+		#else
+			jQuery.messager.alert('错误', "操作失败~", 'error');
+		#end
+	#end
+</script>
+
+<form action="/admin/structure/save" method="post" id="structureForm" enctype="multipart/form-data">
+	<input name="id" type="hidden" value="$!{messnoti.id}"/>
+	<input name="mtype" type="hidden" value="5"/>
+	<div class="box info-list">
+		<table class="unity-table" id="J_adboardList">
+			<tr>
+				<td>类型：</td>
+				<td>
+					<select name="title">
+    					<option #if($!{messnoti.title} == "1" || ${messnoti.title}) selected #end value="1">主办单位</option>
+    					<option #if($!{messnoti.title} == "2") selected #end value="2">独家承办机构</option>
+    					<option #if($!{messnoti.title} == "3") selected #end value="3">特邀承办机构</option>
+    				</select>
+				</td>
+			</tr>
+			<tr>
+				<td>附件：</td>
+				<td>
+					<input type="file" name="files" /> 
+					<span class="upload_file">
+    					#foreach($item in $!{mnattach})
+                            $!{item.path}&nbsp;&nbsp;<a href="#" onclick="cancelAttac($!{messnoti.id});">取消附件</a>
+    					#end
+					</span>
+				</td>
+			</tr>
+			<tr>
+                <td>建议：</td>
+                <td>
+					<p style="color:red;">
+						（主办单位）上传附件【宽度】（265像素），【高度】（70像素）；<br/>
+						（独家承办机构）上传附件【宽度】（265像素），【高度】（60像素）；<br/>
+						（特邀承办机构）上传附件【宽度】（265像素），【高度】（60像素）；
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<td>简介：</td>
+				<td colspan="2">
+					<textarea id="_comment" name="comment">$!{messnoti.comment}</textarea>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3" style="text-align: center">
+					<input type="button" style="width:60px;height:25px;" onclick="doSubmit()" value="确定"/>
+				</td>
+			</tr>
+		</table>
+    </div>
+</form>
+	
+<script>
+
+	// 取消附件
+	function cancelAttac(id){
+		jQuery.messager.confirm("提示", "确定要取消该附件吗？", function(r) {
+			if (r) {
+				jQuery.get("/admin/structure/cancel?id=" + id,function(data){
+					if(data == "1"){
+						$(".upload_file").hide();
+					}
+				});
+			}
+		})
+	}
+	
+    function doSubmit(){
+    	$("#structureForm").submit();
+    }
+     
+    var editor1 = KindEditor.create('textarea[id="_comment"]', {
+    	uploadJson:'${webPath}/kindEditorUpload',
+    	allowFileManager : true,
+    	width:"500px",
+    	height:"300px",
+    	afterBlur:function(){
+    	    this.html();
+    	},
+    	afterChange:function(){
+    	   $("#_comment").val(this.html());
+    	}
+    });
+ 
+</script>

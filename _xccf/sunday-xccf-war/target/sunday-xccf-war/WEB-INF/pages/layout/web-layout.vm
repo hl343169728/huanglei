@@ -1,0 +1,167 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta property="wb:webmaster" content="d07450928f2d3ec0" />
+<link rel="shortcup icon" href="${staticRoot}/xccf/images/icon.ico"/>
+<link rel="stylesheet" href="${staticRoot}/xccf/css/index.css?date=20150123" type="text/css" media="screen" />
+<title>
+	#if($!{columnValue} == 0)2015全球新财富论坛-首页
+	#elseif($!{columnValue} == 1)论坛介绍
+	#elseif($!{columnValue} == 2)新闻中心
+	#elseif($!{columnValue} == 3)顶尖领袖团
+	#elseif($!{columnValue} == 4)拟邀请嘉宾
+	#elseif($!{columnValue} == 5)组织机构
+	#elseif($!{columnValue} == 6)论坛议程
+	#elseif($!{columnValue} == 7)合作媒体
+	#elseif($!{columnValue} == 8)总策划人
+	#elseif($!{columnValue} == 9)联系方式
+	#end
+</title>
+<script src="${staticRoot}/xccf/js/jquery.js?date=20150123"></script>
+    <!--  兼容IE8以下的HTML5 标签-->
+    <!-[if lt IE 8]>
+    <script src='${staticRoot}/xccf/js/html5.js?date=20150123'></script>
+    <![endif]–>
+    <!-- 每个页面都要引入的脚本 end-->
+</head>
+<body class="index">
+	<div class="header">
+		<header class="common-header">
+			<div class="logo"><a class="logo-href" href="/"></a></div>
+			<div class="navPanel">
+				<div class="nav">
+					<ul class="oneUL">
+						<li><a href="/">首页</a></li>
+						<li #if($!{columnValue} == 1) class="on" #end ><a href="/xccf/about/index">论坛介绍</a></li>
+						<li #if($!{columnValue} == 2) class="on" #end ><a href="/xccf/news/index">新闻中心</a></li>
+						<li #if($!{columnValue} == 3) class="on" #end ><a href="/xccf/leader/index">顶尖领袖团</a></li>
+						<li #if($!{columnValue} == 4) class="on" #end ><a href="/xccf/guest/index">拟邀请嘉宾</a></li>
+						<li class="oneLI #if($!{columnValue} == 5) on #end"><a href="/xccf/structure/index">组织机构</a>
+							<ul>
+								<li><a href="/xccf/structure/index#stru1">主办机构</a></li>
+								<li><a href="/xccf/structure/index#stru2">独家承办机构</a></li>
+								<li><a href="/xccf/structure/index#stru3">特邀承办机构</a></li>
+							</ul>
+						</li>
+						<li #if($!{columnValue} == 6) class="on" #end ><a href="/xccf/program/index">论坛议程</a></li>
+						<li #if($!{columnValue} == 7) class="on" #end ><a href="/xccf/cooperation/index">合作媒体</a></li>
+						<li #if($!{columnValue} == 8) class="on" #end ><a href="/xccf/organiger/index">总策划人</a></li>
+						<li #if($!{columnValue} == 9) class="on" #end ><a href="/xccf/contact/index">联系方式</a></li>
+					</ul>
+				</div>
+			</div>
+	  	</header>
+	</div>
+	
+	$screen_content
+ 
+	<div id="footer">
+        <div class="foot">
+            <div class="footLeft">
+                <div class="guide">
+                    <dl>
+                        <dt>参会指南</dt>
+                        <dd>
+                            <ul>
+                                <li class="ico1"><a href="/xccf/about/index">论坛介绍</a></li>
+                                <li class="ico2"><a href="/">时间地点</a></li>
+                                <li class="ico3"><a href="http://map.baidu.com/" target="blank">交通指示</a></li>
+                                <li class="ico4"><a href="#">酒店住宿</a></li>
+                            </ul>
+                        </dd>
+                    </dl>
+                </div>
+                <div class="link">
+                    <dl>
+                        <dt>参会指南</dt>
+                        <dd>
+                            <ul>
+                                <li><a href="/xccf/leader/index">顶尖领袖团</a></li>
+                                <li><a href="/xccf/structure/index#stru1">主办机构</a></li>
+                                <li><a href="/xccf/structure/index#stru2">独家承办机构</a></li>
+                                <li><a href="/xccf/structure/index#stru3">特邀承办机构</a></li>
+                                <li><a href="/xccf/program/index">论坛日程</a></li>
+                                <li><a href="/xccf/cooperation/index">合作媒体</a></li>
+                            </ul>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="footRight">
+                <div class="Copyinfo">
+                    <dl>
+                        <dt>联系方式</dt>
+                        <dd>
+                            <ul>
+								#foreach($ft in $!{contactList})
+                                    <li class="Telephone">$!{ft.reource}</li>
+                                    <li>总部地址：$!{ft.actionTime2}</li>
+                                    <li>分公司地址：$!{ft.actionAddr}</li>
+                                    <li>熙川集团官方网站：$!{ft.summary}</li>
+                                    <li>熙川商品官方网站：$!{ft.comment}　　　熙川文化官方网站：$!{ft.description}</li>
+                                    <li class="Copyright">Copyright © 2015全球新财富论坛（总统峰会） - All rights reserved</li>
+								#end
+                            </ul>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+	</div>
+	
+	<!--在线客服代码begin-->
+	<div id="floatTools" class="rides-cs">
+	  <div class="floatL">
+		<a id="aFloatTools_Show" class="btnOpen" title="查看在线客服" style="top:20px;display:none" href="javascript:void(0);">展开</a>
+		<a id="aFloatTools_Hide" class="btnCtn" title="关闭在线客服" style="top:20px;display:block" href="javascript:void(0);">收缩</a>
+	  </div>
+	  <div id="divFloatToolsView" class="floatR" style="display: block;">
+		<div class="cn">
+		  <h3 class="titZx">在线客服</h3>
+		  <ul>
+			<li><span>参会咨询</span> <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=2850787623&site=qq&menu=yes"><img border="0" src="${staticRoot}/xccf/img/online.png" alt="点击这里给我发消息" title="点击这里给我发消息"/></a> </li>
+			<li><span>合作咨询</span> <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=2850787623&site=qq&menu=yes"><img border="0" src="${staticRoot}/xccf/img/online.png" alt="点击这里给我发消息" title="点击这里给我发消息"/></a> </li>
+			<li style="border:none;">
+				#foreach($ft in $!{contactList})
+					<span>电话：$!{ft.reource}</span> 
+				#end
+			</li>
+		  </ul>
+		</div>
+		<div class="weiPanel">
+		  <ul>
+			<li><div class="qrcode"><img src="${staticRoot}/xccf/img/qrcode_wecorp.jpg" /></div><span>全球新财富论坛<br/>微信公众号</span></li>
+			<li><div class="qrcode"><img src="${staticRoot}/xccf/img/qrcode_weboss.jpg" /></div><span>熙川集团董事长<br/>柳志伟微信公众号</span></li>
+		  </ul>
+		</div>
+	  </div>
+	</div>
+	<script>
+		$(function(){
+			$("#aFloatTools_Show").click(function(){
+				$('#divFloatToolsView').animate({width:'show',opacity:'show'},100,function(){$('#divFloatToolsView').show();});
+				$('#aFloatTools_Show').hide();
+				$('#aFloatTools_Hide').show();				
+			});
+			$("#aFloatTools_Hide").click(function(){
+				$('#divFloatToolsView').animate({width:'hide', opacity:'hide'},100,function(){$('#divFloatToolsView').hide();});
+				$('#aFloatTools_Show').show();
+				$('#aFloatTools_Hide').hide();	
+			});
+		});
+	</script>
+	<!--在线客服代码end-->
+
+
+	<script type="text/javascript" src="${staticRoot}/xccf/js/swipe.js"></script>
+	<script type="text/javascript">
+		var elem = document.getElementById('mySwipe');
+		window.mySwipe = Swipe(elem, {auto : 3000});         /*自动轮播*/
+		var slide = document.getElementById('mySlide');
+		window.mySwipe = Swipe(slide, {auto : 3000});         /*自动轮播*/
+	</script>
+</body>
+</html>
+

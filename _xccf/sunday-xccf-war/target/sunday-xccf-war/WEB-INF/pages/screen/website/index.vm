@@ -1,0 +1,247 @@
+#set( $layout = "/layout/web-layout.vm")
+
+<script>
+function doRegister(){
+	var name = $("#userName").val();
+	var company = $("#company").val();
+	var post = $("#post").val();
+	var phone = $("#phone").val();
+	var number = $("#number").val();
+	var make = $("#make").val();
+	
+	var obj = document.getElementsByName('goal');
+	var goal = "";
+	for(var i=0; i<obj.length; i++){    
+		if(obj[i].checked) {
+			goal += obj[i].value + ",";  //如果选中，将value添加到变量s中    
+		}
+	}   
+	
+	if(jQuery.trim(name)=="" ||  jQuery.trim(company)=="" || jQuery.trim(post)=="" || jQuery.trim(phone)=="" || jQuery.trim(number)=="" || jQuery.trim(goal)==""){
+		alert("姓名，公司，职务，手机，您的意向，人数都是必填项~");
+		return;
+	}
+	jQuery.post("/admin/ticket/add",{name:name,company:company,post:post,phone:phone,number:number,goal:goal,make:make},function(data){
+		if (data == "1") {
+			alert("信息提交成功~");
+			window.location.href = "/"
+		} else {
+			alert("信息提交失败~");
+		}
+	});
+}
+</script>
+
+<div class="banner">
+	<a href="#">
+		#foreach($ft in $!{upAdvertList})
+			#if($velocityCount == 1)
+				<img #foreach($item in $!{ft.attList}) src="${imageRoot}/$!{item.path}" #end width="1000px" height="130px" />
+			#end
+		#end
+	</a>
+</div>
+<div class="wrapper">
+	<div class="leftWrapper">
+		<div class="focus">
+			<div class="ProPic">
+				<div class="pic">
+				  <div class="index_ban">
+						<div id='mySwipe' class='swipe'>
+							<div class='swipe-wrap'>
+								#foreach($ft in $!{imgList})
+									#foreach($item in $!{ft.attList})
+										#if($velocityCount <= 5)
+											<div><a href="javascript:void(0)"><img src="${imageRoot}/$!{item.path}" alt='' width="680px" height="390px"/></a><span>$!{ft.title}</span></div>
+										#end
+									#end
+								#end
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="item xwzx">
+			<h1>新闻中心</h1>
+			<div class="list">
+				<ul>
+					#foreach($ft in $!{newsList})
+						#if($velocityCount <= 3)
+        					<li>
+    							#foreach($item in $!{ft.attList})
+    								<div class="pic">
+    									<a href="/xccf/news/detail?id=$!{ft.id}"><img src="${imageRoot}/$!{item.path}" width="200px" height="120px"/></a>
+    								</div>
+    							#end
+        						<div class="nameContent">
+        							<div class="title"><a href="/xccf/news/detail?id=$!{ft.id}">$!{ft.title}</a></div>
+        							<div class="time">$!timeUtils.format($!{ft.actionTime},"yyyy-MM-dd")</div>
+        							<div class="content">$!{ft.summary}</div>
+        						</div>
+        					</li>
+						#end
+					#end
+				</ul>
+				<div class="moreList" onClick="window.open('/xccf/news/index')">查看更多</div>
+			</div>
+		</div>
+		<div class="item hdmp">
+			<h1>如何获得门票？</h1>
+			<div class="list">
+				<div class="SignUp">
+					<div class="SignUpLeft">
+						#foreach($ft in $!{propaList})
+							$!{ft.comment}
+						#end
+					</div>
+					<div class="SignUpRight">
+						<div class="inputPanel">
+							<div class="txtPanel"><span class="title">姓名：</span><input type="text" placeholder="" id="userName" name="name" maxlength="16" /></div>
+							<div class="txtPanel"><span class="title">公司：</span><input type="text" id="company" name="company" maxlength="64" /></div>
+							<div class="txtPanel"><span class="title">职务：</span><input type="text" id="post" name="post" maxlength="16" /></div>
+							<div class="txtPanel"><span class="title">手机：</span><input type="text" id="phone" name="phone" maxlength="11" /></div>
+							<dl>
+								<dt>您的意向：</dt>
+								<dd>
+									<div class="choice"><input type="checkbox" checked="checked" name="goal" value="报名参加本届论坛"/>报名参加本届论坛</div>
+									<div class="choice"><input type="checkbox" name="goal" value="成为本届论坛合作单位"/>成为本届论坛合作单位</div>
+									<div class="choice"><input type="checkbox" name="goal" value="其他" />其他：<input class="other" type="text" id="make" name="make" maxlength="648"/></div>
+								</dd>
+							</dl>
+							<div class="txtPanel"><span class="title">人数：</span><input type="text" id="number" name="number" maxlength="20" /></div>
+						</div>
+						<div class="Action">
+							<input type="button" value="点击提交信息" onclick="doRegister();" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="item ltyc">
+			<h1>论坛议程</h1>
+			<div class="list">
+				#foreach($ft in $!{programList})
+    				<dl #if($velocityCount == $!{proCount}) class="last" #end>
+    					<dl #if($velocityCount == $!{count}) class="last" #end>
+        					<dt><span>$!{ft.schedule}</span></dt>
+        					<dd><div class="text">$!{ft.comment}</div></dd>
+        				</dl>
+    				</dl>
+    			#end
+			</div>
+		</div>
+	</div>
+	<div class="rightWrapper">
+		#parse("/layout/right-layout.vm")
+		<div class="item lxt guest">
+			<h1>领袖团</h1>
+			<div class="list">
+				<ul>
+					#foreach($ft in $!{leaderList})
+						#if($velocityCount <= 6)
+        					<li>
+        						<div class="pic">
+        							<a href="/xccf/leader/index"><img #foreach($item in $!{ft.attList}) src="${imageRoot}/$!{item.path}" #end width="127px" height="144px" /></a>
+        						</div>
+        						<div class="nameContent">
+        							<div class="content">$!{ft.subhead}</div>
+        							<div class="title"><a href="/xccf/leader/index">$!{ft.title}</a></div>
+        						</div>
+        					</li>
+						#end
+					#end
+				</ul>
+			</div>
+		</div>
+		<div class="item yqjb guest">
+			<h1>拟邀请嘉宾</h1>
+			<div class="list">
+				<ul>
+					#foreach($ft in $!{guestList})
+						#if($velocityCount <= 6)
+        					<li>
+        						<div class="pic">
+        							<a href="/xccf/guest/index"><img #foreach($item in $!{ft.attList}) src="${imageRoot}/$!{item.path}" #end width="127px" height="144px" /></a>
+        						</div>
+        						<div class="nameContent">
+        							<div class="content">$!{ft.subhead}</div>
+        							<div class="title"><a href="/xccf/guest/index">$!{ft.title}</a></div>
+        						</div>
+        					</li>
+						#end
+					#end
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="banner">
+	<a href="#">
+		#foreach($ft in $!{advertList})
+			#if($velocityCount == 1)
+				<img #foreach($item in $!{ft.attList}) src="${imageRoot}/$!{item.path}" #end width="1000px" height="130px" />
+			#end
+		#end
+	</a>
+</div>
+<div class="item zchr person">
+	<h1>论坛总策划人</h1>
+	<div class="list">
+		<ul>
+			#foreach($ft in $!{organigerList})
+    			<li>
+    				<div class="pic">
+    					<a href="/xccf/organiger/index"><img #foreach($item in $!{ft.attList}) src="${imageRoot}/$!{item.path}" #end width="162px" height="192px" /></a>
+    				</div>
+    				<div class="nameContent">
+    					<div class="title"><a href="/xccf/organiger/index">$!{ft.title}</a></div>
+    					<div class="time">浙江熙川控股集团有限公司董事长</div>
+    					<div class="content">$!{ft.summary}</div>
+    				</div>
+    			</li>
+			#end
+			<li>
+				<div class="ProPic">
+					<div class="pic">
+					  <div class="index_ban">
+							<div id='mySlide' class='swipe'>
+								<div class='swipe-wrap'>
+									#foreach($ft in $!{resultList})
+    									<div class="swipePanel">
+    										<div class="swipeUL">
+												#foreach($item in $!{ft.infoList})
+        											<div class="swipeLI">
+        												<div class="pics">
+        													<a href="#"><img #foreach($aItem in $!{item.attList}) src="${imageRoot}/$!{aItem.path}" #end width="214px" height="154px" /></a>
+        												</div>
+        												<div class="pict">
+        													<a href="#">$!{item.title}</a>
+        												</div>
+        											</div>
+												#end
+    										</div>
+    									</div>
+									#end
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="prev" onclick='mySwipe.prev()'><img src="${staticRoot}/xccf/img/Sprev.png" /></div>
+					<div class="next" onclick='mySwipe.next()'><img src="${staticRoot}/xccf/img/Snext.png" /></div>
+				</div>
+			</li>
+		</ul>
+	</div>
+</div>
+<div class="item hzmt">
+	<h1>合作媒体</h1>
+	<div class="list">
+		<ul>
+			#foreach($ft in $!{cooperationList})
+				<li><a href="/xccf/cooperation/index"><img #foreach($item in $!{ft.attList}) src="${imageRoot}/$!{item.path}" #end width="185px" height="65px" /></a></li>
+			#end
+		</ul>
+	</div>
+</div>
+

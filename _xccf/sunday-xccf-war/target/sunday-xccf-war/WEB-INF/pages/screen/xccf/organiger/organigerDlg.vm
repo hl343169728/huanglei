@@ -1,0 +1,142 @@
+#set( $layout = "/layout/common-layout.vm")
+
+<script>
+	 #if("$!message"!="")
+		#if("$!message"=="success")
+			parent.jQuery('#organiger_div').window('close');
+			parent.jQuery("#organigerTable").datagrid('reload');
+		#else
+			jQuery.messager.alert('错误', "操作失败~", 'error');
+		#end
+	#end
+</script>
+
+<form action="/admin/organiger/save" method="post" id="organigerForm" enctype="multipart/form-data">
+	<input name="id" type="hidden" value="$!{messnoti.id}"/>
+	<input name="mtype" type="hidden" value="8"/>
+	<div class="box info-list">
+		<table class="unity-table" id="J_adboardList">
+			<tr>
+				<td style="width:100px">姓名：</td>
+				<td style="width:320px"><input name="title" maxlength="64" value="$!{messnoti.title}" style="width:600px"/></td>
+				<td rowspan="4">
+					<span class="upload_file">
+    					#foreach($item in $!{mnattach})
+    						<img src="${imageRoot}/$!{item.path}" width="80px" height="100px"/>
+    					#end
+					</span>
+				</td>
+			</tr>
+			<tr>
+				<td>职务：</td>
+				<td><input name="summary" maxlength="200" value="$!{messnoti.summary}" style="width:600px"/></td>
+			</tr>
+			<tr>
+				<td>附件：</td>
+				<td>
+					<input type="file" name="files" />
+					<span class="upload_file">
+						#foreach($item in $!{mnattach})
+							$!{item.fileName}&nbsp;&nbsp;<a href="#" onclick="cancelAttac($!{messnoti.id});">取消附件</a>
+						#end
+					</span>
+				</td>
+			</tr>
+			<tr>
+				<td>建议：</td>
+                <td><p style="color:red;">上传附件【宽度】（164像素），【高度】（210像素）</p></td>
+			</tr>
+			<tr>
+				<td>内容：</td>
+				<td>
+					<textarea id="_comment" name="comment">$!{messnoti.comment}</textarea>
+				</td>
+			</tr>
+			<tr>
+				<td>称呼一：</td>
+				<td><input name="subhead" maxlength="64" value="$!{messnoti.subhead}" style="width:600px"/></td>
+			</tr>
+			<tr>
+				<td>描述：</td>
+				<td>
+					<textarea id="_description" name="description">$!{messnoti.description}</textarea>
+				</td>
+			</tr>
+			<tr>
+				<td>称呼二：</td>
+				<td><input name="reource" maxlength="64" value="$!{messnoti.reource}" style="width:600px"/></td>
+			</tr>
+			<tr>
+				<td>描述：</td>
+				<td>
+					<textarea id="_description2" name="description2">$!{messnoti.description2}</textarea>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3" style="text-align: center">
+					<input type="button" style="width:60px;height:25px;" onclick="doSubmit()" value="确定"/>
+				</td>
+			</tr>
+        </table>
+    </div>
+</form>
+	
+<script>
+
+	// 取消附件
+	function cancelAttac(id){
+		jQuery.messager.confirm("提示", "确定要取消该附件吗？", function(r) {
+			if (r) {
+				jQuery.get("/admin/organiger/cancel?id=" + id,function(data){
+					if(data == "1"){
+						$(".upload_file").hide();
+					}
+				});
+			}
+		})
+	}
+
+    function doSubmit(){
+    	$("#organigerForm").submit();
+    }
+    
+    var editor1 = KindEditor.create('textarea[id="_comment"]', {
+    	uploadJson:'${webPath}/kindEditorUpload',
+    	allowFileManager : true,
+    	width:"500px",
+    	height:"300px",
+    	afterBlur:function(){
+    	    this.html();
+    	},
+    	afterChange:function(){
+    	   $("#_comment").val(this.html());
+    	}
+    });
+	
+	var editor2 = KindEditor.create('textarea[id="_description"]', {
+    	uploadJson:'${webPath}/kindEditorUpload',
+    	allowFileManager : true,
+    	width:"500px",
+    	height:"300px",
+    	afterBlur:function(){
+    	    this.html();
+    	},
+    	afterChange:function(){
+    	   $("#_description").val(this.html());
+    	}
+    });
+	
+	var editor3 = KindEditor.create('textarea[id="_description2"]', {
+    	uploadJson:'${webPath}/kindEditorUpload',
+    	allowFileManager : true,
+    	width:"500px",
+    	height:"300px",
+    	afterBlur:function(){
+    	    this.html();
+    	},
+    	afterChange:function(){
+    	   $("#_description2").val(this.html());
+    	}
+    });
+ 
+</script>

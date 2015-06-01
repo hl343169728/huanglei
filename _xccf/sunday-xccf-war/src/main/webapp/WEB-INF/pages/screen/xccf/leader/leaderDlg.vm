@@ -1,0 +1,98 @@
+#set( $layout = "/layout/common-layout.vm")
+
+<script>
+	 #if("$!message"!="")
+		#if("$!message"=="success")
+			parent.jQuery('#leader_div').window('close');
+			parent.jQuery("#leaderTable").datagrid('reload');
+		#else
+			jQuery.messager.alert('错误', "操作失败~", 'error');
+		#end
+	#end
+</script>
+
+<form action="/admin/leader/save" method="post" id="leaderForm" enctype="multipart/form-data">
+	<input name="id" type="hidden" value="$!{messnoti.id}"/>
+	<input name="mtype" type="hidden" value="3"/>
+	<div class="box info-list">
+		<table class="unity-table" id="J_adboardList">
+			<tr>
+				<td style="width:80px;">姓名：</td>
+				<td style="width:320px;"><input name="title" maxlength="64" value="$!{messnoti.title}" style="width:620px;"/></td>
+                <td rowspan="4">
+					<span class="upload_file">
+    					#foreach($item in $!{mnattach})
+    						<img src="${imageRoot}/$!{item.path}" width="80px" height="100px"/>
+    					#end
+					</span>
+				</td>
+			</tr>
+			<tr>
+				<td>职务：</td>
+				<td>
+					<input name="subhead" maxlength="64" value="$!{messnoti.subhead}" style="width:620px;"/>
+				</td>
+			</tr>
+			<tr>
+				<td>附件：</td>
+				<td>
+					<input type="file" name="files" /> 
+					<span class="upload_file">
+    					#foreach($item in $!{mnattach})
+                            $!{item.path}&nbsp;&nbsp;<a href="#" onclick="cancelAttac($!{messnoti.id});">取消附件</a>
+    					#end
+					</span>
+				</td>
+			</tr>
+			<tr>
+                <td>建议：</td>
+                <td><p style="color:red;">上传附件【宽度】（162像素），【高度】（192像素）</p></td>
+			</tr>
+			<tr>
+				<td>简介：</td>
+				<td colspan="2">
+					<textarea id="_comment" name="comment">$!{messnoti.comment}</textarea>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3" style="text-align: center">
+					<input type="button" style="width:60px;height:25px;" onclick="doSubmit()" value="确定"/>
+				</td>
+			</tr>
+		</table>
+    </div>
+</form>
+	
+<script>
+
+	// 取消附件
+	function cancelAttac(id){
+		jQuery.messager.confirm("提示", "确定要取消该附件吗？", function(r) {
+			if (r) {
+				jQuery.get("/admin/leader/cancel?id=" + id,function(data){
+					if(data == "1"){
+						$(".upload_file").hide();
+					}
+				});
+			}
+		})
+	}
+	
+    function doSubmit(){
+    	$("#leaderForm").submit();
+    }
+     
+    var editor1 = KindEditor.create('textarea[id="_comment"]', {
+    	uploadJson:'${webPath}/kindEditorUpload',
+    	allowFileManager : true,
+    	width:"500px",
+    	height:"300px",
+    	afterBlur:function(){
+    	    this.html();
+    	},
+    	afterChange:function(){
+    	   $("#_comment").val(this.html());
+    	}
+    });
+ 
+</script>

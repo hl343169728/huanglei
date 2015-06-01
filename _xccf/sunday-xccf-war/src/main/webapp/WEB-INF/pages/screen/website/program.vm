@@ -1,0 +1,16 @@
+#set( $layout = "/layout/web-layout.vm")
+
+<div class="wrapper">
+	<div class="item ltyc detail">
+		<h1>论坛议程</h1>
+		<div class="list">
+			#foreach($ft in $!{programList})
+				<dl #if($velocityCount == $!{count}) class="last" #end>
+					<dt><span>$!{ft.schedule}</span></dt>
+					<dd><div class="text">$!{ft.comment}</div></dd>
+				</dl>
+			#end
+		</div>
+	</div>
+</div>
+	

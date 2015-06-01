@@ -1,0 +1,68 @@
+#set( $layout = "/layout/web-layout.vm")
+
+<div class="wrapper">
+		<div class="item zchr ceo">
+			<h1>总策划人</h1>
+			<div class="list">
+				#foreach($ft in $!{organigerList})
+    				<div class="honor">
+                        <div class="avatar">
+    						<img #foreach($item in $!{ft.attList}) src="${imageRoot}/$!{item.path}" #end width="164px" height="210px" />
+    					</div>
+                        <div class="nameContent">
+                            <div class="title">$!{ft.title}</div>
+                            <div class="content">$!{ft.summary}</div>
+                        </div>
+    				</div>
+                    <div class="introduce">
+                        <div class="text">
+                            $!{ft.comment}
+                        </div>
+                        <div class="video">
+                            <iframe width="410" height="360" src="http://cache.tv.qq.com/qqplayerout.swf?vid=q014694zzvb" frameborder=0 allowfullscreen></iframe>
+                        </div>
+                    </div>
+                    <dl>
+                    	<dt>$!{ft.subhead}</dt>
+                        <dd>$!{ft.description}</dd>
+                    </dl>
+					<dl>
+                    	<dt>$!{ft.reource}</dt>
+                        <dd>$!{ft.description2}</dd>
+                    </dl>
+				#end
+			</div>
+			<div class="threePic">
+				<div class="divide"><span>企业家风采</span></div>
+				<div class="ProPic">
+					<div class="pic">
+					  <div class="index_ban">
+							<div id='mySlide' class='swipe'>
+								<div class='swipe-wrap'>
+									#foreach($ft in $!{resultList})
+    									<div class="swipePanel">
+    										<div class="swipeUL">
+												#foreach($item in $!{ft.infoList})
+        											<div class="swipeLI">
+        												<div class="pics">
+        													<a href="#"><img #foreach($aItem in $!{item.attList}) src="${imageRoot}/$!{aItem.path}" #end width="256px" height="194px" /></a>
+        												</div>
+        												<div class="pict">
+        													<a href="#">$!{item.title}</a>
+        												</div>
+        											</div>
+												#end
+    										</div>
+    									</div>
+									#end
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="prev" onclick='mySwipe.prev()'><img src="${staticRoot}/xccf/img/Bprev.png" /></div>
+					<div class="next" onclick='mySwipe.next()'><img src="${staticRoot}/xccf/img/Bnext.png" /></div>
+				</div>
+			</div>
+		</div>
+	</div>
+

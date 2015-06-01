@@ -1,0 +1,25 @@
+#set( $layout = "/layout/web-layout.vm")
+
+<div class="wrapper">
+	<div class="leftWrapper">
+		<div class="item lxt NewsDetail">
+			<h1>顶尖领袖团</h1>
+			<div class="list">
+				<div class="title">$!{leaderInfo.title}</div>
+				<div class="time">$!{leaderInfo.subhead}</div>
+				<div class="content">
+					#foreach($item in $!{attList})
+						<div class="ban">
+							<img src="${imageRoot}/$!{item.path}" style="width: 162px; height: 192px;"/>
+						</div>
+					#end
+					<p>$!{leaderInfo.comment}</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="rightWrapper">
+		#parse("/layout/right-layout.vm")
+	</div>
+</div>
+	

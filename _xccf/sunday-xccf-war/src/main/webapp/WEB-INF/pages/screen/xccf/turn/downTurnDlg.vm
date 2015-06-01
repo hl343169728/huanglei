@@ -1,0 +1,87 @@
+#set( $layout = "/layout/common-layout.vm")
+
+<script>
+	 #if("$!message"!="")
+		#if("$!message"=="success")
+			parent.jQuery('#down_turn_div').window('close');
+			parent.jQuery("#downTurnTable").datagrid('reload');
+		#else
+			jQuery.messager.alert('错误', "操作失败~", 'error');
+		#end
+	#end
+</script>
+
+<form action="/admin/downTurn/save" method="post" id="downTurnForm" enctype="multipart/form-data">
+	<input name="id" type="hidden" value="$!{messnoti.id}"/>
+	<input name="mtype" type="hidden" value="11"/>
+	<div class="box info-list">
+		<table class="unity-table" id="J_adboardList">
+			<tr>
+				<td style="width:80px">标题：</td>
+				<td style="width:320px"><input name="title" maxlength="64" value="$!{messnoti.title}" style="width:600px"/></td>
+			</tr>
+			<tr>
+				<td>附件：</td>
+				<td>
+					<input type="file" name="files" /> 
+					<span id="upload_file">
+    					#foreach($item in $!{mnattach})
+    						$!{item.path}&nbsp;&nbsp;<a href="#" onclick="cancelAttac($!{messnoti.id});">取消附件</a>
+    					#end
+					</span>
+				</td>
+			</tr>
+			<tr>
+                <td>建议：</td>
+                <td><p style="color:red;">上传附件【宽度】（256像素），【高度】（194像素）</p></td>
+			</tr>
+			#if($!{size} > 0)
+    			<tr id="turn_file">
+    				<td colspan="2">
+    					<img #foreach($item in $!{mnattach}) src="${imageRoot}/$!{item.path}" #end width="256px" height="194px"/>
+    				</td>
+    			</tr>
+			#end
+			<tr>
+				<td colspan="2" style="text-align: center">
+					<input type="button" style="width:60px;height:25px;" onclick="doSubmit()" value="确定"/>
+				</td>
+			</tr>
+		</table>
+    </div>
+</form>
+	
+<script>
+
+	// 取消附件
+	function cancelAttac(id){
+		jQuery.messager.confirm("提示", "确定要取消该附件吗？", function(r) {
+			if (r) {
+				jQuery.get("/admin/downTurn/cancel?id=" + id,function(data){
+					if(data == "1"){
+						$("#upload_file").hide(); 
+						$("#turn_file").hide();
+					}
+				});
+			}
+		})
+	}
+
+    function doSubmit(){
+    	$("#downTurnForm").submit();
+    }
+     
+    var editor1 = KindEditor.create('textarea[id="_comment"]', {
+    	uploadJson:'${webPath}/kindEditorUpload',
+    	allowFileManager : true,
+    	width:"500px",
+    	height:"300px",
+    	afterBlur:function(){
+    	    this.html();
+    	},
+    	afterChange:function(){
+    	   $("#_comment").val(this.html());
+    	}
+    });
+ 
+</script>

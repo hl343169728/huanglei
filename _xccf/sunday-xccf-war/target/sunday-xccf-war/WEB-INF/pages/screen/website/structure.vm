@@ -1,0 +1,47 @@
+#set( $layout = "/layout/web-layout.vm")
+
+	<div class="wrapper">
+		<div class="item zzjg">
+			<h1>组织机构</h1>
+			<div class="list">
+                <div class="panelBox dataLine datap">
+                    <div class="title" id="stru1"><span>主办机构</span></div>
+                    <ul>
+						#foreach($ft in $!{structureList})
+							#if($!{ft.title} == "1")
+                                <li>
+                                    <a href="#"><img #foreach($item in $!{ft.attList}) src="${imageRoot}/$!{item.path}" #end width="265px" height="70px" /></a>
+                                    <div class="text">$!{ft.comment}</div>
+                                </li>
+							#end
+						#end
+                    </ul>
+                </div>
+                <div class="panelBox dataLine datap Block">
+                    <div class="title" id="stru2"><span>独家承办机构</span></div>
+                    <ul>
+						#foreach($ft in $!{structureList})
+							#if($!{ft.title} == "2")
+                                <li>
+                                	<div class="text">$!{ft.comment}</div>
+                                </li>
+    						#end
+						#end
+                    </ul>
+                </div>
+                <div class="panelBox dataLine datap">
+                    <div class="title" id="stru3"><span>特邀承办机构</span></div>
+                    <ul>
+						#foreach($ft in $!{structureList})
+							#if($!{ft.title} == "3")
+                                <li>
+        							<a href="#"><img #foreach($item in $!{ft.attList}) src="${imageRoot}/$!{item.path}" #end width="265px" height="60px" /></a>
+                                    <div class="text">$!{ft.comment}</div>
+                                </li>
+							#end
+						#end
+                    </ul>
+                </div>
+			</div>
+		</div>
+	</div>

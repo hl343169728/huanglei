@@ -1,0 +1,102 @@
+#set( $layout = "/layout/web-layout.vm")
+
+<script type="text/javascript">
+	// 加载更多
+	function getAjax() {
+		var from = $("#from").val();
+		var pageSize = 10;
+		jQuery.ajax({
+			url:"/xccf/news/index?filter_S_reource=1&filter_I_size=" + pageSize + "&filter_I_from=" + from,
+			type:"post",
+			success:function(data){
+				var obj = JSON.parse(data);
+				if ((data != '' || data != null) && obj.length != 0) {
+					for (var i=0;i < obj.length;i++) {
+						$("#from").val(obj[i].from);
+                    	var _replaceHtml = '<li>';
+						var att = obj[i].attList;
+						for (var j=0;j < att.length;j++) {
+							_replaceHtml += '<div class="pic"><a href="/xccf/news/detail?id=' + obj[i].id + '">' + '<img src="${imageRoot}/' + att[j].path + '" width="200px" height="120px"/></a></div>'
+						}
+						_replaceHtml += '<div class="nameContent">';
+						_replaceHtml += '<div class="title"><a href="/xccf/news/detail?id=' + obj[i].id + '">' + obj[i].title + '</a></div>';
+						_replaceHtml += '<div class="time">' + format(obj[i].actionTime, 'yyyy-MM-dd') + '</div>';
+						_replaceHtml += '<div class="content">' + obj[i].comment + '</div>';
+						_replaceHtml += '</div>';
+						_replaceHtml += '</li>';
+                		var trrep = '<ul id="single_item">';
+                		replaceHtml = trrep + _replaceHtml;
+                		$("#nList").append(replaceHtml + "</ul>");
+					}
+					if (obj.length < pageSize) {
+						$("#get_more").hide();
+					}
+    			} else {
+					$("#get_more").hide();
+				}
+			}
+		});
+	}
+	
+	// 将中国标准时间转化为指定格式时间  
+	var format = function(time, format){
+	    var t = new Date(time);
+	    var tf = function(i){return (i < 10 ? '0' : '') + i};
+	    return format.replace(/yyyy|MM|dd|HH|mm|ss/g, function(a){
+	        switch(a){
+	            case 'yyyy':
+	                return tf(t.getFullYear());
+	                break;
+	            case 'MM':
+	                return tf(t.getMonth() + 1);
+	                break;
+	            case 'mm':
+	                return tf(t.getMinutes());
+	                break;
+	            case 'dd':
+	                return tf(t.getDate());
+	                break;
+	            case 'HH':
+	                return tf(t.getHours());
+	                break;
+	            case 'ss':
+	                return tf(t.getSeconds());
+	                break;
+	        }
+	    });
+	}
+</script>
+
+<input type="hidden" id="from" value="$!{from}"/>
+<div class="wrapper">
+	<div class="leftWrapper">
+		<div class="item xwzx">
+			<h1>新闻中心</h1>
+			<div class="list" id="nList">
+				<ul id="single_item">
+					#foreach($ft in $!{newsList})
+    					<li>
+							#foreach($item in $!{ft.attList})
+								<div class="pic">
+									<a href="/xccf/news/detail?id=$!{ft.id}"><img src="${imageRoot}/$!{item.path}" width="200px" height="120px"/></a>
+								</div>
+							#end
+    						<div class="nameContent">
+    							<div class="title"><a href="/xccf/news/detail?id=$!{ft.id}">$!{ft.title}</a></div>
+    							<div class="time">$!timeUtils.format($!{ft.actionTime},"yyyy-MM-dd")</div>
+    							<div class="content">$!{ft.summary}</div>
+    						</div>
+    					</li>
+					#end
+				</ul>
+			</div>
+			#if($!{listSize} == $!{from})
+				<div id="get_more" class="moreList" onClick="getAjax()">查看更多</div>
+			#end
+		</div>
+	</div>
+	<div class="rightWrapper">
+		#parse("/layout/right-layout.vm")
+	</div>
+</div>
+	

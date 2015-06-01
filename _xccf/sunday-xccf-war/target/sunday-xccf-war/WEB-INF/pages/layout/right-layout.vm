@@ -1,0 +1,59 @@
+#parse($sub)
+
+<div class="panelBox data">
+	#foreach($ft in $!{aboutList})
+    	<div class="dataLine">
+    		<div class="title"><span>论坛主题</span></div>
+    		<div class="content">$!{ft.title}</div>
+    	</div>
+    	<div class="dataLine">
+    		<div class="title"><span>时　　间</span></div>
+    		<div class="content">$!{ft.subhead}</div>
+    	</div>
+    	<div class="dataLine">
+    		<div class="title"><span>地　　点</span></div>
+    		<div class="content">$!{ft.summary}</div>
+    	</div>
+    	<div class="dataLine">
+    		<div class="title"><span>论坛规模</span></div>
+    		<div class="content">$!{ft.reource}</div>
+    	</div>
+    	<div class="dataLine">
+    		<div class="title"><span>主 持 人</span></div>
+    		<div class="content">$!{ft.description}</div>
+    	</div>
+	#end
+</div>
+<div class="panelBox dataLine datap">
+	<div class="title"><span>主办机构</span></div>
+	<ul>
+		#foreach($ft in $!{hostList})
+			#if($!{ft.title} == "1")
+				<li><a href="/xccf/structure/index#stru1"><img #foreach($item in $!{ft.attList}) src="${imageRoot}/$!{item.path}" #end width="265px" height="70px"  /></a></li>
+			#end
+		#end
+	</ul>
+</div>
+<div class="panelBox dataLine datap">
+	<div class="title"><span>独家承办机构</span></div>
+	<ul>
+		#foreach($ft in $!{soleList})
+			#if($!{ft.title} == "2")
+				<li><a href="/xccf/structure/index#stru2"><img #foreach($item in $!{ft.attList}) src="${imageRoot}/$!{item.path}" #end width="265px" height="60px"  /></a></li>
+			#end
+		#end
+	</ul>
+</div>
+<div class="panelBox dataLine datap">
+	<div class="title"><span>特邀承办机构</span></div>
+	<ul>
+		#foreach($ft in $!{speciList})
+			#if($!{ft.title} == "3")
+				<li><a href="/xccf/structure/index#stru3"><img #foreach($item in $!{ft.attList}) src="${imageRoot}/$!{item.path}" #end width="265px" height="60px"  /></a></li>
+			#end
+		#end
+	</ul>
+</div>
+
+
+	

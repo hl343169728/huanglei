@@ -1,0 +1,24 @@
+#set( $layout = "/layout/web-layout.vm")
+
+<div class="wrapper">
+	<div class="item yqjb person">
+		<h1>拟邀请嘉宾</h1>
+		<div class="list">
+			<ul>
+				#foreach($ft in $!{guestList})
+    				<li>
+    					<div class="pic">
+    						<a href="#"><img #foreach($item in $!{ft.attList}) src="${imageRoot}/$!{item.path}" #end width="162px" height="192px" /></a>
+    					</div>
+    					<div class="nameContent">
+    						<div class="title #if(${ft.title} == '' && ${ft.comment} == '') topMargin #end"><a href="#">$!{ft.subhead}</a></div>
+        					<div class="time">$!{ft.title}</div>
+        					<div class="content">$!{ft.comment}</div>
+    					</div>
+    				</li>
+				#end
+			</ul>
+		</div>
+	</div>
+</div>
+	

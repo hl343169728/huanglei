@@ -1,0 +1,49 @@
+#set( $layout = "/layout/web-layout.vm")
+
+<div class="wrapper">
+	<div class="item lxfs detail">
+		<h1>联系方式</h1>
+		<div class="list">
+			<div class="content">
+				#foreach($ft in $!{contactList})
+    				<dl>
+    					<dt>电话 · Telephone</dt>
+    					<dd>
+    						<ul class="type1">
+    							<li>$!{ft.reource}</li>
+    						</ul>
+    					</dd>
+    				</dl>
+    				<dl>
+    					<dt>地址 · Address</dt>
+    					<dd>
+    						<ul class="type2">
+    							<li><span>总　部：</span>$!{ft.actionTime2}</li>
+    							<li><span>分公司：</span>$!{ft.actionAddr}</li>
+    						</ul>
+    					</dd>
+    				</dl>
+    				<dl>
+    					<dt>投递 · Delivery</dt>
+    					<dd>
+    						<ul class="type3">
+    							<li>网址：$!{ft.title}</li>
+    							<!--<li>邮箱：$!{ft.subhead}</li>-->
+    							<li>熙川集团官方网站：$!{ft.summary}</li>
+    							<li>熙川商品官方网站：$!{ft.comment}</li>
+    							<li>熙川文化官方网站：$!{ft.description}</li>
+    						</ul>
+    					</dd>
+    				</dl>
+				#end
+			</div>
+			<div class="content">
+				#foreach($ft in $!{upAdvertList})
+        			#if($velocityCount == 1)
+        				<img #foreach($item in $!{ft.attList}) src="${imageRoot}/$!{item.path}" #end width="1000px" height="130px" />
+        			#end
+        		#end
+			</div>
+		</div>
+	</div>
+</div>

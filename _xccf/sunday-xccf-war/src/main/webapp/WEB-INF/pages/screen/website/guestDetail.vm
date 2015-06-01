@@ -1,0 +1,25 @@
+#set( $layout = "/layout/web-layout.vm")
+
+<div class="wrapper">
+	<div class="leftWrapper">
+		<div class="item yqjb NewsDetail">
+			<h1>拟邀请嘉宾</h1>
+			<div class="list">
+				<div class="title">$!{guestInfo.title}</div>
+				<div class="time">$!{guestInfo.subhead}</div>
+				<div class="content">
+					#foreach($item in $!{attList})
+						<div class="ban">
+							<img src="${imageRoot}/$!{item.path}"/>
+						</div>
+					#end
+					<p>$!{guestInfo.comment}</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="rightWrapper">
+		#parse("/layout/right-layout.vm")
+	</div>
+</div>
+	

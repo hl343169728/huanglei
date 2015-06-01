@@ -1,0 +1,31 @@
+﻿<html>
+<head>
+<meta charset="utf-8">
+<link href="/favicon.ico" rel="icon" type="image/x-icon">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<title>报名成功</title>
+<link href="${staticRoot}/xccf/wechat/wechat.css" rel="stylesheet">
+</head>
+<body>
+	<div class="SignUp">
+		<img src="../img/head_bg.jpg" height="3" />
+		<img src="${staticRoot}/xccf/wechat/weBanner.jpg" />
+		<div class="success">基本报名信息已提交</div>
+		<div class="loginWrapper">
+			<div class="Action">
+				<button onclick="doBack();">返 回</button>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+
+<script >
+	function doBack() {
+		window.location.href = "/xccf/wechat/signup"
+	}
+</script>
+
