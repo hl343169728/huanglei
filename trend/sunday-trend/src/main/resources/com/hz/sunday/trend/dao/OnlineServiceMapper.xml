@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hz.sunday.trend.dao.OnlineServiceMapper">
+
+	<resultMap id="onlineServiceMap" type="com.hz.sunday.trend.orm.OnlineService">
+		<result property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="address" column="address" />
+		<result property="mobile" column="mobile" />
+		<result property="comment" column="comment" />
+	</resultMap>
+
+	<sql id="ONLINE_SERVICE_SQL">
+		name,address,mobile,comment
+	</sql>
+
+	<!-- 新增 -->
+	<insert id="insert" parameterType="com.hz.sunday.trend.orm.MessageInfo"
+		useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+		insert into
+		online_service(
+		<include refid="ONLINE_SERVICE_SQL" />
+		)VALUES(#{name},#{address},#{mobile},#{comment})
+	</insert>
+
+	<!-- 获取分页数据 -->
+	<select id="list" parameterType="java.util.HashMap" resultMap="onlineServiceMap">
+		select id,
+		<include refid="ONLINE_SERVICE_SQL" />
+		from online_service
+		<where>
+			1=1
+			<if test="name != null and name != ''">
+				<![CDATA[ and name like CONCAT('%',#{name},'%')]]>
+			</if>
+			<if test="address != null and address != ''">
+				<![CDATA[ and address like CONCAT('%',#{address},'%')]]>
+			</if>
+			<if test="mobile != null and mobile != ''">
+				<![CDATA[ and mobile like CONCAT('%',#{mobile},'%')]]>
+			</if>
+		</where>
+		order by id DESC
+		<if test="rowStart != null and pageSize != null">
+			<![CDATA[limit #{rowStart},#{pageSize}]]>
+		</if>
+	</select>
+
+	<!-- 获取客户记录总条数 -->
+	<select id="count" parameterType="java.util.HashMap" resultType="java.lang.Long">
+		select COUNT(*) FROM online_service
+		<where>
+			1=1
+			<if test="name != null and name != ''">
+				<![CDATA[ and name like CONCAT('%',#{name},'%')]]>
+			</if>
+			<if test="address != null and address != ''">
+				<![CDATA[ and address like CONCAT('%',#{address},'%')]]>
+			</if>
+			<if test="mobile != null and mobile != ''">
+				<![CDATA[ and mobile like CONCAT('%',#{mobile},'%')]]>
+			</if>
+			<if test="sex != null and sex != ''">
+				<![CDATA[ and sex = #{sex}]]>
+			</if>
+		</where>
+	</select>
+
+	<!-- 根据ID，删除一条数据 -->
+	<delete id="deleteById" parameterType="java.lang.Long">
+		delete from online_service
+		where id = #{id}
+	</delete>
+
+</mapper>
+	

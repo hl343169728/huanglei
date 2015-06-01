@@ -1,0 +1,83 @@
+#parse($sub) 
+
+<script type="text/javascript">
+// 发送
+function sendMsg(){
+	var name = $("#userName").val();
+	var address = $("#address").val();
+	var mobile = $("#mobile").val();
+	var comment = $("#comment").val(); 
+	
+	if(jQuery.trim(name) == "" || jQuery.trim(address) == "" || jQuery.trim(mobile) == "" || jQuery.trim(comment) == ""){
+		alert("姓名，地址，电话，留言都是必填项~");
+		return;
+	}
+	jQuery.post("/admin/service/save",{name:name,address:address,mobile:mobile,comment:comment},function(data){
+		if (data == "success") {
+			alert("信息提交成功~");
+			doReset();
+		} else {
+			alert("信息提交失败~");
+		}
+	});
+}
+
+// 充填
+function doReset() {
+	$("#userName").val('');
+	$("#address").val('');
+	$("#mobile").val('');
+	$("#comment").val(''); 
+}
+</script>
+
+<div class="panelBox lxwm">
+	<h1><span>联系我们</span></h1>
+    <div class="list">
+		#foreach($ft in $!{contactList})
+        	<h2>$!{ft.title}</h2>
+            <dl>
+            	<dt>地址：</dt>
+                <dd>$!{ft.actionAddr}</dd>
+            </dl>
+            <dl class="phone">
+            	<dt>电话：</dt>
+                <dd>
+                	<ul>
+                    	<li>$!{ft.field1}</li>
+                        <li>$!{ft.field2}</li>
+                        <li>$!{ft.field3}</li>
+                        <li>$!{ft.field4}</li>
+                    </ul>
+                </dd>
+            </dl>
+		#end
+        <dl class="qq">
+        	<dt>业务咨询：</dt>
+            <dd>
+            	<ul>
+					#foreach($ft in $!{consultList})
+						<li><a target="_blank" href="$!{ft.summary}">$!{ft.title}</a></li>
+					#end
+                </ul>
+            </dd>
+        </dl>
+    </div>
+</div>
+<div class="panelBox zxkf">
+	<h1><span>在线客服</span></h1>
+    <div class="list">
+        <div class="Message">
+            <div class="inputPanel">
+                <div class="txtPanel"><span class="title">姓名：</span><input type="text" id="userName" name="name" maxlength="64" placeholder="" /></div>
+                <div class="txtPanel"><span class="title">电话：</span><input type="text" id="mobile" name="mobile" maxlength="11" /></div>
+                <div class="txtPanel"><span class="title">地址：</span><input type="text" id="address" name="address" maxlength="64"/></div>
+                <div class="txtPanel"><span class="title">留言：</span><textarea id="comment" name="comment" style="resize:none;"></textarea></div>
+            </div>
+            <div class="Action">
+                <input type="button" value="发送" onclick="sendMsg();"/>
+            	<input type="button" value="重填" onclick="doReset();"/>
+            </div>
+        </div>
+    </div>
+</div>

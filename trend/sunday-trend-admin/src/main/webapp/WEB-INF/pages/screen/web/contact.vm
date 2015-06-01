@@ -1,0 +1,52 @@
+#set( $layout = "/layout/web-layout.vm") 
+
+#parse("/layout/header-layout.vm")
+
+<div class="wrapper">
+	<div class="leftWrapper">
+		<div class="panelBox gsjs">
+			<h1><span>联系我们</span></h1>
+            <div class="list">
+                <ul>
+                    <li><a href="/trend/contact/index">联系我们</a></li> 
+                </ul>
+            </div>
+		</div>
+		
+		#parse("/layout/left-layout.vm")
+		
+    </div>
+	<div class="rightWrapper">
+		<div class="panelBox contact">
+			<h1>
+            	<span>联系我们</span>
+                <div class="path"><em>您的位置：</em><a href="/">首页</a> > 联系我们</div>
+            </h1>
+            <div class="list">
+           		<div class="content">
+					#foreach($ft in $!{contactList})
+    					<p>$!{ft.title}
+                        <br/>工作时间：$!{ft.actionTime2}
+                        <br/>地址：$!{ft.actionAddr}
+                        </p>
+                            <dl class="telephone">
+                                <dt>公司电话：</dt>
+                                <dd>
+                                    <ul>
+                                        <li>$!{ft.field1}</li>
+                                        <li>$!{ft.field2}</li>
+                                        <li>$!{ft.field3}</li>
+                                        <li>$!{ft.field4}</li>
+                                    </ul>
+                                </dd>
+                            </dl>
+                        <p>售后部（7*24小时）：$!{ft.subhead}　<img src="$!{staticRoot}/trend/img/qq.png" />
+                        <br/>产品中心：$!{ft.summary}　<img src="$!{staticRoot}/trend/img/qq.png" /></p>
+    					<div class="map"><img #foreach($item in $!{ft.attList}) src="${imageRoot}/$!{item.path}" #end /></div>
+					#end
+            	</div>
+            </div>
+		</div>
+    </div>
+</div>
+    

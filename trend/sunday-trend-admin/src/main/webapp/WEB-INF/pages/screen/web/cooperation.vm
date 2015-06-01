@@ -1,0 +1,43 @@
+#set( $layout = "/layout/web-layout.vm") 
+
+#parse("/layout/header-layout.vm")
+
+<div class="wrapper">
+	<div class="leftWrapper">
+		<div class="panelBox gsjs">
+			<h1><span>投资方案</span></h1>
+            <div class="list">
+                <ul>
+					<li><a href="#">公司加盟优势</a></li>
+                    <li><a href="#">开业赠送</a></li>
+                    <li><a href="#">公司合作流程</a></li> 
+                    <li><a href="#">单店合作政策</a></li>
+                </ul>
+            </div>
+		</div>
+		
+		#parse("/layout/left-layout.vm")
+		
+    </div>
+	<div class="rightWrapper">
+		<div class="panelBox cooperation">
+			<h1>
+            	<span>投资方案</span>
+                <div class="path"><em>您的位置：</em><a href="/">首页</a> > 投资方案</div>
+            </h1>
+            <div class="list">
+           		<div class="content">
+					#foreach($ft in $!{cooperList})
+                    	<dl>
+                        	<dt>$!{ft.title}</dt>
+                            <dd>
+                            	$!{ft.comment}
+                            </dd>
+                        </dl>
+					#end
+            	</div>
+            </div>
+		</div>
+    </div>
+</div>
+    

@@ -1,0 +1,20 @@
+#parse($sub)
+
+<div class="page" id="changePage"></div>
+
+<!--
+<div class="page">
+	<span>共检索<em>363</em>条信息 每页<em>12</em>条信&nbsp;</span> < 
+    <a class=cy05 href="index.html">首页&nbsp;</a> 
+    <a class=cy05 href="#">上一页&nbsp;</a> 
+    <a class=cy05 href="index_1.htm">下一页&nbsp;</a> > 
+    <a class=cy05 href="index_5.htm">末页&nbsp;&nbsp;</a> > 
+    <span>　转 到：
+        <select>
+            <option>第1页</option>
+            <option>第2页</option>
+            <option>第3页</option> 
+        </select>
+    </span> 
+</div>
+-->

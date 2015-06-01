@@ -1,0 +1,149 @@
+#set( $layout = "/layout/web-layout.vm") 
+
+<script type="text/javascript">
+// 发送
+function doSend(){
+	var name = $("#userName").val();
+	var sex = $('input:radio:checked').val();
+	var address = $("#address").val();
+	var mobile = $("#mobile").val();
+	var email = $("#email").val();
+	var comment = $("#comment").val(); 
+	
+	if(jQuery.trim(name)=="" || jQuery.trim(address)=="" || jQuery.trim(mobile)==""){
+		alert("姓名，开店地址，联系电话都是必填项~");
+		return;
+	}
+	jQuery.post("/admin/msgInfo/save",{name:name,sex:sex,address:address,mobile:mobile,email:email,comment:comment},function(data){
+		if (data == "success") {
+			alert("信息提交成功~");
+			doReset();
+		} else {
+			alert("信息提交失败~");
+		}
+	});
+}
+
+// 充填
+function doReset() {
+	$("#userName").val('');
+	$("#address").val('');
+	$("#mobile").val('');
+	$("#comment").val(''); 
+	$("#email").val('')
+}
+</script> 
+
+<div class="bannerIndex">
+	<a href="#">
+		#foreach($ft in $!{logoList})
+    		#if($velocityCount == 1)
+    			<img #foreach($item in $!{ft.attList}) src="${imageRoot}/$!{item.path}" #end />
+    		#end
+    	#end
+	</a>
+</div>
+<div class="wrapper">
+    <div class="item hd01">
+        <h1>自有工厂  厂家直销  售后有保障  专注专业</h1>
+        <div class="list">
+            <img src="$!{staticRoot}/trend/images/index_bd01.jpg" />
+            <div class="video1"><embed src="http://player.youku.com/player.php/sid/XNDQzNjc2NzIw/v.swf" allowFullScreen="true" quality="high" width="318" height="267" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash"></embed></div>
+            <div class="video2"><embed src="http://player.youku.com/player.php/sid/XNDQzNjc2NzIw/v.swf" allowFullScreen="true" quality="high" width="318" height="267" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash"></embed></div>
+            <div class="video3"><embed src="http://player.youku.com/player.php/sid/XNDQzNjc2NzIw/v.swf" allowFullScreen="true" quality="high" width="318" height="267" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash"></embed></div>
+        </div>
+    </div>
+    <div class="item hd02">
+        <h1>纸币找零的重要性</h1>
+        <div class="list">
+            <img src="$!{staticRoot}/trend/images/index_bd02.jpg" />
+        </div>
+    </div>
+    <div class="item hd03">
+        <h1>加盟店案例展示</h1>
+        <div class="list">
+            <img src="$!{staticRoot}/trend/images/index_bd03.jpg" />
+        </div>
+    </div>
+    <div class="item hd04">
+        <h1>合作流程</h1>
+        <div class="list">
+            <img src="$!{staticRoot}/trend/images/index_bd04.jpg" />
+        </div>
+    </div>
+    <div class="item hd05">
+        <h1>21世纪仅剩的暴利行业</h1>
+        <div class="list">
+            <img src="$!{staticRoot}/trend/images/index_bd05.jpg" />
+        </div>
+    </div>
+    <div class="item hd06">
+        <h1>开创成人用品自助购物新模式</h1>
+        <div class="list">
+            <img src="$!{staticRoot}/trend/images/index_bd06.jpg" />
+        </div>
+    </div>
+    <div class="item hd07">
+        <h1>利润分析</h1>
+        <div class="list">
+            <img src="$!{staticRoot}/trend/images/index_bd07.jpg" />
+        </div>
+    </div>
+    <div class="item hd08">
+        <h1>强大运营团队，售后体系完善</h1>
+        <div class="list">
+            <img src="$!{staticRoot}/trend/images/index_bd08.jpg" />
+        </div>
+    </div>
+    <div class="item hd09">
+        <h1>店面展示</h1>
+        <div class="list">
+            <ul>
+				<!--
+				#foreach($ft in $!{shopList})
+					#if($velocityCount <= 4)
+						<li><a href="#"><img #foreach($item in $!{ft.attList}) src="${imageRoot}/$!{item.path}" #end /></a></li>
+					#end
+				#end
+				-->
+				<li><a href="#"><img src="$!{staticRoot}/trend/images/storePic01.jpg" /></a></li>
+                <li><a href="#"><img src="$!{staticRoot}/trend/images/storePic01.jpg" /></a></li>
+                <li><a href="#"><img src="$!{staticRoot}/trend/images/storePic01.jpg" /></a></li>
+                <li><a href="#"><img src="$!{staticRoot}/trend/images/storePic01.jpg" /></a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="item hd10">
+        <h1>产品丰富  质优价廉  拒绝高仿  100%调换货</h1>
+        <div class="list">
+        	<div class="brand">品牌</div>
+            <ul>
+				#foreach($ft in $!{brandList})
+					<li><a href="#"><img #foreach($item in $!{ft.attList}) src="${imageRoot}/$!{item.path}" #end /></a></li>
+				#end
+            </ul>
+        </div>
+    </div>
+    <div class="item hd11">
+        <h1>在线留言</h1>
+        <div class="list">
+        	<div class="Message">
+                <div class="inputPanel">
+                    <div class="txtPanel name"><span class="title">您的姓名：</span><input type="text" id="userName" name="name" maxlength="64" placeholder="" />
+                    	<ul>
+                        	<li><input type="radio" name="sex" checked="checked" value="先生"/><label for="male">先生</label></li>
+                            <li><input type="radio" name="sex" value="女士"/><label for="female">女士</label></li>
+                        </ul><span class="must">* 此项为必填</span></div>
+                    <div class="txtPanel"><span class="title">开店地址：</span><input type="text" id="address" name="address" maxlength="64" /><span class="must">* 此项为必填</span></div>
+                    <div class="txtPanel"><span class="title">联系电话：</span><input type="text" id="mobile" name="mobile" maxlength="11" /><span class="must">* 此项为必填</span></div>
+                    <div class="txtPanel"><span class="title">电子邮箱：</span><input type="text" id="email" name="email" maxlength="64" /></div>
+                    <div class="txtPanel"><span class="title">留言内容：</span><textarea id="comment" name="comment" ></textarea></div>
+                </div>
+                <div class="Action">
+					<input type="button" value="发 送" onclick="doSend();" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    

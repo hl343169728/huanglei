@@ -1,0 +1,42 @@
+#set( $layout = "/layout/common-layout.vm") 
+
+<script>
+	 #if("$!message"!="")
+		#if("$!message"=="success")
+			parent.jQuery('#consult_div').window('close');
+			parent.jQuery("#consultTable").datagrid('reload');
+		#else
+			jQuery.messager.alert('错误', "操作失败~", 'error');
+		#end
+	#end
+</script>
+
+<form action="/admin/consult/save" method="post" id="consultForm" enctype="multipart/form-data">
+	<input name="id" type="hidden" value="$!{info.id}"/>
+	<input name="mType" type="hidden" value="13"/>
+	<div class="box info-list">
+		<table class="unity-table" id="J_adboardList">
+			<tr>
+				<td style="width:80px">称呼：</td>
+				<td style="width:320px"><input name="title" maxlength="64" value="$!{info.title}" style="width:600px"/></td>
+			</tr>
+			<tr>
+				<td>链接：</td>
+				<td><input name="summary" maxlength="200" value="$!{info.summary}" style="width:600px"/></td>
+			</tr>
+			<tr>
+				<td colspan="2" style="text-align: center">
+					<input type="button" style="width:60px;height:25px;" onclick="doSubmit()" value="确定"/>
+				</td>
+			</tr>
+        </table>
+    </div>
+</form>
+	
+<script type="text/javascript">
+
+    function doSubmit(){
+    	$("#consultForm").submit();
+    }
+     
+</script>

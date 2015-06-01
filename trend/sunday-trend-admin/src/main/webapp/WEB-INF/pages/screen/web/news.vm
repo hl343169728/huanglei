@@ -1,0 +1,38 @@
+#set( $layout = "/layout/web-layout.vm") 
+
+#parse("/layout/header-layout.vm")
+
+<div class="wrapper">
+	<div class="leftWrapper">
+		<div class="panelBox gsjs">
+			<h1><span>新闻动态</span></h1>
+            <div class="list">
+                <ul>
+                    <li><a href="/trend/news/index">公司新闻</a></li> 
+                    <li><a href="#">行业动态</a></li>
+                </ul>
+            </div>
+		</div>
+		
+		#parse("/layout/left-layout.vm")
+		
+    </div>
+	<div class="rightWrapper">
+		<div class="panelBox news">
+			<h1>
+            	<span>公司新闻</span>
+                <div class="path"><em>您的位置：</em><a href="/">首页</a> > <a href="/trend/news/index">新闻动态</a> > 公司新闻</div>
+            </h1>
+            <div class="list">
+				<ul id="info_list">
+					#foreach($ft in $!{newsList})
+						<li><a href="/trend/news/detail?id=$!{ft.id}">$!{ft.title}</a><span>$!timeUtils.format($!{ft.actionTime},"yyyy-MM-dd")</span></li>
+					#end
+				</ul>
+               
+				#parse("/layout/page-layout.vm")
+            </div>
+		</div>
+    </div>
+</div>
+    

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hz.sunday.trend.dao.InformationMapper">
+
+	<resultMap id="informationMap" type="com.hz.sunday.trend.orm.Information">
+		<id property="id" column="id" />
+		<result property="title" column="title" />
+		<result property="subhead" column="subhead" />
+		<result property="summary" column="summary" />
+		<result property="comment" column="comment" />
+		<result property="mType" column="m_type" />
+		<result property="reource" column="reource" />
+		<result property="actionTime" column="action_time" />
+		<result property="actionTime2" column="action_time2" />
+		<result property="actionAddr" column="action_addr" />
+		<result property="field1" column="field1" />
+		<result property="field2" column="field2" />
+		<result property="field3" column="field3" />
+		<result property="field4" column="field4" />
+		<result property="creator" column="creator" />
+		<result property="createTime" column="create_time" />
+		<result property="updater" column="updater" />
+		<result property="updateTime" column="update_time" />
+	</resultMap>
+
+	<sql id="INFORMATION_SQL">
+		title,subhead,summary,comment,m_type,creator,create_time,reource,action_time,action_addr,action_time2,field1,field2,field3,field4
+	</sql>
+
+	<!-- 新增 -->
+	<insert id="insert" parameterType="com.hz.sunday.trend.orm.Information"
+		useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+		insert into information(
+		<include refid="INFORMATION_SQL" />
+		)
+		values(#{title},#{subhead},#{summary},#{comment},#{mType},#{creator},NOW(),#{reource},#{actionTime},#{actionAddr},#{actionTime2},#{field1},#{field2},#{field3},#{field4})
+	</insert>
+
+	<!-- 更新 -->
+	<update id="update" parameterType="com.hz.sunday.trend.orm.Information">
+		update information set update_time = NOW()
+		<if test=" title !=null and title != ''">
+			<![CDATA[ ,title = #{title}]]>
+		</if>
+		<if test=" subhead !=null and subhead != ''">
+			<![CDATA[ ,subhead = #{subhead}]]>
+		</if>
+		<if test=" summary !=null and summary != ''">
+			<![CDATA[ ,summary = #{summary}]]>
+		</if>
+		<if test=" comment !=null and comment != ''">
+			<![CDATA[ ,comment = #{comment}]]>
+		</if>
+		<if test=" mType !=null and mType != ''">
+			<![CDATA[ ,m_type = #{mType}]]>
+		</if>
+		<if test=" updater !=null and updater != ''">
+			<![CDATA[ ,updater = #{updater}]]>
+		</if>
+		<if test=" updateTime !=null and updateTime != ''">
+			<![CDATA[ ,update_time = #{updateTime}]]>
+		</if>
+		<if test=" reource !=null and reource != ''">
+			<![CDATA[ ,reource = #{reource}]]>
+		</if>
+		<if test=" actionTime !=null and actionTime != ''">
+			<![CDATA[ ,action_time = #{actionTime}]]>
+		</if>
+		<if test=" actionTime2 !=null and actionTime2 != ''">
+			<![CDATA[ ,action_time2 = #{actionTime2}]]>
+		</if>
+		<if test=" actionAddr !=null and actionAddr != ''">
+			<![CDATA[ ,action_addr = #{actionAddr}]]>
+		</if>
+		<if test=" field1 !=null and field1 != ''">
+			<![CDATA[ ,field1 = #{field1}]]>
+		</if>
+		<if test=" field2 !=null and field2 != ''">
+			<![CDATA[ ,field2 = #{field2}]]>
+		</if>
+		<if test=" field3 !=null and field3 != ''">
+			<![CDATA[ ,field3 = #{field3}]]>
+		</if>
+		<if test=" field4 !=null and field4 != ''">
+			<![CDATA[ ,field4 = #{field4}]]>
+		</if>
+		where id= #{id}
+	</update>
+
+	<!-- 根据ID，删除一条数据 -->
+	<delete id="delete" parameterType="java.util.List">
+		delete from information where
+		id = #{id}
+	</delete>
+
+	<!-- 获取总记录数 -->
+	<select id="getCount" parameterType="java.util.HashMap"
+		resultType="Long">
+		select count(id) from information
+		<where>
+			<if test=" title !=null and title != ''">
+				<![CDATA[ and title like CONCAT('%',#{title},'%')]]>
+			</if>
+			<if test=" mType !=null and mType != ''">
+				<![CDATA[ and m_type =#{mType}]]>
+			</if>
+			<if test=" actionTime !=null and actionTime != ''">
+				<![CDATA[ and action_time = #{actionTime}]]>
+			</if>
+		</where>
+	</select>
+
+	<!-- 获取分页数据 -->
+	<select id="getList" parameterType="java.util.HashMap"
+		resultMap="informationMap">
+		select id,
+		<include refid="INFORMATION_SQL" />
+		from information
+		<where>
+			<if test=" title !=null and title != ''">
+				<![CDATA[ and title like CONCAT('%',#{title},'%')]]>
+			</if>
+			<if test=" mType !=null and mType != ''">
+				<![CDATA[ and m_type =#{mType}]]>
+			</if>
+			<if test=" actionTime !=null and actionTime != ''">
+				<![CDATA[ and action_time = #{actionTime}]]>
+			</if>
+		</where>
+
+		order by create_time DESC
+		<if test="rowStart!=null and pageSize!=null">
+			<![CDATA[limit #{rowStart},#{pageSize}]]>
+		</if>
+	</select>
+
+	<!-- 根据ID，获取一条数据 -->
+	<select id="getSingleDetail" parameterType="Long" resultMap="informationMap">
+		select id,
+		<include refid="INFORMATION_SQL" />
+		from information where id=#{id}
+	</select>
+
+	<!-- 根据消息类型，获取数据 -->
+	<select id="getByMtype" parameterType="int" resultMap="informationMap">
+		select id,
+		<include refid="INFORMATION_SQL" />
+		from information where m_type=#{mType} order by id desc
+	</select>
+
+
+</mapper>

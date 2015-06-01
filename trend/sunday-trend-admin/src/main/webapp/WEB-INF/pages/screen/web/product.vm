@@ -1,0 +1,38 @@
+#set( $layout = "/layout/web-layout.vm") 
+
+#parse("/layout/header-layout.vm")
+
+<div class="wrapper">
+	<div class="leftWrapper">
+		<div class="panelBox gsjs">
+			<h1><span>产品中心</span></h1>
+            <div class="list">
+                <ul>
+                    <li><a href="/trend/product/index">产品介绍</a></li>
+                    <li><a href="#">产品报价</a></li>
+                </ul>
+            </div>
+		</div>
+		
+		#parse("/layout/left-layout.vm")
+		
+    </div>
+	<div class="rightWrapper">
+		<div class="panelBox product"> 
+			<h1>
+            	<span>产品中心</span>
+                <div class="path"><em>您的位置：</em><a href="/">首页</a> > <a href="/trend/product/index">产品中心</a> > 产品介绍</div>
+            </h1>
+            <div class="list">
+				<ul id="info_list">
+                    #foreach($ft in $!{productList})
+						<li><a href="#"><img #foreach($item in $!{ft.attList}) src="${imageRoot}/$!{item.path}" #end /><span>$!{ft.title}</span></a></li>
+					#end
+				</ul>
+				
+                #parse("/layout/page-layout.vm")
+            </div>
+		</div>
+    </div>
+</div>
+    

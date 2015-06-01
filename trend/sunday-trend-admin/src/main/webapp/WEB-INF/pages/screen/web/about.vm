@@ -1,0 +1,36 @@
+#set( $layout = "/layout/web-layout.vm") 
+
+#parse("/layout/header-layout.vm")
+
+<div class="wrapper">
+	<div class="leftWrapper">
+		<div class="panelBox gsjs">
+			<h1><span>公司介绍</span></h1>
+            <div class="list">
+                <ul>
+					<li><a href="/trend/about/index">公司简介</a></li> 
+                    <li><a href="#">合作保障</a></li>
+                </ul>
+            </div>
+		</div>
+		
+		#parse("/layout/left-layout.vm")
+		
+    </div>
+	<div class="rightWrapper">
+		<div class="panelBox detail">
+			<h1>
+            	<span>公司简介</span>
+                <div class="path"><em>您的位置：</em><a href="/">首页</a> > <a href="/trend/about/index">公司介绍</a> > 公司简介</div>
+            </h1>
+            <div class="list">
+           		<div class="content">
+					#foreach($ft in $!{aboutList})
+    					$!{ft.comment}
+    				#end
+            	</div>
+            </div>
+		</div>
+    </div>
+</div>
+   

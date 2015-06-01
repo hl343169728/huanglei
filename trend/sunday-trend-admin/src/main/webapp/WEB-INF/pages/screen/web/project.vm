@@ -1,0 +1,43 @@
+#set( $layout = "/layout/web-layout.vm") 
+
+#parse("/layout/header-layout.vm")
+
+<div class="wrapper">
+	<div class="leftWrapper">
+		<div class="panelBox gsjs">
+			<h1><span>项目介绍</span></h1>
+            <div class="list">
+                <ul>
+					<li><a href="#">全能型（仓储型）</a></li>
+                    <li><a href="#">触屏型</a></li>
+                    <li><a href="#">橱窗型市</a></li>
+                    <li><a href="#">场前景综合一体机加强型</a></li>
+                    <li><a href="#">全能型（加强型）</a></li>
+                    <li><a href="#">合作保障</a></li>
+                    <li><a href="#">常见合作问题解答</a></li>
+                    <li><a href="#">联系我们</a></li>
+                    <li><a href="#">视频演示</a></li> 
+                </ul>
+            </div>
+		</div>
+		
+		#parse("/layout/left-layout.vm")
+		
+    </div>
+	<div class="rightWrapper">
+		<div class="panelBox detail">
+			<h1>
+            	<span>项目介绍</span>
+                <div class="path"><em>您的位置：</em><a href="/">首页</a> > 项目介绍</div>
+            </h1>
+            <div class="list">
+           		<div class="content">
+					#foreach($ft in $!{projectList})
+    					$!{ft.comment}
+    				#end
+				</div>
+            </div>
+		</div>
+    </div>
+</div>
+    

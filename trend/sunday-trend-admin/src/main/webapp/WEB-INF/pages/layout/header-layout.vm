@@ -1,0 +1,19 @@
+#parse($sub) 
+
+<div class="alarm">
+	最新公告：
+	#foreach($ft in $!{noticeList})
+		#if($velocityCount == 1)
+			$!{ft.comment}
+		#end
+	#end
+</div>
+<div class="banner">
+	<a href="#">
+		#foreach($ft in $!{logoList})
+    		#if($velocityCount == 1)
+    			<img #foreach($item in $!{ft.attList}) src="${imageRoot}/$!{item.path}" #end />
+    		#end
+    	#end
+	</a>
+</div>

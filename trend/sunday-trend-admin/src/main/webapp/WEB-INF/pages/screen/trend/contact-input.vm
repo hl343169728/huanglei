@@ -1,0 +1,106 @@
+#set( $layout = "/layout/common-layout.vm") 
+
+<script>
+	 #if("$!message"!="")
+		#if("$!message"=="success")
+			parent.jQuery('#contact_div').window('close');
+			parent.jQuery("#contactTable").datagrid('reload');
+		#else
+			jQuery.messager.alert('错误', "操作失败~", 'error');
+		#end
+	#end
+</script>
+
+<form action="/admin/contact/save" method="post" id="contactForm" enctype="multipart/form-data">
+	<input name="id" type="hidden" value="$!{info.id}"/>
+	<input name="mType" type="hidden" value="8"/>
+	<div class="box info-list">
+		<table class="unity-table" id="J_adboardList">
+			<tr>
+				<td style="width:80px">公司名称：</td>
+				<td style="width:320px"><input name="title" maxlength="64" value="$!{info.title}" style="width:600px"/></td>
+			</tr>
+			<tr>
+				<td>工作时间：</td>
+				<td><input name="actionTime2" maxlength="64" value="$!{info.actionTime2}" style="width:600px"/></td>
+			</tr>
+			<tr>
+				<td>地址：</td>
+				<td><input name="actionAddr" maxlength="120" value="$!{info.actionAddr}" style="width:600px"/></td>
+			</tr>
+			<tr>
+				<td>公司电话：</td>
+				<td>
+					<input name="field1" maxlength="120" value="$!{info.field1}" />
+					<input name="field2" maxlength="120" value="$!{info.field2}" />
+					<input name="field3" maxlength="120" value="$!{info.field3}" />
+					<input name="field4" maxlength="120" value="$!{info.field4}" />
+				</td>
+			</tr>
+			<tr>
+				<td>售后部：</td>
+				<td>
+					<input name="subhead" maxlength="64" value="$!{info.subhead}" style="width:600px"/>
+				</td>
+			</tr>
+			<tr>
+				<td>产品中心：</td>
+				<td>
+					<input name="summary" maxlength="200" value="$!{info.summary}" style="width:600px"/>
+				</td>
+			</tr>
+			<tr>
+				<td>全国统一热线：</td>
+				<td>
+					<input name="reource" maxlength="64" value="$!{info.reource}" style="width:600px"/>
+				</td>
+			</tr>
+			<tr>
+				<td>附件：</td>
+				<td>
+					<input type="file" name="files" />
+					<span id="upload_file">
+						#foreach($item in $!{attach})
+							$!{item.fileName}&nbsp;&nbsp;<a href="#" onclick="cancelAttac($!{info.id});">取消附件</a>
+						#end
+					</span>
+				</td>
+			</tr>
+			#if($!{size} > 0)
+    			<tr id="turn_file">
+					<td>地图指示：</td>
+    				<td>
+    					<img #foreach($item in $!{attach}) src="${imageRoot}/$!{item.path}" #end />
+    				</td>
+    			</tr>
+			#end
+			<tr>
+				<td colspan="2" style="text-align: center">
+					<input type="button" style="width:60px;height:25px;" onclick="doSubmit()" value="确定"/>
+				</td>
+			</tr>
+        </table>
+    </div>
+</form>
+	
+<script type="text/javascript">
+
+	// 取消附件
+	function cancelAttac(id){
+		jQuery.messager.confirm("提示", "确定要取消该附件吗？", function(r) {
+			if (r) {
+				jQuery.get("/admin/contact/cancel?id=" + id,function(data){
+					if(data == "1"){
+						$("#upload_file").hide();
+						$("#turn_file").hide();
+					}
+				});
+			}
+		})
+	}
+
+    function doSubmit(){
+    	$("#contactForm").submit();
+    }
+ 
+</script>

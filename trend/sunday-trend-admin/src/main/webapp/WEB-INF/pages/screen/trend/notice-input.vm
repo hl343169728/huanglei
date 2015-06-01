@@ -1,0 +1,57 @@
+#set( $layout = "/layout/common-layout.vm") 
+
+<script>
+	 #if("$!message"!="")
+		#if("$!message"=="success")
+			parent.jQuery('#notice_div').window('close');
+			parent.jQuery("#noticeTable").datagrid('reload');
+		#else
+			jQuery.messager.alert('错误', "操作失败~", 'error');
+		#end
+	#end
+</script>
+
+<form action="/admin/notice/save" method="post" id="noticeForm" enctype="multipart/form-data">
+	<input name="id" type="hidden" value="$!{info.id}"/>
+	<input name="mType" type="hidden" value="9"/>
+	<div class="box info-list">
+		<table class="unity-table" id="J_adboardList">
+			<tr>
+				<td style="width:80px">标题：</td>
+				<td style="width:320px"><input name="title" maxlength="64" value="$!{info.title}" style="width:600px"/></td>
+			</tr>
+			<tr>
+				<td>公告信息：</td>
+				<td>
+					<textarea id="_comment" name="comment">$!{info.comment}</textarea>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" style="text-align: center">
+					<input type="button" style="width:60px;height:25px;" onclick="doSubmit()" value="确定"/>
+				</td>
+			</tr>
+        </table>
+    </div>
+</form>
+	
+<script type="text/javascript">
+
+    function doSubmit(){
+    	$("#noticeForm").submit();
+    }
+     
+    var editor1 = KindEditor.create('textarea[id="_comment"]', {
+    	uploadJson:'${webPath}/kindEditorUpload',
+    	allowFileManager : true,
+    	width:"500px",
+    	height:"300px",
+    	afterBlur:function(){
+    	    this.html();
+    	},
+    	afterChange:function(){
+    	   $("#_comment").val(this.html());
+    	}
+    });
+ 
+</script>
