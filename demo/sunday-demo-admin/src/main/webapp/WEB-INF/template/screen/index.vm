@@ -1,6 +1,4 @@
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>测试综合运营管理平台</title>
@@ -42,7 +40,7 @@
 		}
 	</style>
 		
-	<script>
+	<script type="text/javascript">
 		jQuery(document).ready(function() {  
 			$(".yisheng-menu-div div").hover(
 			  function () {
@@ -60,60 +58,53 @@
 		var img_path="${imageRoot}";
 	</script>
 </head>
-<body class="easyui-layout" style='width:100%;height:100%'>
-   <!-- 头部开始 -->
-   <div region="north" border="false" style="BACKGROUND:#E6E6FA;height: 65px; padding: 1px; overflow: hidden;">
-	   <table width="100%" border="0" cellpadding="0" cellspacing="0">
-		<tr>
-		 <td align="left" style="vertical-align:text-bottom;padding-top: 15px;" >
-			 <img src="$!{staticRoot}/demo/images/logo.png"  alt="">
-		 </td>
-		 <td align="right" nowrap>
-		  <table>
-		   <tr>
-			<td valign="top" height="50">
-			 <span style="color: #CC33FF">当前用户：</span><span style="color: #666633">$!{adminUser.userName}</span>
-			 #if($loginUser.type==1)<span style="color: #CC33FF">角色：</span><span style="color: #666633">系统管理员 </span>#end
-			 #if($loginUser.type==0)
-				<span style="color: #CC33FF">部门：</span><span style="color: #666633">$!{adminUser.userOrgPost.deptName}</span>
-				<span style="color: #CC33FF">职务：</span><span style="color: #666633">$!{adminUser.userOrgPost.postName}</span>
-			 #end
-			</td>
-		   </tr>
-		   <td>
-			<div style="position: absolute; right: 0px; bottom: 0px;">
-			 <a href="javascript:void(0);" class="easyui-menubutton" menu="#layout_north_kzmbMenu" iconCls="icon-panel">控制面板</a><a href="javascript:void(0);" class="easyui-menubutton" menu="#layout_north_zxMenu" iconCls="icon-logout">注销</a>
-			</div>
-			<div id="layout_north_kzmbMenu" style="width: 100px; display: none;">
-			 <div onclick="openMainwindow('个人信息','/admin/user/detail.html',550)">
-			  个人信息
-			 </div>
-			 <div class="menu-sep"></div>
-			 <div onclick="openMainwindow('修改密码','/admin/user/changepass.html',400)">
-			  修改密码
-			 </div>
-			</div>
-			<div id="layout_north_zxMenu" style="width: 100px; display: none;">
-			 <div class="menu-sep"></div>
-			 <div onclick="window.location.href='/admin/logout'">
-				退出系统
-			 </div>
-			</div>
-		   </td>
-		   </tr>
-		  </table>
-		 </td>
-		 <td align="right">
-		  &nbsp;&nbsp;&nbsp;
-		 </td>
-		</tr>
-	   </table>
-  </div>
- <!-- 头部结束 -->
+<body class="easyui-layout" style="width:100%; height:100%; ">
+	<!-- 头部开始 -->
+	<div region="north" border="false" style="BACKGROUND:#E6E6FA;height: 65px; padding: 1px; overflow: hidden;">
+    	<table width="100%" border="0" cellpadding="0" cellspacing="0">
+    		<tr>
+    			<td align="left" style="vertical-align:text-bottom;padding-top: 15px;" >
+    				<img src="$!{staticRoot}/demo/images/logo.png"  alt="">
+    		 	</td>
+    			<td align="right" nowrap>
+        			<table>
+        				<tr>
+        					<td valign="top" height="50">
+        						<span style="color: #CC33FF">当前用户：</span><span style="color: #666633">$!{adminUser.userName}</span>
+        						#if(${adminUser.type} == 1)
+									<span style="color: #CC33FF">角色：</span><span style="color: #666633">系统管理员 </span>
+								#end
+    							#if(${adminUser.type} == 0)
+    								<span style="color: #CC33FF">部门：</span><span style="color: #666633">$!{adminUser.userOrgPost.deptName}</span>
+    								<span style="color: #CC33FF">职务：</span><span style="color: #666633">$!{adminUser.userOrgPost.postName}</span>
+    							#end
+        					</td>
+                			<td>
+                				<div style="position: absolute; right: 0px; bottom: 0px;">
+                					<a href="javascript:void(0);" class="easyui-menubutton" menu="#layout_north_kzmbMenu" iconCls="icon-panel">控制面板</a><a href="javascript:void(0);" class="easyui-menubutton" menu="#layout_north_zxMenu" iconCls="icon-logout">注销</a>
+                				</div>
+                				<div id="layout_north_kzmbMenu" style="width: 100px; display: none;">
+                					<!--<div onclick="openMainwindow('个人信息','/common/admin/user/detail.html',550)">个人信息</div>-->
+                					<div class="menu-sep"></div>
+                					<div onclick="openMainwindow('修改密码','/common/admin/user/changepass.html',400)">修改密码</div>
+                				</div>
+                				<div id="layout_north_zxMenu" style="width: 100px; display: none;">
+                					<div class="menu-sep"></div>
+                					<div onclick="window.location.href='/admin/logout'">退出系统</div>
+                				</div>
+                		   </td>
+    					</tr>
+    				</table>
+    			</td>
+    			<td align="right">&nbsp;&nbsp;&nbsp;</td>
+    		</tr>
+    	</table>
+	</div>
+	<!-- 头部结束 -->
 	<div id="marketColumnInfo_view01" class="easyui-window" title="信息详情" data-options="modal:true,closed:true,collapsible:false,minimizable:false,maximizable:false" style="width:1190px; height:630px; padding: 10px;">
     	<iframe src="#" id="marketColumnInfo_view01_ifr" marginwidth="0" marginheight="0" width="1150px" height="560px" frameborder="0" scrolling="false" allowtransparency="true"></iframe>	
     </div>
-  <!-- 菜单开始 -->
+	<!-- 菜单开始 -->
 	<div data-options="region:'west',split:true,title:'导航菜单'" style="width:170px;">
 		<div class="easyui-accordion" style="width:162px;padding-left:0px">
 			#foreach($menudto in $allowMenus)
@@ -129,30 +120,57 @@
 	<div data-options="region:'center'">
 		<div class="easyui-tabs" id="main-tabs-div">
 			<div title="首页面板">
+				<p style="font-size: 14px; margin-left: 10px;">欢迎使用综合运营管理平台</p>
 				<div class="bodydiv">
 				    <div class="navPg">
-				        <div class="navPgTb" style="float:left;">
-                            
-						<!--
-				        <div id="navMenu">
-				        <ul>
-				            <li class="selected" id="_main1"><a href="javascript:doOpenMenuIndex('/admin/main/main-page-1.html',1,'首页面板')"  rel="main" fresh="false" title="主控台"><span>主页</span></a></li>
-				            <li id="_main2"><a href="javascript:doOpenMenuIndex('/admin/main/main-page-2.html',1,'首页面板')" target="navTab" rel="main" fresh="false" title="主控台"><span>代理商</span></a></li>
-				            <li id="_main3"><a href="javascript:doOpenMenuIndex('/admin/main/main-page-3.html',1,'首页面板')" target="navTab" rel="main" fresh="false" title="主控台"><span>商家</span></a></li>            
-				            <li id="_main4"><a href="javascript:doOpenMenuIndex('/admin/main/main-page-4.html',1,'首页面板')" target="navTab" rel="main" fresh="false" title="主控台"><span>会员</span></a></li>
-				            <li id="_main5"><a href="javascript:doOpenMenuIndex('/admin/main/main-page-5.html',1,'首页面板')" target="navTab" rel="main" fresh="false" title="主控台"><span>查询</span></a></li>
-				            <li id="_main6"><a href="javascript:doOpenMenuIndex('/admin/main/main-page-6.html',1,'首页面板')" target="navTab" rel="main" fresh="false" title="主控台"><span>统计</span></a></li>
-				            <li id="_main7"><a href="javascript:doOpenMenuIndex('/admin/main/main-page-7.html',1,'首页面板')" target="navTab" rel="main" fresh="false" title="主控台"><span>财务</span></a></li>
-				        </ul>
-						</div>-->
+						<div class="navPgTb" style="float:left;">
+							<!--
+							<div id="MsgWarn" class="navPgTbBox1">
+                                <div class="MsgCount" style="display: none;">0</div>
+									<a onclick="doOpenMenu('#',9,'活动信息')"><img alt="" src="$!{staticRoot}/common/images/active.png"></a>
+								</div>
+								<div class="navPgTbBox2">活动</div>
+                                <div class="navPgTbBox3">活动管理</div>
+                            </div>
+                            <div class="navPgTb" style="float:left;">
+                                <div id="MsgMemo" class="navPgTbBox1">
+                                    <div class="MsgCount" style="display: none;">0</div>
+                                    <a onclick="doOpenMenu('#',12,'通告')"><img alt="" src="$!{staticRoot}/common/images/gonggao.png"></a>
+                                </div>
+								<div class="navPgTbBox2">通告</div>
+                                <div class="navPgTbBox3">网站通告</div>
+                            </div>
+                            <div class="navPgTb" style="float:left;">
+                                <div id="MsgPublic" class="navPgTbBox1">
+                                    <div class="MsgCount" style="display: none;">0</div>
+                                    <a onclick="doOpenMenu('#',14,'课程')"><img alt="" src="$!{staticRoot}/common/images/lesson.png"></a>
+                                </div>
+                                <div class="navPgTbBox2">课程</div>
+                                <div class="navPgTbBox3">课程管理</div>
+                            </div>
+							-->
+							
+    						<!--
+    				        <div id="navMenu">
+    				        <ul>
+    				            <li class="selected" id="_main1"><a href="javascript:doOpenMenuIndex('/admin/main/main-page-1.html',1,'首页面板')"  rel="main" fresh="false" title="主控台"><span>主页</span></a></li>
+    				            <li id="_main2"><a href="javascript:doOpenMenuIndex('/admin/main/main-page-2.html',1,'首页面板')" target="navTab" rel="main" fresh="false" title="主控台"><span>代理商</span></a></li>
+    				            <li id="_main3"><a href="javascript:doOpenMenuIndex('/admin/main/main-page-3.html',1,'首页面板')" target="navTab" rel="main" fresh="false" title="主控台"><span>商家</span></a></li>            
+    				            <li id="_main4"><a href="javascript:doOpenMenuIndex('/admin/main/main-page-4.html',1,'首页面板')" target="navTab" rel="main" fresh="false" title="主控台"><span>会员</span></a></li>
+    				            <li id="_main5"><a href="javascript:doOpenMenuIndex('/admin/main/main-page-5.html',1,'首页面板')" target="navTab" rel="main" fresh="false" title="主控台"><span>查询</span></a></li>
+    				            <li id="_main6"><a href="javascript:doOpenMenuIndex('/admin/main/main-page-6.html',1,'首页面板')" target="navTab" rel="main" fresh="false" title="主控台"><span>统计</span></a></li>
+    				            <li id="_main7"><a href="javascript:doOpenMenuIndex('/admin/main/main-page-7.html',1,'首页面板')" target="navTab" rel="main" fresh="false" title="主控台"><span>财务</span></a></li>
+    				        </ul>
+    						</div>
+							-->
                         </div>
 				    </div> 
 				</div>
 			</div>
 		</div>
 	</div>
-	<script>
-		
+	
+	<script type="text/javascript">
 		function doOpenMenu(menu_url,menuId,menuName){
 			var url=menu_url;
 			if(menu_url.indexOf("?")==-1){
@@ -172,16 +190,15 @@
 			});
 		}
 		
-		
 		function openMainwindow(_title,url,width){
-				$("#mailwindowdiv").dialog({   
-        			 title: _title,   
-        			 width: width,  
-        			 closed: false,   
-        			 cache: false,   
-        			 href: url,   
-        			 modal: true  
-        		});  
+			$("#mailwindowdiv").dialog({   
+    			 title: _title,   
+    			 width: width,  
+    			 closed: false,   
+    			 cache: false,   
+    			 href: url,   
+    			 modal: true  
+    		});  
 		}
 		
 		function getMyTaskTime(){
@@ -194,7 +211,7 @@
 						showType:'slide'
 					});
 				}
-			})
+			});
 		}
 		
 		//定时提醒待办任务
@@ -204,8 +221,7 @@
 		
 	</script>
 	
-	<div id="mailwindowdiv" class="easyui-window" title="测试在线编辑器" data-options="modal:true,closed:true,collapsible:false,minimizable:false,maximizable:false" style="width:600px">
-   </div>
+	<div id="mailwindowdiv" class="easyui-window" title="测试在线编辑器" data-options="modal:true,closed:true,collapsible:false,minimizable:false,maximizable:false" style="width:600px"></div>
 </body>
 </html>
 
