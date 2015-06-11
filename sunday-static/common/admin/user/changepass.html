@@ -2,20 +2,19 @@
 	<form id="aUserChangePasstForm" method="post">
 		<table>
 			<tr>
-				<td>旧密码:</td>
-				<td><input name="oldpass" id="auoldpass" class="easyui-validatebox" type="password"  data-options="required:true"></input></td>
+				<td>旧密码：</td>
+				<td><input name="oldpass" id="auoldpass" class="easyui-validatebox" type="password"  data-options="required:true" /><span style="color:red;font-size:12pt;">&nbsp;*</span></td>
 			</tr>
 			<tr>
-				<td>新密码:</td>
-				<td><input name="newpass" id="aunewpass" class="easyui-validatebox" type="password"  data-options="required:true"></input></td>
+				<td>新密码：</td>
+				<td><input name="newpass" id="aunewpass" class="easyui-validatebox" type="password"  data-options="required:true" /><span style="color:red;font-size:12pt;">&nbsp;*</span></td>
 			</tr>
 			<tr>
-				<td>确认新密码</td>
-				<td><input name="upass" id="auupass" class="easyui-validatebox" type="password"  data-options="required:true"></input></td>
+				<td>确认新密码：</td>
+				<td><input name="upass" id="auupass" class="easyui-validatebox" type="password"  data-options="required:true" /><span style="color:red;font-size:12pt;">&nbsp;*</span></td>
 			</tr>
 			<tr>
-	            <td>&nbsp;</td>
-	            <td>
+	            <td colspan="2" style="text-align: center;padding-top: 10px;">
 	            	<input type="button" onclick="submitUserPasswordForm()" value="提交"></input>
 	            	<input type="reset" value="重置" ></input>
 	            </td>
@@ -24,7 +23,7 @@
 	</form>
 </div>
 
-<script>  
+<script type="text/javascript">  
 	function submitUserPasswordForm(){
 		var oldpass = $("#auoldpass").val();
 		var newpass = $("#aunewpass").val();
@@ -46,5 +45,4 @@
 			});
 		}
 	}
-	
 </script>
