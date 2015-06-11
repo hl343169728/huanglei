@@ -1,0 +1,206 @@
+#set( $layout = "/layout/page-layout.vm")
+
+<div style="padding: 10px 0 10px 40px" style="width:750px; height:400px; padding: 10px;">
+	<form id="demoUserForm" method="post" enctype="multipart/form-data">
+		<input id="demoId" name="id" type="hidden" value="$!{user.id}"/>
+		<table>
+			<tr>
+				<td>姓名：</td>
+				<td><input name="name" autoComplete="off" value="$!{user.name}" class="easyui-validatebox" style="width:200px" data-options="required:true"><span style="color:red;font-size:12pt;">*</span></td>
+				<td>性别：</td> 
+                <td >
+					<input type="radio" name="sex" #if($!{user.sex} == 0 || !$!{user.sex}) checked #end value="0"/>&nbsp;男&nbsp;
+					<input type="radio" name="sex" #if($!{user.sex} == 1) checked #end value="1"/>&nbsp;女
+				</td>
+				#if($!{user.logo})
+				<td id="demoUserLogotd" rowspan="4"><a href="$!{imageRoot}/$!{user.logo}" target="_blank"><img src="$!{imageRoot}/$!{user.logo}" width="80"/></a></td>
+				#end
+			</tr>
+			<tr>
+				<td>手机号：</td>
+				<td><input name="mobile" maxlength="11" value="$!{user.mobile}" class="easyui-validatebox" style="width:200px" data-options="required:true,validType:'mobile'"><span style="color:red;font-size:12pt;">*</span></td>
+				<td>头像：</td>
+				<td><input name="logos" type="file" />#if($!{user.id} && $!{user.logo})<a id="cancel" href="#" onclick="cancelAttac();" style="color: blue;">取消附件</a>#end</td>
+			</tr>
+			<tr>	
+				<td>所在地区：</td>
+				<td>
+					<select id="demoUserProvinceId" name="provinceId" value="$!{user.provinceId}" style="width:80px"></select>
+    				<select id="demoUserDistrictId" name="districtId" value="$!{user.districtId}"  style="width:80px"></select>
+    				<select id="demoUserCityId" name="cityId" value="$!{user.cityId}"  style="width:80px"></select>
+				</td>
+				<td>具体地址：</td>
+				<td>
+					<input name="address" id="address" maxlength="100" value="$!{user.address}" class="easyui-validatebox" style="width:200px">
+					<input type="button" value="地图上找" onClick="sear(document.getElementById('address').value);" />
+			</td>
+			</tr>
+			<tr>
+				<td>经度：</td>
+				<td><input name="longitude" maxlength="22" id="longitude" value="$!{user.longitude}" class="easyui-validatebox" style="width:200px" data-options="required:true"><span style="color:red;font-size:12pt;">*</span></td>
+				<td>纬度：</td>
+				<td><input name="latitude" maxlength="22" id="latitude" value="$!{user.latitude}" class="easyui-validatebox" style="width:200px" data-options="required:true"><span style="color:red;font-size:12pt;">*</span></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><span style="color:red;">请点击地图选取坐标</span></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td colspan="3"><div style="width:700px;height:340px;border:1px solid gray" id="container"></div></td>
+			</tr>
+			<tr>
+				<td>简介：</td>
+				<td colspan="3"><textarea name="description" id="_description">$!{user.description}</textarea></td>
+			</tr>
+			<tr>
+    			<td colspan="4" style="text-align: center">
+    				<input type="button" class="btn" onmouseover="this.className='btn_over'" onmouseout="this.className='btn'" onclick="doSubmit()" value="确定"/>
+    				<button class="btn" onmouseover="this.className='btn_over'" onmouseout="this.className='btn'" onclick="return close1()">取消</button>
+    			</td>
+    		</tr>
+		</table>
+	</form>
+</div>
+
+<script type="text/javascript">
+	// 经度
+	var jingdu = "$!{user.longitude}";
+	// 维度
+	var weidu  = "$!{user.latitude}";
+	if(jingdu == ''){
+		jingdu = "120.159635";
+	}
+	if(weidu == ''){
+		weidu = "30.279328";
+	}
+    var map = new BMap.Map("container");	// 在指定的容器内创建地图实例
+	
+	map.addControl(new BMap.NavigationControl()); // 初始化地图控件
+	map.addControl(new BMap.ScaleControl());                     
+	map.addControl(new BMap.OverviewMapControl());
+	//MapTypeControl：地图类型控件，默认位于地图右上方。
+	map.addControl(new BMap.MapTypeControl());
+
+    
+	map.setDefaultCursor("crosshair");  // 设置地图默认的鼠标指针样式
+    map.enableScrollWheelZoom();        // 启用滚轮放大缩小，默认禁用。
+	
+	var point = new BMap.Point(jingdu, weidu);
+    map.centerAndZoom(point, 13);		 // 初始化地图中心点
+	
+	var marker = new BMap.Marker(point); // 初始化地图标记  
+	marker.enableDragging();			 // 标记开启拖拽 
+	map.addOverlay(marker); 			 // 将标记添加到地图中  
+	
+	
+	var gc = new BMap.Geocoder();//地址解析类  
+    // 添加标记拖拽监听  
+    marker.addEventListener("dragend", function(e){  
+        // 获取地址信息  
+        // 经度
+		document.getElementById("longitude").value=e.point.lng;
+		// 维度
+		document.getElementById("latitude").value=e.point.lat;
+		gc.getLocation(e.point, function(rs){  
+        	showLocationInfo(e.point, rs);  
+    	});  
+    });
+	// 地图单击事件
+    map.addEventListener("click", function(e){
+		// 经度
+		document.getElementById("longitude").value=e.point.lng;
+		// 维度
+		document.getElementById("latitude").value=e.point.lat;
+    });
+	// 根据IP设置地图中心
+    function iploac(result){
+        var cityName = result.name;
+        //map.setCenter(cityName);
+    }
+    var myCity = new BMap.LocalCity();
+    myCity.get(iploac);
+	// 地图搜索
+    function sear(result){
+    	var local = new BMap.LocalSearch(map, {
+      		renderOptions:{map: map}
+    	});
+    	local.search(result);
+    }
+	// 显示地址信息窗口  
+	function showLocationInfo(pt, rs){  
+    	var opts = {  
+          	width : 250,     // 信息窗口宽度  
+          	height: 50,     // 信息窗口高度  
+          	title : ""  // 信息窗口标题  
+    	}  
+      
+    	var addComp = rs.addressComponents;  
+    	var addr = "当前位置：" + addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber + "<br/>";  
+    	addr += "纬度: " + pt.lat + ", " + "经度：" + pt.lng;  
+   	   
+    	var infoWindow = new BMap.InfoWindow(addr, opts);  // 创建信息窗口对象  
+    	marker.openInfoWindow(infoWindow);  
+	}  
+</script>
+	
+<script type="text/javascript">
+   	#if("$!{user.provinceId}" != "")
+		//延时50毫秒执行
+    	setTimeout(function(){
+    		doInitCitySelect("demoUserProvinceId", "demoUserDistrictId", "demoUserCityId", $!{user.provinceId}, $!{user.districtId}, $!{user.cityId});
+    	},50);
+	#else
+		//延时50毫秒执行
+    	setTimeout(function(){
+    		doInitCitySelect("demoUserProvinceId", "demoUserDistrictId", "demoUserCityId");
+    	},50);
+	#end
+	
+	var editor1 = KindEditor.create('textarea[id="_description"]', {
+    	uploadJson:'${webPath}/kindEditorUpload',
+    	allowFileManager : true,
+    	width:"700px",
+    	afterBlur:function(){
+    	    this.html();
+    	},
+    	afterChange:function(){
+    	   $("#_description").val(this.html());
+    	}
+    });
+	
+	function doSubmit(){
+		$('#demoUserForm').form('submit',{
+			url:"/demo/user/save",
+			success : function(data) {
+				if (data == 'fail') {
+					jQuery.messager.alert('Info', "失败", 'info');
+				} else {
+					parent.$("#demoUserTable").datagrid('reload'); 
+					parent.$('#demo_user_div').window('close');
+				}
+			}
+		});
+	}
+	
+	// 取消
+    function close1(){
+    	parent.$("#demo_user_div").window("close");
+    	return false;
+    }
+	
+	// 取消附件
+	function cancelAttac(){
+		var id = $("#demoId").val();
+		jQuery.messager.confirm("提示", "确定要取消该附件吗？", function(r) {
+			if (r) {
+				jQuery.get("/demo/user/cancel?id=" + id,function(data){
+					if(data == 'success'){
+						$("#demoUserLogotd").hide();
+						$("#cancel").hide();
+					}
+				});
+			}
+		});
+	}
+</script>

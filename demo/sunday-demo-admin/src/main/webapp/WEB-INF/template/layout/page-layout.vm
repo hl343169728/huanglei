@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="pragma" Content="no-cache">
+	<meta http-equiv="Cache-Control" Content="no-cache, must-revalidate,no-store">
+	<meta http-equiv="Expires" Content="0">
+	<title>市场管理</title>
+	<link rel="stylesheet" type="text/css" href="$!{staticRoot}/common/jquery-easyui/themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="$!{staticRoot}/common/jquery-easyui/themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="$!{staticRoot}/common/jquery-easyui/demo/demo.css">
+	<script type="text/javascript" src="$!{staticRoot}/common/jquery-easyui/jquery-1.8.0.min.js"></script>
+	<script type="text/javascript" src="$!{staticRoot}/common/jquery-easyui/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="$!{staticRoot}/common/jquery-easyui/myself-easyui-tools.js"></script>
+	<script type="text/javascript" src="$!{staticRoot}/common/jquery-easyui/locale/easyui-lang-zh_CN.js"></script>
+	<link rel="stylesheet" href="$!{staticRoot}/common/kindeditor-4.1.7/themes/default/default.css" />
+	<script charset="utf-8" src="$!{staticRoot}/common/kindeditor-4.1.7/kindeditor-min.js"></script>
+	<script charset="utf-8" src="$!{staticRoot}/common/kindeditor-4.1.7/lang/zh_CN.js"></script>
+	<script type="text/javascript" src="$!{staticRoot}/common/jquery-easyui/city.js"></script>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=1.2"></script>
+</head>
+</body>	
+ $screen_content
+</body>
+</html>
