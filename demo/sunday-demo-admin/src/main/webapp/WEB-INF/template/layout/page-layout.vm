@@ -14,7 +14,7 @@
 	<script type="text/javascript" src="$!{staticRoot}/common/jquery-easyui/myself-easyui-tools.js"></script>
 	<script type="text/javascript" src="$!{staticRoot}/common/jquery-easyui/locale/easyui-lang-zh_CN.js"></script>
 	<link rel="stylesheet" href="$!{staticRoot}/common/kindeditor-4.1.7/themes/default/default.css" />
-	<script charset="utf-8" src="$!{staticRoot}/common/kindeditor-4.1.7/kindeditor-min.js"></script>
+	<script charset="utf-8" src="$!{staticRoot}/common/kindeditor-4.1.7/kindeditor-min.js"></script> 
 	<script charset="utf-8" src="$!{staticRoot}/common/kindeditor-4.1.7/lang/zh_CN.js"></script>
 	<script type="text/javascript" src="$!{staticRoot}/common/jquery-easyui/city.js"></script>
 	<script type="text/javascript" src="http://api.map.baidu.com/api?v=1.2"></script>
