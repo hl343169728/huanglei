@@ -27,12 +27,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.hz.sunday.demo.bo.UserBO;
 import com.hz.sunday.demo.entity.User;
-import com.hz.yisheng.admin.bo.AdminOrgBO;
-import com.hz.yisheng.admin.bo.AdminUserBO;
-import com.hz.yisheng.admin.orm.AdminOrg;
-import com.hz.yisheng.admin.orm.AdminUser;
 import com.hz.yisheng.commondata.dao.CityMapper;
-import com.hz.yisheng.webdata.SessionHolder;
 
 /**
  * 用户信息管理
@@ -47,10 +42,6 @@ public class UserController extends BaseController {
 	private UserBO userBO;
 	@Autowired
 	private CityMapper cityMapper;
-	@Autowired
-	private AdminUserBO adminUserBO;
-	@Autowired
-	private AdminOrgBO adminOrgBO;
 
 	/**
 	 * 获取分页数据
@@ -75,15 +66,6 @@ public class UserController extends BaseController {
 	 */
 	@RequestMapping("input")
 	public String previewUpdate(@RequestParam(required = false) Long id, Model model) {
-		AdminUser user = adminUserBO.getUserById(SessionHolder.getAdminUserId());
-		if(null != user && null != user.getUserOrgPost()) {
-			AdminOrg org = adminOrgBO.findById(user.getUserOrgPost().getOrgId());
-			if(null != org){
-				model.addAttribute("provinceId", org == null ? 2 : org.getProvinceId());
-				model.addAttribute("districtId", org == null ? 52 : org.getDistrictId());
-				model.addAttribute("cityId", org == null ? "" : org.getCityId());
-			}
-		}
 		if (null != id) {
 			model.addAttribute("user", userBO.findById(id));
 		}
