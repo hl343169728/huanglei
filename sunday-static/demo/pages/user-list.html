@@ -1,0 +1,193 @@
+<div style="margin:10px 0;"></div>
+
+<div id="demoUserSearchForm" style="padding:5px;height:auto">
+	<div style="margin-bottom:5px">
+		<a href="#"  onclick="addUser()" class="easyui-linkbutton" iconCls="icon-add" plain="true">新增客户</a>
+		<a href="#"  onclick="addUser2()" class="easyui-linkbutton" iconCls="icon-add" plain="true">新增客户2</a>
+	</div>
+	<div>
+		<form id="queryDemoUserForm">
+			姓名：<input class="easyui-validatebox" name="filter_S_name"> &nbsp;&nbsp;
+			<a href="javascript:doSearchObject('demoUserTable','queryDemoUserForm')" class="easyui-linkbutton" iconCls="icon-search">搜索</a>
+		</form>
+	</div>
+</div>
+
+<div id="demo_user_div" class="easyui-window" title="会员信息" data-options="modal:true,closed:true,collapsible:false,minimizable:false,maximizable:false" style="width: 1000px; height: 560px; padding: 10px;">
+	<iframe src="#" id="demo_user_ifr" marginwidth="0" marginheight="0" style="width: 965px; height: 500px;" frameborder="0" scrolling="false" allowtransparency="true"></iframe>
+</div>
+
+<div id="add_demo_user" class="easyui-window" title="会员信息" data-options="modal:true,closed:true,collapsible:false,minimizable:false,maximizable:false" style="width:600px;padding:10px;">
+	<div style="padding:10px 0 10px 40px">
+		<form id="demoUserForm" method="post" action="/demo/user/save" enctype="multipart/form-data">
+	   		<input id="demoId" name="id" type="hidden" />
+	    	<table>
+				<tr>
+					<td style="width:100px">姓名：</td>
+					<td><input name="name" class="easyui-validatebox" data-options="required:true" /></td>
+					<td id="demoUserLogotd" style="display: none;" rowspan="4"></td>
+				</tr>
+				<tr>
+					<td>性别：</td>
+					<td>
+						<input name="sex" type="radio" value="0">男
+						<input name="sex" type="radio" value="1">女
+					</td>
+				</tr>
+				<tr>
+					<td>手机号码：</td>
+					<td><input name="mobile" class="easyui-validatebox" data-options="required:true" /></td>
+				</tr>
+				<tr>
+					<td>头像:</td>
+					<td>
+						<input name="logos" type="file" /><a id="cancel" href="#" onclick="cancelAttac();" style="color: blue;">取消附件</a>
+					</td>
+				</tr>
+				<tr>
+					<td>选择城市</td>
+					<td>
+						<select id="demoUserProvinceId" name="provinceId"></select>
+						<select id="demoUserDistrictId" name="districtId"></select>
+						<select id="demoUserCityId" name="cityId"></select>
+					</td>
+				</tr>
+				<tr>
+					<td>具体地址：</td>
+					<td><input name="address" class="easyui-validatebox" data-options="required:true" /></td>
+				</tr>
+				<tr>
+					<td>简介：</td>
+					<td><textarea name="description" style="width: 320px; height: 100px;resize: none;" ></textarea></td>
+				</tr>
+				<tr>
+		            <td colspan="2" style="text-align:center;padding-top: 10px;">
+		            	<input type="button" value="提交" onclick="doSubmitUser()"></input>
+		            	<input type="reset" value="重置" ></input>
+		            </td>
+		        </tr>
+			</table>
+		</form>
+	</div>
+</div>
+
+<table id="demoUserTable" style="width:1200px"></table>
+
+<script>
+	
+	// 加载列表
+	$('#demoUserTable').datagrid({   
+		url:'/demo/user/list',   
+		toolbar: '#demoUserSearchForm',
+		pagination:true,
+		singleSelect:true,
+		rownumbers:true,
+		autoRowHeight:true,
+		columns:[[   
+				{field:'name',title:'姓名',width:150},
+				{field:'address',title:'地址',width:200},
+				{field:'sex',title:'性别',width:50,
+					formatter: function(value,row,index){
+						if (row.sex == 1) {
+							return "女";
+						} else {
+							return "男";
+						}
+					}
+				},
+				{field:'mobile',title:'手机号',width:100},
+				{field:'description',title:'简介',width:300},
+				{field:'operate',title:'操作',width:200,
+					formatter: function(value,row,index){
+						return outPutFunction("editUser",row.id,"编辑") + "	" + outPutFunction("editUser2",row.id,"编辑2") + "	" + outPutFunction("deleteUserById",row.id,"删除");
+					}
+				}
+			]]
+	});
+	
+	// 新增
+	function addUser2(){
+		$("#demo_user_ifr").attr("src","/demo/user/input");
+		$('#demo_user_div').window('open');
+	}
+	
+	// 编辑2
+	function editUser2(id){
+		$("#demo_user_ifr").attr("src","/demo/user/input?id=" + id);
+		$('#demo_user_div').window('open');
+	}
+	
+	// 新增
+	function addUser(){
+		$("#demoUserForm").form('clear');
+		$("#demoUserForm input[name='sex'][value='0']").attr("checked",true);
+		$("#add_demo_user").window('open');
+		doInitCitySelect("demoUserProvinceId","demoUserDistrictId","demoUserCityId");
+		$("#demoUserLogotd").hide();
+		$("#cancel").hide();
+	}
+	
+	// 编辑
+	function editUser(id){
+		$.get("/demo/user/findById/" + id,function(data){
+			doInitCitySelect("demoUserProvinceId", "demoUserDistrictId", "demoUserCityId", data.provinceId, data.districtId, data.cityId);
+			if(data.logo != null){
+				$("#demoUserLogotd").show();
+				$("#cancel").show();
+				var ipth = img_path + data.logo;
+				$("#demoUserLogotd").html('<a href="' + ipth + '" target="_blank"><img src="' + ipth + '" width="80"/></a>');
+			} else {
+				$("#demoUserLogotd").hide();
+				$("#cancel").hide();
+			}
+			$('#add_demo_user').window('open');
+			$('#demoUserForm').form('load',data);
+		});
+	}
+	
+	// 保存
+	function doSubmitUser(){
+		$('#demoUserForm').form("submit",{
+			success:function(data){
+				$('#add_demo_user').window('close');
+			  	if(data == 'success'){
+					$("#demoUserTable").datagrid('reload'); 
+				    $(".easyui-validatebox").val('');
+				}else{
+				 	$.messager.alert('Info', "添加失败，可能是用户名存在或曾经存在", 'info');
+				}   
+			}
+		});
+	}
+	
+	// 删除
+	function deleteUserById(id){
+		jQuery.messager.confirm("会员信息", "确定要删除该客户信息吗？", function(r) {
+			if (r) {
+				jQuery.get("/demo/user/deleteById?id=" + id,function(data){
+					if(data == "0"){
+						jQuery.messager.alert('错误', "删除失败~", "error");
+					}else{
+						 $("#demoUserTable").datagrid('reload'); 
+					}
+				});
+			}
+		});
+	}
+	
+	// 取消附件
+	function cancelAttac(){
+		var id = $("#demoId").val();
+		jQuery.messager.confirm("会员信息", "确定要取消该附件吗？", function(r) {
+			if (r) {
+				jQuery.get("/demo/user/cancel?id=" + id,function(data){
+					if(data == 'success'){
+						$("#demoUserLogotd").hide();
+						$("#cancel").hide();
+					}
+				});
+			}
+		});
+	}
+	
+</script>
