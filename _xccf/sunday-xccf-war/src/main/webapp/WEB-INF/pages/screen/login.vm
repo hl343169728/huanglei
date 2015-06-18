@@ -48,7 +48,7 @@ function changeYzm(){
             <p>用户名：</p>
             <p><input name="userName" id="userName" value="$!{username}" style="border:1px solid #a09e99; width:221px; height:28px; line-height:28px; padding-left:3px;"/></p>
             <p class="forget"><span>密码：</span></p>
-            <p><input type="password" id="password" style="border:1px solid #a09e99; width:200px; height:28px; line-height:28px; padding-left:3px;"/></p>
+            <p><input type="password" id="password" style="border:1px solid #a09e99; width:221px; height:28px; line-height:28px; padding-left:3px;"/></p>
             <p>验证码：</p>
             <p class="login_y"><input name="yzm"   id="yzm" type="text" value=""  style="border:1px solid #a09e99; width:71px; height:20px; line-height:20px; padding-left:3px; padding-top:4px;"/><img src="/yzm" width="85" height="26" id="yzmimg" /><a href="javascript:void(0)" onclick="changeYzm()">换一张</a></p>
             <p class="forget"><input type="checkbox" id="autoLogin" name="autoLogin" #if($!isPassword) checked #end />下次自动登入</p>
