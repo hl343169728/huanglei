@@ -40,7 +40,9 @@ function changeYzm(){
 
 
 <body style="background:url(${staticRoot}/demo/images/login_bg.jpg) no-repeat center 0;">
+	<!-- 
 	<div class="header"><img src="${staticRoot}/demo/images/login_t.png" width="1200" height="45" id="login_t" /></div>
+	-->
     <div class="login_con">
     	<div class="login_l">
 			<img src="${staticRoot}/img/youngman/logo1.png" width="297" height="81" id="logo" />

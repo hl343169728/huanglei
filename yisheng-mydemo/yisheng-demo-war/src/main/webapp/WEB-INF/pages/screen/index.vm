@@ -24,7 +24,11 @@
 	
 	<!-- My97DatePicker（日期控件） -->
 	<script type="text/javascript" src="${staticRoot}/common/My97DatePicker/WdatePicker.js"></script>
-
+	
+	<!-- 自定义分页 -->
+	<link rel="stylesheet" type="text/css" href="${staticRoot}/common/jQuery/css/smartpaginator.css">
+	<script type="text/javascript" src="${staticRoot}/common/jQuery/js/smartpaginator.js"></script>
+	
 	<style type="text/css"> 
 		.yisheng-menu-div div { 
 			height:22px;
