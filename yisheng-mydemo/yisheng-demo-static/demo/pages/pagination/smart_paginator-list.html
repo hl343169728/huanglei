@@ -1,0 +1,62 @@
+
+<div style="margin:10px 0;"></div>
+<div class="easyui-layout" style="width:1100px;height:900px;margin:0px;padding:20px 0px 0px 0px">
+	<div data-options="region:'center',title:'Smart Paginator'" style="text-align:right;margin:0px;padding: 0px">
+		<div style="margin:50px 0 0 20px;">
+			<div id="green"></div><br>
+			<div id="black"></div><br>
+			<div id="red"></div><br>
+			
+			<div id="smart-paginator" > </div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#green').smartpaginator({
+			totalrecords : 10,
+			recordsperpage : 3,
+			datacontainer : 'mt',
+			dataelement : 'tr',
+			initval : 0,
+			next : 'Next',
+			prev : 'Prev',
+			first : 'First',
+			last : 'Last',
+			theme : 'green'
+		});
+
+		$('#black').smartpaginator({
+			totalrecords : 5,
+			recordsperpage : 1,
+			datacontainer : 'divs',
+			dataelement : 'div',
+			initval : 0,
+			next : 'Next',
+			prev : 'Prev',
+			first : 'First',
+			last : 'Last',
+			theme : 'black'
+		});
+
+		$('#red').smartpaginator({
+			totalrecords : 32,// 总的分页数
+			recordsperpage : 5,// 单页数据量
+			length : 4,// 这个参数很特殊，上一页、下一页、第一页、最后一页的显示控制依赖于这个参数，当length的值大于totalrecords/recordsperpage时，是不显示上一页、下一页、第一页、最后一页的
+			next : '下一页',// 下一页文本
+			prev : '上一页',// 上一页文本
+			first : '首页',// 第一页文本
+			last : '末尾',// 最后一页文本
+			go: '前往',// 跳转文本
+			theme : 'red', // 模板
+			initval : 1, // 默认显示第几页
+            onchange: onPageChange // 分页改变后触发的函数
+		});
+	});
+	
+	function onPageChange(newPageValue) {
+        current_page = newPageValue;
+        console.log("跳转页：" + current_page);
+    }
+</script>
