@@ -1,0 +1,87 @@
+@CHARSET "UTF-8"; * { font-family: "微软雅黑", "宋体"; }
+li{ list-style-type: none; }
+* { margin:0px; padding:0px; border:0px;}
+body { margin:0px; padding:0px; border:0px;}
+img{ width: 100%; }
+A:link {text-decoration: none }
+A:visited { text-decoration: none }
+A:hover { text-decoration: underline }
+A:active { text-decoration: underline }
+ul { margin:0px; padding:0px; border:0px;}
+ol { margin:0px; padding:0px; border:0px;}
+body {scrollbar-arrow-color:#f4ae21;scrollbar-face-color:#333;scrollbar-3dlight-color: #666; scrollbar-highlight-color: #666; scrollbar-shadow-color:#999; scrollbar-darkshadow-color: #666; scrollbar-track-color: #666; scrollbar-base-color:#f8f8f8; font-family: "微软雅黑", Arial, Helvetica, sans-serif; }
+.Login{ margin:0px auto; width:100%; max-width:640px;background:#fff;}
+.logo{ text-align:center; margin-top:35px;}
+.logo img{ width:50%;}
+
+
+.banner img{ border-bottom: #e1e1e1 1px solid; }
+.inputPanel{ margin-top:10px; min-height:30px;}
+.inputPanel .txtPanel{ position:relative; margin-left:300px; border-bottom: #efefef 1px solid; margin-top:10px; padding-bottom:7px;}
+.inputPanel .txtPanel .unit{ position:absolute; height:30px; line-height:30px; top:0px; right:0px; color:#8c8c8c; padding-right:7px;}
+.inputPanel .txtPanel .title{ position:absolute; height:30px; line-height:30px; top:0px; left:-280px; width:280px; color:#444; font-size:14px; text-align:right;}
+.inputPanel .txtPanel .must{ position:absolute; height:30px; line-height:30px; top:0px; left:300px; color:#f00; font-size:1.2em;}
+.inputPanel input[type=text],.inputPanel .txtPanel input[type=password],.inputPanel .txtPanel select,.inputPanel .txtPanel textarea { 
+	width:255px; 
+	display:block; 
+	color:#020202; 
+	height:30px; 
+	line-height:30px; 
+	text-align:left; 
+	overflow:hidden;
+	border-radius: 6px;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	outline: 0;
+	padding: 0 0 0 10px;
+	-webkit-transition: box-shadow .5s;
+	font-size:16px;
+    }
+
+.inputPanel input[type=text]:hover,.inputPanel .txtPanel input[type=text]:focus,.inputPanel .txtPanel input[type=password]:hover,  input[type=password]:focus,.inputPanel .txtPanel select:hover ,.inputPanel .txtPanel select:focus,.inputPanel .txtPanel textarea:hover,.inputPanel .txtPanel textarea:focus{color: #999;}
+.inputPanel input::-webkit-input-placeholder { color: #999;}
+.inputPanel input:focus::-webkit-input-placeholder,.inputPanel input:hover::-webkit-input-placeholder { color: #c2c2c2;}
+.inputPanel .txtPanel textarea{ height:100px;}
+.inputPanel .txtPanel select option{ padding-top:20px;}
+
+.Action { padding:20px 0px; max-width:70%; margin:0px auto;}
+.Action button,.Action input{ -webkit-appearance: none; display:block; color:#fff; width:100%; height:44px; line-height:40px; text-align:center; border-radius: 4px; font-size:18px; cursor:pointer; background:#0066cf;}
+
+
+.loginWrapper{ max-width:95%; margin:0px auto;}
+.loginWrapper .link{ overflow:hidden; zoom:1;}
+.loginWrapper .link .left{ float:left;}
+.loginWrapper .link .right{ float:left;}
+.loginWrapper .link a{ height:16px; line-height:16px; color:#8a8a8a; font-size:14px;}
+.loginWrapper .link a:link {text-decoration: none;}
+.loginWrapper .link a:visited { text-decoration: none }
+.loginWrapper .link a:hover { text-decoration: underline }
+.loginWrapper .link a:active { text-decoration: underline }
+
+.inputPanel{ margin:0px auto;}
+.inputPanel .txtPanel{ height:40px; line-height:40px; margin-left:0px;}
+.inputPanel .txtPanel .title{ height:40px; line-height:40px; left:0px; width:100px; font-size:16px; }
+.inputPanel input{ height:40px; padding-left:100px; width:100%;}
+.agreement{ clear:both; padding:20px 0px; text-align:center; color:#020202; font-size:12px;}
+.agreement input{ margin-right:5px;}
+.agreement a{ color:#015fb1;}
+.success{ clear:both; padding:20px 0px; text-align:center; color:#020202; font-size:18px; line-height:50px; font-size:16px;}
+.success a{ color:#015fb1;}
+
+.SignUp .inputPanel{ margin-top:0px;}
+.SignUp .inputPanel .txtPanel .title{ height:40px; line-height:40px; left:20px; width:90px; font-size:16px; text-align:left;}
+.SignUp .inputPanel input{ height:40px; padding-left:110px; width:96%; background:url(ArrowRight.png) no-repeat right 10px; background-size:auto 20px;}
+
+	
+	
+body {
+	margin: 0 auto;
+	font-family: "微软雅黑", Arial, Helvetica, sans-serif;
+}
+@media all and (min-width: 640px) {
+body {
+	width: 640px;
+	margin-left: auto;
+	margin-right: auto;
+}
+}

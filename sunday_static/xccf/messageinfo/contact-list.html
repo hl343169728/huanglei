@@ -1,0 +1,48 @@
+<div style="margin:10px 0;"></div>
+
+<div id="contactSearchForm" style="padding:5px;height:auto">
+</div>
+
+<div id="contact_div" class="easyui-window" title="联系方式信息" data-options="modal:true,closed:true,collapsible:false,minimizable:false,maximizable:false" style="width:900px; height:560px;">
+	<iframe src="#" id="contact_ifr" marginwidth="0" marginheight="0" width="880px" height="512px" frameborder="0" scrolling="false" allowtransparency="true"></iframe>	
+</div>
+
+<table id="contatctTable" style="width:1200px"></table>
+
+<script>
+	$('#contatctTable').datagrid({   
+		url:'/admin/contact/list?filter_I_mtype=9',   
+		toolbar: '#contactSearchForm',
+		pagination:true,
+		singleSelect:true,
+		rownumbers:true,
+		autoRowHeight:true,
+		columns:[[   
+					{field:'reource',title:'电话',width:100},
+					{field:'actionTime2',title:'总部地址',width:100},
+					{field:'actionAddr',title:'分公司地址',width:100},
+					{field:'title',title:'网址',width:100},
+					{field:'summary',title:'熙川集团官方网站',width:150},
+					{field:'comment',title:'熙川商品官方网站',width:150},
+					{field:'description',title:'熙川文化官方网站',width:150},
+					{field:'operate',title:'操作',width:100,
+						formatter: function(value,row,index){
+							return outPutFunction("editContact",row.id,"编辑");
+						}
+					}
+				]]
+		});
+	
+	// 新增
+	function addContact(){
+		$("#contact_ifr").attr("src","/admin/contact/add/dispatch");
+		$('#contact_div').window('open');
+	}
+	
+	// 编辑
+	function editContact(id){
+		$("#contact_ifr").attr("src","/admin/contact/edit/dispatch?id=" + id);
+		$('#contact_div').window('open');
+	}
+	
+</script>

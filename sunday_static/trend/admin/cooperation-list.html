@@ -1,0 +1,67 @@
+<div style="margin:10px 0;"></div>
+
+<div id="cooperationSearchForm" style="padding:5px;height:auto">
+	<div style="margin-bottom:5px">
+		<a href="#"  onclick="addShop()" class="easyui-linkbutton" iconCls="icon-add" plain="true">新增投资方案</a>
+	</div>
+	<div>
+		<form id="queryCooperationForm">
+			标题：<input class="easyui-validatebox" name="filter_S_title"> &nbsp;&nbsp;
+			<a href="javascript:doSearchObject('cooperationTable','queryCooperationForm')" class="easyui-linkbutton" iconCls="icon-search">搜索</a>
+		</form>
+	</div>
+</div>
+
+<div id="cooperation_div" class="easyui-window" title="投资方案" data-options="modal:true,closed:true,collapsible:false,minimizable:false,maximizable:false" style="width:900px; height:600px;">
+	<iframe src="#" id="cooperation_ifr" marginwidth="0" marginheight="0" width="880px" height="550px" frameborder="0" scrolling="false" allowtransparency="true"></iframe>	
+</div>
+
+<table id="cooperationTable" style="width:1200px"></table>
+
+<script type="text/javascript">
+	$('#cooperationTable').datagrid({   
+		url:'/admin/cooperation/list?filter_I_mType=7',   
+		toolbar: '#cooperationSearchForm',
+		pagination:true,
+		singleSelect:true,
+		rownumbers:true,
+		autoRowHeight:true,
+		columns:[[   
+					{field:'title',title:'标题',width:200},
+					{field:'comment',title:'公司介绍',width:400},
+					{field:'operate',title:'操作',width:100,
+						formatter: function(value,row,index){
+							return outPutFunction("editCooperation",row.id,"编辑") + "	" + outPutFunction("deleteCooperationById",row.id,"删除");
+						}
+					}
+				]]
+		});
+	
+	// 新增新闻
+	function addShop(){
+		$("#cooperation_ifr").attr("src","/admin/cooperation/add/dispatch");
+		$('#cooperation_div').window('open');
+	}
+	
+	// 编辑新闻
+	function editCooperation(id){
+		$("#cooperation_ifr").attr("src","/admin/cooperation/edit/dispatch?id=" + id);
+		$('#cooperation_div').window('open');
+	}
+	
+	// 删除
+	function deleteCooperationById(id){
+		jQuery.messager.confirm("投资方案", "确定要删除该投资方案吗？", function(r) {
+			if (r) {
+				jQuery.get("/admin/cooperation/deleteById?id=" + id,function(data){
+					if(data == "0"){
+						jQuery.messager.alert('错误', "删除失败~", "error");
+					}else{
+						 $("#cooperationTable").datagrid('reload'); 
+					}
+				});
+			}
+		})
+	}
+	
+</script>

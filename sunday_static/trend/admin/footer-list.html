@@ -1,0 +1,66 @@
+<div style="margin:10px 0;"></div>
+
+<div id="footerSearchForm" style="padding:5px;height:auto">
+	<div style="margin-bottom:5px">
+		<a href="#"  onclick="addFooter()" class="easyui-linkbutton" iconCls="icon-add" plain="true">新增LOGO</a>
+	</div>
+	<div>
+		<form id="queryFooterForm">
+			标题：<input class="easyui-validatebox" name="filter_S_title"> &nbsp;&nbsp;
+			<a href="javascript:doSearchObject('footerTable','queryFooterForm')" class="easyui-linkbutton" iconCls="icon-search">搜索</a>
+		</form>
+	</div>
+</div>
+
+<div id="footer_div" class="easyui-window" title="网站底部LOGO" data-options="modal:true,closed:true,collapsible:false,minimizable:false,maximizable:false" style="width:900px; height:600px;">
+	<iframe src="#" id="footer_ifr" marginwidth="0" marginheight="0" width="880px" height="550px" frameborder="0" scrolling="false" allowtransparency="true"></iframe>	
+</div>
+
+<table id="footerTable" style="width:1200px"></table>
+
+<script type="text/javascript">
+	$('#footerTable').datagrid({   
+		url:'/admin/footer/list?filter_I_mType=14',   
+		toolbar: '#footerSearchForm',
+		pagination:true,
+		singleSelect:true,
+		rownumbers:true,
+		autoRowHeight:true,
+		columns:[[   
+					{field:'title',title:'标题',width:200},
+					{field:'operate',title:'操作',width:100,
+						formatter: function(value,row,index){
+							return outPutFunction("editFooter",row.id,"编辑") + "	" + outPutFunction("deleteFooterById",row.id,"删除");
+						}
+					}
+				]]
+		});
+	
+	// 新增
+	function addFooter(){
+		$("#footer_ifr").attr("src","/admin/footer/add/dispatch");
+		$('#footer_div').window('open');
+	}
+	
+	// 编辑
+	function editFooter(id){
+		$("#footer_ifr").attr("src","/admin/footer/edit/dispatch?id=" + id);
+		$('#footer_div').window('open');
+	}
+	
+	// 删除
+	function deleteFooterById(id){
+		jQuery.messager.confirm("网站底部LOGO", "确定要删除该LOGO吗？", function(r) {
+			if (r) {
+				jQuery.get("/admin/footer/deleteById?id=" + id,function(data){
+					if(data == "0"){
+						jQuery.messager.alert('错误', "删除失败~", "error");
+					}else{
+						 $("#footerTable").datagrid('reload'); 
+					}
+				});
+			}
+		})
+	}
+	
+</script>

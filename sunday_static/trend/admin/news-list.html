@@ -1,0 +1,69 @@
+<div style="margin:10px 0;"></div>
+
+<div id="newsSearchForm" style="padding:5px;height:auto">
+	<div style="margin-bottom:5px">
+		<a href="#"  onclick="addNews()" class="easyui-linkbutton" iconCls="icon-add" plain="true">发布新闻</a>
+	</div>
+	<div>
+		<form id="queryNewsForm">
+			标题：<input class="easyui-validatebox" name="filter_S_title"> &nbsp;&nbsp;
+			<a href="javascript:doSearchObject('newsTable','queryNewsForm')" class="easyui-linkbutton" iconCls="icon-search">搜索</a>
+		</form>
+	</div>
+</div>
+
+<div id="news_div" class="easyui-window" title="新闻动态" data-options="modal:true,closed:true,collapsible:false,minimizable:false,maximizable:false" style="width:900px; height:600px;">
+	<iframe src="#" id="news_ifr" marginwidth="0" marginheight="0" width="880px" height="550px" frameborder="0" scrolling="false" allowtransparency="true"></iframe>	
+</div>
+
+<table id="newsTable" style="width:1200px"></table>
+
+<script type="text/javascript">
+	$('#newsTable').datagrid({   
+		url:'/admin/news/list?filter_I_mType=2',   
+		toolbar: '#newsSearchForm',
+		pagination:true,
+		singleSelect:true,
+		rownumbers:true,
+		autoRowHeight:true,
+		columns:[[   
+					{field:'title',title:'标题',width:200},
+					{field:'subhead',title:'副标题',width:200},
+					{field:'summary',title:'摘要',width:150},
+					{field:'createTime',title:'创建时间',width:150},
+					{field:'operate',title:'操作',width:100,
+						formatter: function(value,row,index){
+							return outPutFunction("editNews",row.id,"编辑") + "	" + outPutFunction("deleteNewsById",row.id,"删除");
+						}
+					}
+				]]
+		});
+	
+	// 新增新闻
+	function addNews(){
+		$("#news_ifr").attr("src","/admin/news/add/dispatch");
+		$('#news_div').window('open');
+	}
+	
+	// 编辑新闻
+	function editNews(id){
+		$("#news_ifr").attr("src","/admin/news/edit/dispatch?id=" + id);
+		$('#news_div').window('open');
+	}
+	
+	// 删除
+	function deleteNewsById(id){
+		jQuery.messager.confirm("新闻动态", "确定要删除该新闻吗？", function(r) {
+			if (r) {
+				jQuery.get("/admin/news/deleteById?id=" + id,function(data){
+					if(data == "0"){
+						jQuery.messager.alert('错误', "删除失败~", "error");
+					}else{
+						 $("#newsTable").datagrid('reload'); 
+					}
+				});
+			}
+		})
+	}
+	
+</script>

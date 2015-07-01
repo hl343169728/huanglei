@@ -1,0 +1,50 @@
+<div style="margin: 10px 0;"></div>
+
+<div id="serviceSearchForm" style="padding: 5px; height: auto">
+	<form id="queryServiceForm">
+		<div>
+			姓名：<input class="easyui-validatebox" name="filter_S_name" style="width: 100px">
+			<a href="javascript:doSearchObject('serviceTable','queryServiceForm')" class="easyui-linkbutton" iconCls="icon-search">搜索</a>
+		</div>
+	</form>
+</div>
+
+<table id="serviceTable" style="width:1100px" class="easyui-datagrid"></table>
+
+<script>
+	$('#serviceTable').datagrid({
+		url:'/admin/service/list',
+		toolbar : '#serviceSearchForm',
+		singleSelect : true,
+		pagination:true,
+		rownumbers : true,
+		columns : [[
+			{field : 'name',title : '姓名',width:100},
+			{field : 'address',title : '地址',width:200},
+			{field : 'mobile',title : '电话',width:100},
+			{field : 'comment',title : '留言',width:300},
+			{field : 'operate',title : '操作',width:50,
+				formatter : function(value, row, index) {
+					return outPutFunction("deleteServiceById", row.id, "删除");
+				}
+			} 
+		]]
+	});
+	
+	// 删除
+	function deleteServiceById(id) {
+		jQuery.messager.confirm('在线客服',"确定要删除选中信息吗?",function(r){
+		  	if (r){   
+				jQuery.post("/admin/service/deleteById/" + id,{}, function(data) {
+					if(data == "success"){
+						$("#serviceTable").datagrid('reload');
+					}else{
+						jQuery.messager.alert('Info', "删除失败", 'info');
+					}
+				});
+		 	}
+		});
+	}
+
+</script>
+

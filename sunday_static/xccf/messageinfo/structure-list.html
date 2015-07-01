@@ -1,0 +1,81 @@
+<div style="margin:10px 0;"></div>
+
+<div id="structureSearchForm" style="padding:5px;height:auto">
+	<div style="margin-bottom:5px">
+		<a href="#"  onclick="addStructure()" class="easyui-linkbutton" iconCls="icon-add" plain="true">新增组织机构</a>
+	</div>
+	<div>
+		<form id="queryStructureForm">
+			类型：<select name="filter_S_title" style="width: 200px;">
+					<option value="1">主办机构</option>
+					<option value="2">独家承办机构</option>
+					<option value="3">特邀承办机构</option>
+				</select>&nbsp;&nbsp;
+			<a href="javascript:doSearchObject('structureTable','queryStructureForm')" class="easyui-linkbutton" iconCls="icon-search">搜索</a>
+		</form>
+	</div>
+</div>
+
+<div id="structure_div" class="easyui-window" title="组织结构信息" data-options="modal:true,closed:true,collapsible:false,minimizable:false,maximizable:false" style="width:900px; height:560px;">
+	<iframe src="#" id="structure_ifr" marginwidth="0" marginheight="0" width="880px" height="512px" frameborder="0" scrolling="false" allowtransparency="true"></iframe>	
+</div>
+
+<table id="structureTable" style="width:1200px"></table>
+
+<script>
+	$('#structureTable').datagrid({   
+		url:'/admin/structure/list?filter_I_mtype=5',   
+		toolbar: '#structureSearchForm',
+		pagination:true,
+		singleSelect:true,
+		rownumbers:true,
+		autoRowHeight:true,
+		columns:[[   
+					{field:'title',title:'类型',width:150,
+						formatter: function(value,row,index){
+							if (row.title == "1") {
+								return "主办机构";
+							} else if (row.title == "2") {
+								return "独家承办机构";
+							} else {
+								return "特邀承办机构";
+							}
+						}
+					},
+					{field:'comment',title:'简介',width:400},
+					{field:'operate',title:'操作',width:100,
+						formatter: function(value,row,index){
+							return outPutFunction("editStructure",row.id,"编辑") + "	" + outPutFunction("deleteStructureById",row.id,"删除");
+						}
+					}
+				]]
+		});
+	
+	// 新增
+	function addStructure(){
+		$("#structure_ifr").attr("src","/admin/structure/add/dispatch");
+		$('#structure_div').window('open');
+	}
+	
+	// 编辑
+	function editStructure(id){
+		$("#structure_ifr").attr("src","/admin/structure/edit/dispatch?id=" + id);
+		$('#structure_div').window('open');
+	}
+	
+	// 删除
+	function deleteStructureById(id){
+		jQuery.messager.confirm("提示", "确定要删除该组织机构吗？", function(r) {
+			if (r) {
+				jQuery.get("/admin/structure/deleteById?id=" + id,function(data){
+					if(data == "0"){
+						jQuery.messager.alert('错误', "删除失败~", "error");
+					}else{
+						 $("#structureTable").datagrid('reload'); 
+					}
+				});
+			}
+		})
+	}
+	
+</script>

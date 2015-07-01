@@ -1,0 +1,60 @@
+<div style="margin:10px 0;"></div>
+
+<div id="advertSearchForm" style="padding:5px;height:auto">
+	<div style="margin-bottom:5px">
+		<a href="#"  onclick="addAdvert()" class="easyui-linkbutton" iconCls="icon-add" plain="true">新增广告位</a>
+	</div>
+</div>
+
+<div id="advert_div" class="easyui-window" title="广告位信息" data-options="modal:true,closed:true,collapsible:false,minimizable:false,maximizable:false" style="width:900px; height:560px;">
+	<iframe src="#" id="advert_ifr" marginwidth="0" marginheight="0" width="880px" height="512px" frameborder="0" scrolling="false" allowtransparency="true"></iframe>	
+</div>
+
+<table id="advertTable" style="width:1200px"></table>
+
+<script>
+	$('#advertTable').datagrid({   
+		url:'/admin/advert/list?filter_I_mtype=12',   
+		toolbar: '#advertSearchForm',
+		pagination:true,
+		singleSelect:true,
+		rownumbers:true,
+		autoRowHeight:true,
+		columns:[[   
+					{field:'title',title:'标题',width:500},
+					{field:'operate',title:'操作',width:100,
+						formatter: function(value,row,index){
+							return outPutFunction("editAdvert",row.id,"编辑") + "	" + outPutFunction("deleteAdvertById",row.id,"删除");
+						}
+					}
+				]]
+		});
+	
+	// 新增
+	function addAdvert(){
+		$("#advert_ifr").attr("src","/admin/advert/add/dispatch");
+		$('#advert_div').window('open');
+	}
+	
+	// 编辑
+	function editAdvert(id){
+		$("#advert_ifr").attr("src","/admin/advert/edit/dispatch?id=" + id);
+		$('#advert_div').window('open');
+	}
+	
+	// 删除
+	function deleteAdvertById(id){
+		jQuery.messager.confirm("提示", "确定要删除该广告位吗？", function(r) {
+			if (r) {
+				jQuery.get("/admin/advert/deleteById?id=" + id,function(data){
+					if(data == "0"){
+						jQuery.messager.alert('错误', "删除失败~", "error");
+					}else{
+						 $("#advertTable").datagrid('reload'); 
+					}
+				});
+			}
+		})
+	}
+	
+</script>
