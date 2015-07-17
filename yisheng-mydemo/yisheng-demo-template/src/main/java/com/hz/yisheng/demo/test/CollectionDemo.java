@@ -139,6 +139,7 @@ public class CollectionDemo {
 		}
 	}
 	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private static void getInfo() {
 		Map map = new HashMap();
 		People p1 =  new People("张三", 201501);
