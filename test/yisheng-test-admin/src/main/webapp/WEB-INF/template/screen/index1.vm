@@ -1,40 +1,33 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>测试综合运营管理平台</title>
+    <title>水木佳辰测试管理平台</title>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 	<meta charset="utf-8" />
 	<meta name="description" content="Static &amp; Dynamic Tables" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 	
-	<script type="text/javascript" src="$!{staticRoot}/common/jquery-easyui/jquery-1.8.0.min.js"></script>
-	
 	<!-- ace_admin1.3.1 -->
 	<!-- bootstrap & fontawesome -->
 	<link rel="stylesheet" href="$!{staticRoot}/common/ace_admin1.3.1/assets/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="$!{staticRoot}/common/ace_admin1.3.1/assets/css/font-awesome.min.css" />
-	<!-- text fonts -->
-	<link rel="stylesheet" href="$!{staticRoot}/common/ace_admin1.3.1/assets/css/ace-fonts.css" />
+	<link rel="stylesheet" href="$!{staticRoot}/common/css/colorbox.min.css" />
 	<!-- ace styles -->
-	<link rel="stylesheet" href="$!{staticRoot}/common/ace_admin1.3.1/assets/css/ace.min.css" id="main-ace-style" />
-	<!--[if lte IE 9]>
-		<link rel="stylesheet" href="$!{staticRoot}/common/ace_admin1.3.1/assets/css/ace-part2.min.css" />
-	<![endif]-->
-	<link rel="stylesheet" href="$!{staticRoot}/common/ace_admin1.3.1/assets/css/ace-skins.min.css" />
-	<link rel="stylesheet" href="$!{staticRoot}/common/ace_admin1.3.1/assets/css/ace-rtl.min.css" />
-	<!--[if lte IE 9]>
-	  <link rel="stylesheet" href="$!{staticRoot}/common/ace_admin1.3.1/assets/css/ace-ie.min.css" />
-	<![endif]-->
+	<link rel="stylesheet" href="$!{staticRoot}/common/ace_admin1.3.1/assets/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
+	
+	<!-- page specific plugin styles -->
+	<link rel="stylesheet" href="$!{staticRoot}/common/css/jquery-ui.min.css" />
+	<link rel="stylesheet" href="$!{staticRoot}/common/css/ui.jqgrid.min.css" />
+
 	<!-- inline styles related to this page -->
-	<!-- ace settings handler -->
 	<script src="$!{staticRoot}/common/ace_admin1.3.1/assets/js/ace-extra.min.js"></script>
 	<!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
 
 	<!--[if lte IE 8]>
-	<script src="$!{staticRoot}/common/ace_admin1.3.1/assets/js/html5shiv.min.js"></script>
-	<script src="$!{staticRoot}/common/ace_admin1.3.1/assets/js/respond.min.js"></script>
+	<script src="dist/js/html5shiv.min.js"></script>
+	<script src="dist/js/respond.min.js"></script>
 	<![endif]-->
-
+	<link rel="stylesheet" href="$!{staticRoot}/common/css/myframe.css" />
 </head>
 <body class="no-skin">
 	<!-- #section:basics/navbar.layout -->
@@ -58,7 +51,7 @@
 				<a href="#" class="navbar-brand">
 					<small>
 						<i class="fa fa-leaf"></i>
-						Ace Admin
+						水木佳辰测试管理平台
 					</small>
 				</a>
 				<!-- /section:basics/navbar.layout.brand -->
@@ -285,8 +278,31 @@
 							<i class="ace-icon fa fa-caret-down"></i>
 						</a>
 						<ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-							<li><a href="#"><i class="ace-icon fa fa-cog"></i>Settings</a></li>
-							<li><a href="profile.html"><i class="ace-icon fa fa-user"></i>Profile</a></li>
+							<li>
+								<a href="#">
+									<i class="ace-icon fa fa-cog"></i>我的信息
+								</a>
+							</li>
+							#if(${adminUser.type} == 1)
+    							<li>
+    								<a href="#">
+    									<i class="ace-icon fa fa-user"></i>
+    									<span style="color: #CC33FF">角色：</span><span style="color: #666633">系统管理员 </span>
+    								</a>
+    							</li>
+							#end
+							#if(${adminUser.type} == 0)
+    							<li href="#">
+    								<a> 
+    									<span style="color: #CC33FF">部门：</span><span style="color: #666633">$!{adminUser.userOrgPost.deptName}</span>
+    								</a>
+    							</li>
+    							<li href="#">
+    								<a> 
+    									<span style="color: #CC33FF">职务：</span><span style="color: #666633">$!{adminUser.userOrgPost.postName}</span>
+    								</a>
+    							</li>
+							#end
 							<li class="divider"></li>
 							<li><a href="#" onclick="window.location.href='/admin/logout'"><i class="ace-icon fa fa-power-off"></i>注销</a></li>
 						</ul>
@@ -312,7 +328,7 @@
 
 			<div class="sidebar-shortcuts" id="sidebar-shortcuts">
 				<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
-					导航菜单
+					控制面板
 					<!-- /section:basics/sidebar.layout.shortcuts -->
 				</div>
 				<div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
@@ -347,26 +363,6 @@
 				#end
 			</ul>
 			<!-- /.nav-list -->
-			<script type="text/javascript">
-    			function doOpenMenu(menu_url,menuId,menuName){
-        			var url = menu_url;
-        			if(menu_url.indexOf("?") == -1){
-        				url = menu_url + "?" + Date.parse(new Date());
-        			}
-        			jQuery.get(url,function(data) {
-        				if (!$('.main-content').tabs('exists', menuName)) {
-        					$('.main-content').tabs('add',{
-        						title: menuName,
-        						content: data,
-        						closable: true
-        					});
-        				} else {
-        					$('.main-content').tabs('select', menuName);
-        				}
-        				
-        			});
-        		}
-            </script>
 
 			<!-- #section:basics/sidebar.layout.minimize -->
 			<div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
@@ -379,145 +375,38 @@
 			</script>
 		</div>
 
-		<!-- /section:basics/sidebar -->
+		<!-- main-content -->
 		<div class="main-content">
-			<!-- #section:basics/content.breadcrumbs -->
 			<div class="breadcrumbs" id="breadcrumbs">
-				<script type="text/javascript">
-					try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
-				</script>
-
 				<ul class="breadcrumb">
 					<li>
 						<i class="ace-icon fa fa-home home-icon"></i>
-						<a href="#">Home</a>
+						<a href="/">首页</a>
 					</li>
+					<li class="active">控制面板</li>
 				</ul><!-- /.breadcrumb -->
-
-				<!-- #section:basics/content.searchbox -->
-				<div class="nav-search" id="nav-search">
-					<form class="form-search">
-						<span class="input-icon">
-							<input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
-							<i class="ace-icon fa fa-search nav-search-icon"></i>
-						</span>
-					</form>
-				</div><!-- /.nav-search -->
-
-				<!-- /section:basics/content.searchbox -->
 			</div>
 
-			<!-- /section:basics/content.breadcrumbs -->
 			<div class="page-content">
-				<!-- #section:settings.box -->
-				<div class="ace-settings-container" id="ace-settings-container">
-					<div class="btn btn-app btn-xs btn-warning ace-settings-btn" id="ace-settings-btn">
-						<i class="ace-icon fa fa-cog bigger-150"></i>
-					</div>
-
-					<div class="ace-settings-box clearfix" id="ace-settings-box">
-						<div class="pull-left width-50">
-							<!-- #section:settings.skins -->
-							<div class="ace-settings-item">
-								<div class="pull-left">
-									<select id="skin-colorpicker" class="hide">
-										<option data-skin="no-skin" value="#438EB9">#438EB9</option>
-										<option data-skin="skin-1" value="#222A2D">#222A2D</option>
-										<option data-skin="skin-2" value="#C6487E">#C6487E</option>
-										<option data-skin="skin-3" value="#D0D0D0">#D0D0D0</option>
-									</select>
-								</div>
-								<span>&nbsp; Choose Skin</span>
-							</div>
-
-							<!-- /section:settings.skins -->
-
-							<!-- #section:settings.navbar -->
-							<div class="ace-settings-item">
-								<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-navbar" />
-								<label class="lbl" for="ace-settings-navbar"> Fixed Navbar</label>
-							</div>
-
-							<!-- /section:settings.navbar -->
-
-							<!-- #section:settings.sidebar -->
-							<div class="ace-settings-item">
-								<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-sidebar" />
-								<label class="lbl" for="ace-settings-sidebar"> Fixed Sidebar</label>
-							</div>
-
-							<!-- /section:settings.sidebar -->
-
-							<!-- #section:settings.breadcrumbs -->
-							<div class="ace-settings-item">
-								<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-breadcrumbs" />
-								<label class="lbl" for="ace-settings-breadcrumbs"> Fixed Breadcrumbs</label>
-							</div>
-
-							<!-- /section:settings.breadcrumbs -->
-
-							<!-- #section:settings.rtl -->
-							<div class="ace-settings-item">
-								<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-rtl" />
-								<label class="lbl" for="ace-settings-rtl"> Right To Left (rtl)</label>
-							</div>
-
-							<!-- /section:settings.rtl -->
-
-							<!-- #section:settings.container -->
-							<div class="ace-settings-item">
-								<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-add-container" />
-								<label class="lbl" for="ace-settings-add-container">
-									Inside
-									<b>.container</b>
-								</label>
-							</div>
-
-							<!-- /section:settings.container -->
-						</div><!-- /.pull-left -->
-
-						<div class="pull-left width-50">
-							<!-- #section:basics/sidebar.options -->
-							<div class="ace-settings-item">
-								<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-hover" />
-								<label class="lbl" for="ace-settings-hover"> Submenu on Hover</label>
-							</div>
-
-							<div class="ace-settings-item">
-								<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-compact" />
-								<label class="lbl" for="ace-settings-compact"> Compact Sidebar</label>
-							</div>
-
-							<div class="ace-settings-item">
-								<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-highlight" />
-								<label class="lbl" for="ace-settings-highlight"> Alt. Active Item</label>
-							</div>
-							<!-- /section:basics/sidebar.options -->
-						</div><!-- /.pull-left -->
-					</div><!-- /.ace-settings-box -->
-				</div><!-- /.ace-settings-container -->
+				<div class="page-content-area">
+        			<div class="main-content-inner">
+        				<div id="indextabs">
+        					<ul style="height: 38px;">
+							
+							</ul>
+        				</div>
+        			</div>
+				</div><!-- /.page-content-area -->
 			</div><!-- /.page-content -->
-		</div><!-- /.main-content -->
+		</div>
 
 		<div class="footer">
 			<div class="footer-inner">
 				<!-- #section:basics/footer -->
 				<div class="footer-content">
 					<span class="bigger-120">
-						<span class="blue bolder">Ace</span>
-						Application &copy; 2013-2014
-					</span>
-					&nbsp; &nbsp;
-					<span class="action-buttons">
-						<a href="#">
-							<i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i>
-						</a>
-						<a href="#">
-							<i class="ace-icon fa fa-facebook-square text-primary bigger-150"></i>
-						</a>
-						<a href="#">
-							<i class="ace-icon fa fa-rss-square orange bigger-150"></i>
-						</a>
+						<span class="blue bolder">水木佳辰</span>
+						 &copy; 2015-2016
 					</span>
 				</div>
 				<!-- /section:basics/footer -->
@@ -538,92 +427,89 @@
 
 	<!-- <![endif]-->
 
-	<!--[if IE]>
-    <script type="text/javascript">
-    	window.jQuery || document.write("<script src='$!{staticRoot}/common/ace_admin1.3.1/assets/js/jquery1x.min.js'>"+"<"+"/script>");
-    </script>
-    <![endif]-->
-	<script type="text/javascript">
-		if('ontouchstart' in document.documentElement) document.write("<script src='$!{staticRoot}/common/ace_admin1.3.1/assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
-	</script>
 	<script src="$!{staticRoot}/common/ace_admin1.3.1/assets/js/bootstrap.min.js"></script>
-
-	<!-- page specific plugin scripts -->
-	<script src="$!{staticRoot}/common/ace_admin1.3.1/assets/js/jquery.dataTables.min.js"></script>
-	<script src="$!{staticRoot}/common/ace_admin1.3.1/assets/js/jquery.dataTables.bootstrap.js"></script>
 
 	<!-- ace scripts -->
 	<script src="$!{staticRoot}/common/ace_admin1.3.1/assets/js/ace-elements.min.js"></script>
 	<script src="$!{staticRoot}/common/ace_admin1.3.1/assets/js/ace.min.js"></script>
+	
+	<script src="$!{staticRoot}/common/js/jquery-ui.min.js"></script>
+	<script src="$!{staticRoot}/common/js/jquery.ui.touch-punch.min.js"></script>
+	<script src="$!{staticRoot}/common/js/jqgrid/grid.locale-en.js"></script>
+	<script src="$!{staticRoot}/common/js/jqnestable/jquery.nestable.min.js"></script>
+	<script src="$!{staticRoot}/common/js/jqgrid/jquery.jqGrid.min.js"></script>
+	<script src="$!{staticRoot}/common/js/jquery.form.js"></script>
+	<script src="$!{staticRoot}/common/js/colorbox/jquery.colorbox.min.js"></script>
 
+	<script src="$!{staticRoot}/common/js/myplugin.js"></script>
 	<!-- inline scripts related to this page -->
+	
 	<script type="text/javascript">
+		var tabs ;
+		var premisesmap;
+		var tabTitle = $( "#tab_title" ),
+      	tabContent = $( "#tab_content" ),
+      	tabTemplate = "<li id='#{menuid}' ><a href='#{href}'>#{label}<span class='glyphicon glyphicon-remove'></span></a></li>",
+      	tabCounter = 0;
 		jQuery(function($) {
-			var oTable1 = 
-			$('#sample-table-2')
-			//.wrap("<div class='dataTables_borderWrap' />")   //if you are applying horizontal scrolling (sScrollX)
-			.dataTable( {
-				bAutoWidth: false,
-				"aoColumns": [
-				  { "bSortable": false },
-				  null, null,null, null, null,
-				  { "bSortable": false }
-				],
-				"aaSorting": [],
-		
-				//,
-				//"sScrollY": "200px",
-				//"bPaginate": false,
-		
-				//"sScrollX": "100%",
-				//"sScrollXInner": "120%",
-				//"bScrollCollapse": true,
-				//Note: if you are applying horizontal scrolling (sScrollX) on a ".table-bordered"
-				//you may want to wrap the table inside a "div.dataTables_borderWrap" element
-		
-				//"iDisplayLength": 50
-		    } );
-			/**
-			var tableTools = new $.fn.dataTable.TableTools( oTable1, {
-				"sSwfPath": "../../copy_csv_xls_pdf.swf",
-		        "buttons": [
-		            "copy",
-		            "csv",
-		            "xls",
-					"pdf",
-		            "print"
-		        ]
-		    } );
-		    $( tableTools.fnContainer() ).insertBefore('#sample-table-2');
-			*/
-		
-		
-			$(document).on('click', 'th input:checkbox' , function(){
-				var that = this;
-				$(this).closest('table').find('tr > td:first-child input:checkbox')
-				.each(function(){
-					this.checked = that.checked;
-					$(this).closest('tr').toggleClass('selected');
-				});
+			// jquery tabs
+			tabs = $("#indextabs").tabs();
+			// close icon: removing the tab on click
+			tabs.delegate( "span.glyphicon-remove", "click", function() {
+				var panelId = $( this ).closest( "li" ).remove().attr( "aria-controls" );
+			    $( "#" + panelId ).remove();
+			    tabs.tabs( "refresh" );
+				tabCounter--;
 			});
-		
-		
-			$('[data-rel="tooltip"]').tooltip({placement: tooltip_placement});
-			function tooltip_placement(context, source) {
-				var $source = $(source);
-				var $parent = $source.closest('table')
-				var off1 = $parent.offset();
-				var w1 = $parent.width();
-		
-				var off2 = $source.offset();
-				//var w2 = $source.width();
-		
-				if( parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2) ) return 'right';
-				return 'left';
+		});
+	
+		function doOpenMenu(menu_url,menuId,menuName){
+			var url = menu_url;
+			if(menu_url.indexOf("?") == -1){
+				url = menu_url + "?" + Date.parse(new Date());
 			}
+
+      		if(!tabs.has("#menutab" + menuId).length){
+				var label = menuName,
+        		li = $( tabTemplate.replace( /#\{menuid\}/g,'menutab' + menuId ).replace( /#\{href\}/g, menu_url ).replace( /#\{label\}/g, label ) );
+      			tabs.find(".ui-tabs-nav").append(li);
+      			tabs.tabs("refresh" );
+      			tabs.tabs({active:tabCounter});
+      			tabCounter++;
+      		} else {
+      			var index = tabs.find("#menutab" + menuId).index();
+      			tabs.tabs({active:index});
+      		}
+		}
 		
-		})
-	</script>
+		function commonbuttonformatter(rowid,functionname,title,classname) {
+			var str="",ocl;
+			ocl = "id='"+rowid+"' onclick="+functionname+"; onmouseover=jQuery(this).addClass('ui-state-hover'); onmouseout=jQuery(this).removeClass('ui-state-hover'); ";
+			str += "<div title='"+title+"' style='float:left;cursor:pointer;' class='ui-pg-div ui-inline-edit' "+ocl+"><span class='"+classname+"'></span></div>";
+			return str;
+		}
+
+		function updatePagerIcons(table) {
+			var replacement = 
+				{
+					'ui-icon-seek-first' : 'ace-icon fa fa-angle-double-left bigger-140',
+					'ui-icon-seek-prev' : 'ace-icon fa fa-angle-left bigger-140',
+					'ui-icon-seek-next' : 'ace-icon fa fa-angle-right bigger-140',
+					'ui-icon-seek-end' : 'ace-icon fa fa-angle-double-right bigger-140'
+			};
+			$('.ui-pg-table:not(.navtable) > tbody > tr > .ui-pg-button > .ui-icon').each(function(){
+				var icon = $(this);
+				var $class = $.trim(icon.attr('class').replace('ui-icon', ''));
+						
+				if($class in replacement) icon.attr('class', 'ui-icon '+replacement[$class]);
+				})
+			}
+			
+		function enableTooltips(table) {
+			$('.navtable .ui-pg-button').tooltip({container:'body'});
+			$(table).find('.ui-pg-div').tooltip({container:'body'});
+		}
+    </script>
 
 	<!-- the following scripts are used in demo only for onpage help and you don't need them -->
 	<link rel="stylesheet" href="$!{staticRoot}/common/ace_admin1.3.1/assets/css/ace.onpage-help.css" />

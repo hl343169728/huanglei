@@ -15,11 +15,11 @@
 		http://www.springframework.org/schema/tx/spring-tx-4.0.xsd"
 	default-lazy-init="true">
 	
-	<!-- 用户信息管理 
+	<!-- 用户信息管理 -->
 	<bean id="userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
-		<property name="mapperInterface" value="com.hz.sunday.demo.dao.UserMapper" />
+		<property name="mapperInterface" value="com.hz.yisheng.test.dao.UserMapper" />
 		<property name="sqlSessionFactory" ref="testSessionFactory" />
 	</bean> 
-	-->
+	
 	
 </beans>	
