@@ -12,6 +12,6 @@
 	<modules>
 		<module>sunday-xccf</module>
 		<module>sunday-xccf-war</module>
-    </modules>
+  </modules>
 
 </project>
