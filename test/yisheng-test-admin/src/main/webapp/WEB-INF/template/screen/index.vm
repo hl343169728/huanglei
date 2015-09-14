@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="pragma" Content="no-cache">
+	<meta http-equiv="Cache-Control" Content="no-cache, must-revalidate,no-store">
+	<meta http-equiv="Expires" Content="0">
+	<title>水木佳辰测试管理平台</title>
+
+	<!-- bootstrap & fontawesome -->
+	<link rel="stylesheet" href="$!{staticRoot}/common/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="$!{staticRoot}/common/css/font-awesome.min.css" />
+	<link rel="stylesheet" href="$!{staticRoot}/common/css/colorbox.min.css" />
+	<!-- ace styles -->
+	<link rel="stylesheet" href="$!{staticRoot}/common/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
+	
+	<!-- page specific plugin styles -->
+	<link rel="stylesheet" href="$!{staticRoot}/common/css/jquery-ui.min.css" />
+	<link rel="stylesheet" href="$!{staticRoot}/common/css/ui.jqgrid.min.css" />
+
+	<!-- inline styles related to this page -->
+	<script src="$!{staticRoot}/common/js/ace-extra.min.js"></script>
+	<!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
+
+	<!--[if lte IE 8]>
+	<script src="dist/js/html5shiv.min.js"></script>
+	<script src="dist/js/respond.min.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="$!{staticRoot}/common/css/myframe.css" />
+		
+	</head>	
+</head>
+<body class="no-skin">
+	<div id="navbar" class="navbar navbar-default">
+    	<script type="text/javascript">
+    		try{ace.settings.check('navbar' , 'fixed')}catch(e){}
+    	</script>
+		<div class="navbar-container" id="navbar-container">
+			<!-- #section:basics/sidebar.mobile.toggle -->
+			<button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler">
+				<span class="sr-only">Toggle sidebar</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+
+			<!-- /section:basics/sidebar.mobile.toggle -->
+			<div class="navbar-header pull-left">
+				<!-- #section:basics/navbar.layout.brand -->
+				<a href="#" class="navbar-brand">
+					<small>
+						<i class="fa fa-leaf"></i>
+						水木佳辰测试管理平台
+					</small>
+				</a>
+				<!-- /section:basics/navbar.layout.brand -->
+				<!-- #section:basics/navbar.toggle -->
+				<!-- /section:basics/navbar.toggle -->
+			</div>
+
+			<!-- #section:basics/navbar.dropdown -->
+			<div class="navbar-buttons navbar-header pull-right" role="navigation">
+				<ul class="nav ace-nav">
+					<li class="grey">
+						<a data-toggle="dropdown" class="dropdown-toggle" href="#">
+							<i class="ace-icon fa fa-tasks"></i>
+							<span class="badge badge-grey">1</span>
+						</a>
+
+						<ul class="dropdown-menu-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
+							<li class="dropdown-header">
+								<i class="ace-icon fa fa-check"></i>
+								1 Tasks to complete
+							</li>
+
+							<li>
+								<a href="#">
+									<div class="clearfix">
+										<span class="pull-left">Software Update</span>
+										<span class="pull-right">65%</span>
+									</div>
+
+									<div class="progress progress-mini">
+										<div style="width:65%" class="progress-bar"></div>
+									</div>
+								</a>
+							</li>
+
+							<li class="dropdown-footer">
+								<a href="#">
+									See tasks with details
+									<i class="ace-icon fa fa-arrow-right"></i>
+								</a>
+							</li>
+						</ul>
+					</li>
+
+					<li class="purple">
+						<a data-toggle="dropdown" class="dropdown-toggle" href="#">
+							<i class="ace-icon fa fa-bell icon-animated-bell"></i>
+							<span class="badge badge-important">8</span>
+						</a>
+
+						<ul class="dropdown-menu-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-close">
+							<li class="dropdown-header">
+								<i class="ace-icon fa fa-exclamation-triangle"></i>
+								8 Notifications
+							</li>
+
+							<li>
+								<a href="#">
+									<div class="clearfix">
+										<span class="pull-left">
+											<i class="btn btn-xs no-hover btn-pink fa fa-comment"></i>
+											New Comments
+										</span>
+										<span class="pull-right badge badge-info">+12</span>
+									</div>
+								</a>
+							</li>
+
+							<li>
+								<a href="#">
+									<i class="btn btn-xs btn-primary fa fa-user"></i>
+									Bob just signed up as an editor ...
+								</a>
+							</li>
+
+							<li>
+								<a href="#">
+									<div class="clearfix">
+										<span class="pull-left">
+											<i class="btn btn-xs no-hover btn-success fa fa-shopping-cart"></i>
+											New Orders
+										</span>
+										<span class="pull-right badge badge-success">+8</span>
+									</div>
+								</a>
+							</li>
+
+							<li>
+								<a href="#">
+									<div class="clearfix">
+										<span class="pull-left">
+											<i class="btn btn-xs no-hover btn-info fa fa-twitter"></i>
+											Followers
+										</span>
+										<span class="pull-right badge badge-info">+11</span>
+									</div>
+								</a>
+							</li>
+
+							<li class="dropdown-footer">
+								<a href="#">
+									See all notifications
+									<i class="ace-icon fa fa-arrow-right"></i>
+								</a>
+							</li>
+						</ul>
+					</li>
+
+					<li class="green">
+						<a data-toggle="dropdown" class="dropdown-toggle" href="#">
+							<i class="ace-icon fa fa-envelope icon-animated-vertical"></i>
+							<span class="badge badge-success">5</span>
+						</a>
+
+						<ul class="dropdown-menu-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
+							<li class="dropdown-header">
+								<i class="ace-icon fa fa-envelope-o"></i>
+								5 Messages
+							</li>
+
+							<li class="dropdown-content">
+								<ul class="dropdown-menu dropdown-navbar">
+									<li>
+										<a href="#">
+											<img src="$!{staticRoot}/common/ace_admin1.3.1/assets/avatars/avatar.png" class="msg-photo" alt="Alex's Avatar" />
+											<span class="msg-body">
+												<span class="msg-title">
+													<span class="blue">Alex:</span>
+													Ciao sociis natoque penatibus et auctor ...
+												</span>
+
+												<span class="msg-time">
+													<i class="ace-icon fa fa-clock-o"></i>
+													<span>a moment ago</span>
+												</span>
+											</span>
+										</a>
+									</li>
+
+									<li>
+										<a href="#">
+											<img src="$!{staticRoot}/common/ace_admin1.3.1/assets/avatars/avatar3.png" class="msg-photo" alt="Susan's Avatar" />
+											<span class="msg-body">
+												<span class="msg-title">
+													<span class="blue">Susan:</span>
+													Vestibulum id ligula porta felis euismod ...
+												</span>
+
+												<span class="msg-time">
+													<i class="ace-icon fa fa-clock-o"></i>
+													<span>20 minutes ago</span>
+												</span>
+											</span>
+										</a>
+									</li>
+
+									<li>
+										<a href="#">
+											<img src="$!{staticRoot}/common/ace_admin1.3.1/assets/avatars/avatar4.png" class="msg-photo" alt="Bob's Avatar" />
+											<span class="msg-body">
+												<span class="msg-title">
+													<span class="blue">Bob:</span>
+													Nullam quis risus eget urna mollis ornare ...
+												</span>
+
+												<span class="msg-time">
+													<i class="ace-icon fa fa-clock-o"></i>
+													<span>3:15 pm</span>
+												</span>
+											</span>
+										</a>
+									</li>
+
+									<li>
+										<a href="#">
+											<img src="$!{staticRoot}/common/ace_admin1.3.1/assets/avatars/avatar2.png" class="msg-photo" alt="Kate's Avatar" />
+											<span class="msg-body">
+												<span class="msg-title">
+													<span class="blue">Kate:</span>
+													Ciao sociis natoque eget urna mollis ornare ...
+												</span>
+
+												<span class="msg-time">
+													<i class="ace-icon fa fa-clock-o"></i>
+													<span>1:33 pm</span>
+												</span>
+											</span>
+										</a>
+									</li>
+
+									<li>
+										<a href="#">
+											<img src="$!{staticRoot}/common/ace_admin1.3.1/assets/avatars/avatar5.png" class="msg-photo" alt="Fred's Avatar" />
+											<span class="msg-body">
+												<span class="msg-title">
+													<span class="blue">Fred:</span>
+													Vestibulum id penatibus et auctor  ...
+												</span>
+
+												<span class="msg-time">
+													<i class="ace-icon fa fa-clock-o"></i>
+													<span>10:09 am</span>
+												</span>
+											</span>
+										</a>
+									</li>
+								</ul>
+							</li>
+
+							<li class="dropdown-footer">
+								<a href="inbox.html">
+									See all messages
+									<i class="ace-icon fa fa-arrow-right"></i>
+								</a>
+							</li>
+						</ul>
+					</li>
+
+					<!-- #section:basics/navbar.user_menu -->
+					<li class="light-blue">
+						<a data-toggle="dropdown" href="#" class="dropdown-toggle">
+							<img class="nav-user-photo" src="$!{staticRoot}/common/ace_admin1.3.1/assets/avatars/user.jpg" alt="Jason's Photo" />
+							<span class="user-info"><small>Welcome,</small>$!{adminUser.userName}</span>
+							<i class="ace-icon fa fa-caret-down"></i>
+						</a>
+						<ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+							<li>
+								<a href="#">
+									<i class="ace-icon fa fa-cog"></i>设置
+								</a>
+							</li>
+							#if(${adminUser.type} == 1)
+    							<li>
+    								<a href="#">
+    									<i class="ace-icon fa fa-user"></i>
+    									</span><span style="color: #666633">系统管理员 </span>
+    								</a>
+    							</li>
+							#end
+							#if(${adminUser.type} == 0)
+    							<li href="#">
+    								<a> 
+    									<span style="color: #CC33FF">部门：</span><span style="color: #666633">$!{adminUser.userOrgPost.deptName}</span>
+    								</a>
+    							</li>
+    							<li href="#">
+    								<a> 
+    									<span style="color: #CC33FF">职务：</span><span style="color: #666633">$!{adminUser.userOrgPost.postName}</span>
+    								</a>
+    							</li>
+							#end
+							<li class="divider"></li>
+							<li><a href="#" onclick="window.location.href='/admin/logout'"><i class="ace-icon fa fa-power-off"></i>注销</a></li>
+						</ul>
+					</li>
+					<!-- /section:basics/navbar.user_menu -->
+				</ul>
+			</div>
+			<!-- /section:basics/navbar.dropdown -->
+		</div><!-- /.navbar-container -->
+	</div>
+ 
+
+	<div class="main-container" id="main-container">
+		<script type="text/javascript">
+			try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+		</script>
+
+		<div id="sidebar" class="sidebar responsive" data-sidebar="true" data-sidebar-scroll="true" data-sidebar-hover="true">
+			<script type="text/javascript">
+				try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
+			</script>
+			<ul class="nav nav-list" style="top: 0px;">
+
+				<li >
+					<a href="javascript:doOpenMenu('http://admin.cloud.com/indexpretab.html',0,'JqueryUI插件实例')">
+					<i class="menu-icon fa fa-tachometer"></i><span>后台首页</span></a>
+				</li>
+
+				#foreach($menudto in $allowMenus)
+    				<li class="">
+    					<a href="#" class="dropdown-toggle">
+    						<i class="menu-icon fa fa-list"></i>
+    						<span class="menu-text"> $!menudto.menu.name </span>
+    						<b class="arrow fa fa-angle-down"></b>
+    					</a>
+    					<b class="arrow"></b>
+    					<ul class="submenu">
+							#foreach($child in $!menudto.children)
+        						<li class="">
+        							<a href="javascript:doOpenMenu('$!child.url',$!child.id,'$!child.name')">
+        								<i class="menu-icon fa fa-caret-right"></i>$!child.name
+        							</a>
+        							<b class="arrow"></b>
+        						</li>
+							#end
+    					</ul>
+    				</li>
+				#end
+			</ul><!--/.nav-list-->
+
+			<div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
+				<i class="ace-icon fa fa-angle-double-left" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+			</div>
+
+			<script type="text/javascript">
+				try{ace.settings.check('sidebar' , 'collapsed')}catch(e){}
+			</script>
+		</div>
+
+		<div class="main-content">
+			<div class="breadcrumbs" id="breadcrumbs">
+				<ul class="breadcrumb">
+					<li>
+						<i class="ace-icon fa fa-home home-icon"></i>
+						<a href="/">首页</a>
+					</li>
+					<li class="active">控制面板</li>
+				</ul><!-- /.breadcrumb -->
+			</div>
+
+			<div class="main-content-inner">
+				<div id="indextabs">
+					<ul></ul>
+				</div>
+			</div><!-- /.main-content -->
+		</div>
+		
+		<div class="footer">
+			<div class="footer-inner">
+				<!-- #section:basics/footer -->
+				<div class="footer-content">
+					<span class="bigger-120">
+						<span class="blue bolder">水木佳辰</span>
+						 &copy; 2015-2016
+					</span>
+				</div>
+				<!-- /section:basics/footer -->
+			</div>
+		</div>
+		<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+			<i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+		</a>
+	</div><!-- /.main-container -->
+	
+	<!--[if !IE]> -->
+	<script type="text/javascript">
+		window.jQuery || document.write("<script src='$!{staticRoot}/common/js/jquery.min.js'>"+"<"+"/script>");
+	</script>
+
+	<!-- <![endif]-->
+	<script src="$!{staticRoot}/common/js/bootstrap.min.js"></script>
+	<!-- page specific plugin scripts -->
+	<script src="$!{staticRoot}/common/js/jquery-ui.min.js"></script>
+	<script src="$!{staticRoot}/common/js/jquery.ui.touch-punch.min.js"></script>
+	<script src="$!{staticRoot}/common/js/jqgrid/grid.locale-en.js"></script>
+	<script src="$!{staticRoot}/common/js/jqnestable/jquery.nestable.min.js"></script>
+	<script src="$!{staticRoot}/common/js/jqgrid/jquery.jqGrid.min.js"></script>
+	<script src="$!{staticRoot}/common/js/jquery.form.js"></script>
+	<script src="$!{staticRoot}/common/js/colorbox/jquery.colorbox.min.js"></script>
+
+	<!-- ace scripts -->
+	<script src="$!{staticRoot}/common/js/ace-elements.min.js"></script>
+	<script src="$!{staticRoot}/common/js/ace.min.js"></script>
+	
+	<script src="$!{staticRoot}/common/js/myplugin.js"></script>
+
+	<!-- inline scripts related to this page -->
+	<script type="text/javascript">
+		var tabs ;
+		var premisesmap;
+		var tabTitle = $( "#tab_title" ),
+	    tabContent = $( "#tab_content" ),
+	    tabTemplate = "<li id='#{menuid}' ><a href='#{href}'>#{label}<span class='glyphicon glyphicon-remove'></span></a></li>",
+	    tabCounter = 0;
+		jQuery(function($) {
+			//jquery tabs
+			tabs =$("#indextabs").tabs();
+
+			// close icon: removing the tab on click
+			tabs.delegate( "span.glyphicon-remove", "click", function() {
+				var panelId = $( this ).closest( "li" ).remove().attr( "aria-controls" );
+			    $( "#" + panelId ).remove();
+			    tabs.tabs( "refresh" );
+				tabCounter--;
+			});
+	   	});
+	
+
+		function doOpenMenu(menu_url,menuId,menuName){
+			var url=menu_url;
+			if(menu_url.indexOf("?")==-1){
+				url=menu_url+"?"+Date.parse(new Date());
+			}
+
+	      	if(!tabs.has("#menutab"+menuId).length){
+				var label = menuName,
+	        	li = $( tabTemplate.replace( /#\{menuid\}/g,'menutab'+menuId ).replace( /#\{href\}/g,menu_url ).replace( /#\{label\}/g, label ) );
+	      		tabs.find(".ui-tabs-nav").append(li);
+	      		tabs.tabs( "refresh" );
+	      		tabs.tabs( { active:tabCounter});
+	      		tabCounter++;
+	      	}else{
+	      		var index=tabs.find("#menutab"+menuId).index();
+	      		tabs.tabs( { active:index});
+	      	}
+		}
+
+		
+		function commonbuttonformatter(rowid,functionname,title,classname) {
+			var str="",ocl;
+			ocl = "id='"+rowid+"' onclick="+functionname+"; onmouseover=jQuery(this).addClass('ui-state-hover'); onmouseout=jQuery(this).removeClass('ui-state-hover'); ";
+			str += "<div title='"+title+"' style='float:left;cursor:pointer;' class='ui-pg-div ui-inline-edit' "+ocl+"><span class='"+classname+"'></span></div>";
+			return str;
+		}
+
+		//override dialog's title function to allow for HTML titles
+		jQuery.widget("ui.dialog", $.extend({}, $.ui.dialog.prototype, {
+			_title: function(title) {
+				var temptitle = this.options.title || '&nbsp;'
+				if( ("title_html" in this.options) && this.options.title_html == true)
+					title.html(temptitle);
+					else title.text(temptitle);
+				}
+		}));
+
+
+		function updatePagerIcons(table) {
+			var replacement = 
+				{
+					'ui-icon-seek-first' : 'ace-icon fa fa-angle-double-left bigger-140',
+					'ui-icon-seek-prev' : 'ace-icon fa fa-angle-left bigger-140',
+					'ui-icon-seek-next' : 'ace-icon fa fa-angle-right bigger-140',
+					'ui-icon-seek-end' : 'ace-icon fa fa-angle-double-right bigger-140'
+				};
+				$('.ui-pg-table:not(.navtable) > tbody > tr > .ui-pg-button > .ui-icon').each(function(){
+					var icon = $(this);
+					var $class = $.trim(icon.attr('class').replace('ui-icon', ''));
+					
+					if($class in replacement) icon.attr('class', 'ui-icon '+replacement[$class]);
+				})
+			}
+		
+		function enableTooltips(table) {
+			$('.navtable .ui-pg-button').tooltip({container:'body'});
+			$(table).find('.ui-pg-div').tooltip({container:'body'});
+		}
+	</script>
+
+	<script type="text/javascript">
+		function addAlert(parentId,type,alertinfo,stronginfo) {
+			$(parentId).empty();
+			var str="";
+			str ="<div  class='alert alert-#{type}'><a href='#'' class='close' data-dismiss='alert'>&times;</a><strong>#{stronginfo}</strong>#{alertinfo}</div>",
+			$(parentId).append(str.replace( /#\{type\}/g,type).replace( /#\{stronginfo\}/g,stronginfo ).replace( /#\{alertinfo\}/g,alertinfo ));
+		}
+
+		function addGallery(parentId,title,url,thumburl,dataid) {
+			var str="";
+			str = "<li data-id='#{dataid}'><a><img width='150' height='150' alt=#{title} src='#{thumbhref}'><div class='text'><div class='inner'>#{title}</div></div></a></li>",
+			$(parentId).append(str.replace( /#\{title\}/g,title).replace( /#\{thumbhref\}/g,thumburl ).replace( /#\{dataid\}/g,dataid));
+		}
+
+		function addcommonoption(selectId,data){
+				var str="<option value='#{value}'>#{text}</option>";
+			  	jQuery.each(data, function(i,item){
+			  	var option=str.replace(/#\{value\}/g,item.id).replace(/#\{text\}/g,item.name);
+			  	jQuery(selectId).append(option);
+		});
+	}
+
+		function deleteimage(obj,url){
+		var id=$(obj).parent().data('id');
+		jQuery.getJSON(admin_path+url,{id:id}, function(data) {
+			var code=data.code;
+			if(code==0){
+				alert("删除成功");
+				$(obj).parent().remove();
+				$("#premisesLayoutModal").modal('hide');
+			}else{
+				alert("删除失败");
+			}
+		 });
+	}
+	</script>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=zRgRCe12UZfaOUfqzv5mckga"></script>
+</body>
+</html>
