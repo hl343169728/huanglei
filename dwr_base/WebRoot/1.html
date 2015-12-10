@@ -1,0 +1,35 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>1.html</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <script type='text/javascript' src='/dwr_base/dwr/interface/hello.js'></script>
+    <script type='text/javascript' src='/dwr_base/dwr/engine.js'></script>
+    
+    <script type="text/javascript">
+    	function test1(){
+    		hello.hello();
+    	};
+    	
+    	function test2(uname){
+    		//alert(uname);
+    		hello.checkName(uname,function(result){
+    			if(result){
+    				document.getElementById("msg").innerHTML = "用户名可用！";
+    			}else{
+    				document.getElementById("msg").innerHTML = "用户名已存在，请重新输入！";
+    			}
+    		});
+    	};
+    </script>
+  
+  </head>
+  
+  <body>
+    	<input  type="text"  id="uname"  onchange="test2(this.value);"  /><span id="msg"></span>
+    	<input type="button" value="测试" onclick="test1();"/>
+  </body>
+</html>

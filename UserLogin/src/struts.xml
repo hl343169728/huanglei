@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+    "http://struts.apache.org/dtds/struts-2.1.dtd">
+
+<struts>  
+	
+	<constant name="struts.i18n.encoding" value="utf-8" />
+	<constant name="struts.custom.i18n.resources" value="app" />
+	
+    <package name="default"  namespace="/" extends="struts-default">
+      
+    	<interceptors>
+    		<!-- 用户自定义的拦截器 -->
+    		<interceptor name="LoginInter" class="com.bjsxt.interceptor.LoginInteceptor"></interceptor>
+    		<interceptor-stack name="ccc">
+    			<!-- 计时拦截器 -->
+    			<interceptor-ref name="timer"></interceptor-ref>
+    			<interceptor-ref name="LoginInter"></interceptor-ref>
+    			<interceptor-ref name="defaultStack"></interceptor-ref>
+    		</interceptor-stack>
+    	</interceptors>
+    	
+    	<default-interceptor-ref name="ccc"></default-interceptor-ref>
+    	
+    	<!-- 全局的 -->
+    	<global-results>
+    		<result name="welcome">/welcome.jsp</result>
+    		<result name="login">/userLogin.jsp</result>
+    	</global-results>
+
+		<action name="DemoAction" class="com.bjsxt.action.DemoAction"></action>
+		
+    	<action name="UserAction" class="com.bjsxt.action.UserAction"></action>
+    	
+    </package>  
+</struts>  

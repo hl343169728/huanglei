@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="dwr_province_city_town"
+  id="myeclipse.1352798395828"
+  context-root="/dwr_province_city_town"
+  j2ee-spec="5.0"
+  archive="dwr_province_city_town.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

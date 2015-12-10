@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" 
+	xmlns="http://java.sun.com/xml/ns/javaee" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+  	
+  <servlet>
+  	<servlet-name>FirstServlet</servlet-name>
+  	<servlet-class>com.bjsxt.servlet.FirstServlet</servlet-class>
+  </servlet>
+  
+   <servlet-mapping>
+  	<servlet-name>FirstServlet</servlet-name>
+  	<url-pattern>/one</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>SecondServlet</servlet-name>
+    <servlet-class>com.bjsxt.servlet.SecondServlet</servlet-class>
+  </servlet>
+  
+   <servlet-mapping>
+    <servlet-name>SecondServlet</servlet-name>
+    <url-pattern>/two</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>ThirdServlet</servlet-name>
+  	<servlet-class>com.bjsxt.servlet.ThirdServlet</servlet-class>
+  </servlet>
+  
+    <servlet-mapping>
+  	<servlet-name>ThirdServlet</servlet-name>
+  	<url-pattern>/three</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>FourServlet</servlet-name>
+    <servlet-class>com.bjsxt.servlet.FourServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  
+   <servlet-mapping>
+    <servlet-name>FourServlet</servlet-name>
+    <url-pattern>/four</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>Servlet_5</servlet-name>
+    <servlet-class>com.bjsxt.servlet.Servlet_5</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>Servlet_5</servlet-name>
+    <url-pattern>/Servlet_5</url-pattern>
+  </servlet-mapping>
+  
+</web-app>

@@ -1,0 +1,33 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <base href="<%=basePath%>">
+    
+    <title>My JSP 'userLogin.jsp' starting page</title>
+    
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<meta http-equiv="description" content="This is my page">
+
+  </head>
+  
+  <body>
+  	<font style="color: red" size="7">
+  		<s:property value="#request.error"/>
+  	</font>
+    	<form action="UserAction!login" method="post">
+    		用户名：<input name="uname" value=""/>
+    		密码：<input name="pwd" value=""/>
+    		<input type="submit" value="登录"/>
+    	</form>
+  </body>
+</html>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" 
+	xmlns="http://java.sun.com/xml/ns/javaee" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+  <servlet>
+    <servlet-name>TestServlet_1</servlet-name>
+    <servlet-class>com.bjsxt.servlet.TestServlet_1</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>TestServlet_1</servlet-name>
+    <url-pattern>/TestServlet_1</url-pattern>
+  </servlet-mapping>
+  
+   <servlet>
+    <servlet-name>TestServlet_2</servlet-name>
+    <servlet-class>com.bjsxt.servlet.TestServlet_2</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>TestServlet_2</servlet-name>
+    <url-pattern>/TestServlet_2</url-pattern>
+  </servlet-mapping>
+  
+   <servlet>
+    <servlet-name>TestServlet_3</servlet-name>
+    <servlet-class>com.bjsxt.servlet.TestServlet_3</servlet-class>
+    <init-param>
+    	<param-name>aaa</param-name>
+    	<param-value>1111</param-value>
+    </init-param>
+    <init-param>
+    	<param-name>bbb</param-name>
+    	<param-value>2222</param-value>
+    </init-param>
+  </servlet>
+  
+    <servlet-mapping>
+    <servlet-name>TestServlet_3</servlet-name>
+    <url-pattern>/TestServlet_3</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>TestServlet_4</servlet-name>
+    <servlet-class>com.bjsxt.servlet.TestServlet_4</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>TestServlet_4</servlet-name>
+    <url-pattern>/TestServlet_4</url-pattern>
+  </servlet-mapping>
+  
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+</web-app>
