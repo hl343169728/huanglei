@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<widget id="A6982997209785" version="0.0.1">
+  <name>AppTest</name>
+  <description>我的第二个应用</description>
+  <author email="hl343169728@126.com" href="http://www.apicloud.com">hl4098946</author>
+  <content src="index.html"/>
+  <preference name="pageBounce" value="true"/>
+  <preference name="appBackground" value="rgba(0,0,0,0.0)"/>
+  <preference name="windowBackground" value="rgba(0,0,0,0.0)"/>
+  <preference name="frameBackgroundColor" value="rgba(0,0,0,0.0)"/>
+  <preference name="hScrollBarEnabled" value="true"/>
+  <preference name="vScrollBarEnabled" value="true"/>
+  <preference name="autoLaunch" value="true"/>
+  <preference name="fullScreen" value="false"/>
+  <preference name="autoUpdate" value="true"/>
+  <preference name="smartUpdate" value="false"/>
+  <preference name="debug" value="false"/>
+  <preference name="iOS7StatusBarAppearance" value="true"/>
+  <permission name="readPhoneState"/>
+  <permission name="call"/>
+  <permission name="sms"/>
+  <permission name="camera"/>
+  <permission name="record"/>
+  <permission name="location"/>
+  <permission name="fileSystem"/>
+  <permission name="internet"/>
+  <permission name="bootCompleted"/>
+  <permission name="hardware"/>
+  <permission name="contact"/>
+  <access origin="*"/>
+</widget>

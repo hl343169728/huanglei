@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<widget id="A6982997209785" version="0.0.1"><!-- ID：应用ID，由云服务器自动分配；version:widget的版本号 -->
+  <name>AppTest</name><!-- 名称 -->
+  <description>我的第二个应用</description><!-- 简单描述信息 -->
+  <author email="hl343169728@126.com" href="http://www.apicloud.com">hl4098946</author><!-- 作者信息-->
+  <content src="index.html"/><!-- 运行的起始页，支持相对/绝对路径 -->
+  <preference name="pageBounce" value="true"/><!-- 配置页面是否弹动 -->
+  <preference name="appBackground" value="rgba(0,0,0,0.0)"/><!-- 配置APP全局背景 -->
+  <preference name="windowBackground" value="rgba(0,0,0,0.0)"/><!-- 配置Window默认背景 -->
+  <preference name="frameBackgroundColor" value="rgba(0,0,0,0.0)"/><!-- 配置Frame默认背景 -->
+  <preference name="hScrollBarEnabled" value="true"/><!-- 配置页面是否默认显示横向滚动条 -->
+  <preference name="vScrollBarEnabled" value="true"/><!-- 配置页面是否默认显示竖直滚动条 -->
+  <preference name="autoLaunch" value="true"/><!-- 配置启动页是否自动隐藏 -->
+  <preference name="fullScreen" value="false"/><!-- 配置应用是否全屏运行 -->
+  <preference name="autoUpdate" value="true"/><!-- 配置应用是否自动检测更新 -->
+  <preference name="smartUpdate" value="false"/><!-- 配置应用是否支持增量更新、云修复 -->
+  <preference name="debug" value="false"/><!-- 配置应用开启/关闭调试模式 -->
+  <preference name="iOS7StatusBarAppearance" value="true"/>
+  <permission name="readPhoneState"/><!-- 读取手机状态和身份 -->
+  <permission name="call"/><!-- 直接拨打电话 -->
+  <permission name="sms"/><!-- 直接发送短信 -->
+  <permission name="camera"/><!-- 使用拍照和视频 -->
+  <permission name="record"/><!-- 使用录音 -->
+  <permission name="location"/><!-- 访问地理位置信息 -->
+  <permission name="fileSystem"/><!-- 访问文件系统 -->
+  <permission name="internet"/><!-- 完全的访问网络权限 -->
+  <permission name="bootCompleted"/><!-- 开机启动 -->
+  <permission name="hardware"/><!-- 控制振动/闪光灯/屏幕休眠等硬件设备 -->
+  <permission name="contact"/><!-- 访问设备通讯录 -->
+  <access origin="*"/><!-- 允许访问的资源范围，一般配置“*”，代表允许访问所有 -->
+</widget>
