@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xmlns:aop="http://www.springframework.org/schema/aop"
+xmlns:tx="http://www.springframework.org/schema/tx"
+xmlns:context="http://www.springframework.org/schema/context"
+xsi:schemaLocation="
+http://www.springframework.org/schema/beans 
+http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+http://www.springframework.org/schema/tx
+http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+http://www.springframework.org/schema/aop 
+http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+http://www.springframework.org/schema/context   
+http://www.springframework.org/schema/context/spring-context-2.5.xsd
+"> 
+	
+	<!-- 
+		dbcp  所用到的jar包。spring-framework-2.5.6-with-dependencies\spring-framework-2.5.6\lib\jakarta-commons
+		commons-dbcp.jar  commons-pool.jar
+	 -->
+	<context:component-scan base-package="com.bjsxt"></context:component-scan>
+	 
+	<bean id="dataBase"  
+            class="org.apache.commons.dbcp.BasicDataSource">  
+            <property name="driverClassName"  
+                value="com.mysql.jdbc.Driver"><!-- 指定数据库的JDBC的驱动类 -->  
+            </property>  
+            <property name="url" value="jdbc:mysql://localhost:3306/ssh"></property>  <!-- 指定JDBC连接数据库的URL -->
+            <property name="username" value="root"></property>  <!-- 指定数据库的用户名 -->
+            <property name="password" value="root"></property>  <!-- 指定数据库的密码 -->
+    </bean>  
+
+	<bean  id="sessionFactory"  class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="dataSource"  ref="dataBase" ></property>
+		<!-- 注意：spring 管理 sessionFactory 时，hibernate. 不能省略。-->
+		<property name="hibernateProperties"  >
+			<props>
+				<prop key="hibernate.dialect" >org.hibernate.dialect.MySQLDialect</prop><!-- 指定数据库的方言 -->
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.show_sql">true</prop><!-- 在控制台显示SQL语句，以便于调试及检查 -->
+			</props>
+		</property>
+		
+		<property name="packagesToScan">
+			<value>com.bjsxt.po</value>
+		</property>
+		
+		<!-- 注解方式
+			<property name="annotatedClasses">
+            	<list>
+            		<value>com.bjsxt.po.User</value>
+            	</list>
+            </property>
+		 -->
+	</bean>
+	
+	
+
+	<!-- HibernateTemplate类可让我们将Hibernate的使用模板化，
+			使我们对hibernate的调度更加简单，使用他，我们只要进行如下配置即可 -->
+	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate" >
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<!-- annotation 方式的事务管理 
+		除了要添加以下的配置以外，还要在需要事务的方法上加上    @Transactional
+	-->
+	<bean id="txManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager" >
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<tx:annotation-driven transaction-manager="txManager" /> 
+	
+	
+	<!-- XML配置方式管理事务（推荐使用）
+			一次性设置多个方法
+	 -->
+	<aop:config> 
+		<aop:pointcut expression="execution(public * com.bjsxt.service.*.*(..))" id="bussinessService"/> 
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="bussinessService" /> 
+	</aop:config>
+	<tx:advice id="txAdvice" transaction-manager="txManager" > 
+		<tx:attributes> 
+			<tx:method name="find*"  read-only="true" propagation="NOT_SUPPORTED"  /> 
+			<!-- get开头的方法不需要在事务中运行 。 
+			有些情况是没有必要使用事务的，比如获取数据。开启事务本身对性能是有一定的影响的--> 
+			<tx:method name="add*"  propagation="REQUIRED"/>
+			<tx:method name="del*"  propagation="REQUIRED"/>
+			<tx:method name="update*"  propagation="REQUIRED"/>
+			<tx:method name="transfer*"  propagation="REQUIRED"/>
+		</tx:attributes> 
+	</tx:advice> 
+	
+</beans>
+

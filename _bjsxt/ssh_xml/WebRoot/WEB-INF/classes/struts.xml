@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+	<constant name="struts.objectFactory" value="spring" />
+	<!-- 
+		<action name="userAction" class="com.bjsxt.action.UserAction"  >
+		通过反射 创建action， 并执行 方法的过程。
+	
+	 -->
+    <package name="default" namespace="/" extends="struts-default">
+    	
+    	<action name="userAction" class="userAction"  >
+    		<result name="list">/jsp/user/user_list.jsp</result>
+    		<result name="update">/jsp/user/user_update.jsp</result>
+    	</action>
+    </package>
+    
+</struts>

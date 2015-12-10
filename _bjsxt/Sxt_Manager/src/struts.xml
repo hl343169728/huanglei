@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+    "http://struts.apache.org/dtds/struts-2.1.dtd">
+
+<struts>  
+
+	<constant name="struts.devMode" value="true"></constant>
+    <include file="struts-default.xml" />  
+    <package name="json"  extends="json-default">  
+    	 
+       	 <global-results>
+	    	 	<result name="SUCCESSPAGE">/jsp/globalresults/successpage.jsp</result>  
+	     </global-results>  
+	   
+          <action name="EmployeeAction" class="com.sxt.manager.action.EmployeeAction">
+          		<result name="UPDATE">/jsp/employee/employee_update.jsp</result>
+          		<result name="VIEW">/jsp/employee/employee_onlist.jsp</result>
+          		<result name="LEAVE">/jsp/employee/employee_leave.jsp</result>
+          </action>
+			
+		  <action name="EditorAction" class="com.sxt.manager.action.EditorAction">
+         	<result type="json">
+         		<param name="root">pagination</param>
+         		<param name="includeProperties">temp</param>
+         		<param name="excludeNullProperties">true</param> 
+         	</result>		  
+		  </action>
+		  
+		  <action name="OrgAction" class="com.sxt.manager.action.OrgAction">
+		  		<result name="UPDATE">/jsp/org/org_update.jsp</result>
+		  </action>
+		  
+		  
+		  <action name="UserAction" class="com.sxt.manager.action.UserAction">
+			  <result name="WORK">/jsp/facade/work.jsp</result>
+			  <result name="LOGIN">/index.jsp</result>
+		  </action>
+		  
+		  <action name="MessageAction" class="com.sxt.manager.action.MessageAction">
+		  	  <result name="WRITER">/jsp/message/message_add.jsp</result>
+		  </action>
+		  
+		  <action name="JobAction" class="com.sxt.manager.action.JobAction">
+		  	  	<result name="UPDATE">/jsp/job/job_update.jsp</result>
+		  </action>
+		  
+		  <action name="StudentAction" class="com.sxt.manager.action.StudentAction">
+		  		<result name="LEAVE">/jsp/student/student_leave.jsp</result>
+		  		<result name="PRESTUDENT">/jsp/student/student_preStudent.jsp</result>
+		  		<result name="REALSTUDENT">/jsp/student/student_realStudent.jsp</result>
+		  		<result name="UPDATE">/jsp/student/student_update.jsp</result>
+		  		<result name="DROPOUT">/jsp/student/student_dropOut.jsp</result>
+		  </action>
+		  
+		  <action name="GradeAction" class="com.sxt.manager.action.GradeAction">
+		  		<result name="UPDATE">/jsp/grade/grade_update.jsp</result>
+		  </action>
+		  
+		  <action name="ShouruAction" class="com.sxt.manager.action.ShouruAction">
+		  		<result name="PREUPDATE">/jsp/shouru/shouru_update.jsp</result>
+		  </action>
+		  
+		  <action name="ZhichuAction" class="com.sxt.manager.action.ZhichuAction">
+		  		<result name="PREUPDATE">/jsp/zhichu/zhichu_update.jsp</result>
+		  </action>
+		  
+		  <action name="MemoAction" class="com.sxt.manager.action.MemoAction">
+		  		<result name="PREUPDATE">/jsp/memo/memo_update.jsp</result>
+		  </action>
+    </package>  
+</struts>  

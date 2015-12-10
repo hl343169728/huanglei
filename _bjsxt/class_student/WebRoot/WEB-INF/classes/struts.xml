@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+    "http://struts.apache.org/dtds/struts-2.1.dtd">
+
+<struts>  
+	
+	<constant name="struts.i18n.encoding" value="utf-8" />
+    <package name="default"  namespace="/" extends="struts-default">  
+    
+		<action name="StudentAction" class="com.bjsxt.action.StudentAction">
+			<result name="list" type="redirect">StudentAction!getStudentList</result>
+			<result name="success">/jsp/student/student_list.jsp</result>
+			<result name="update">/jsp/student/student_update.jsp</result>
+		</action>
+		
+		<action name="ClzAction" class="com.bjsxt.action.ClzAction">
+			<result name="VIEW" type="redirect">ClzAction!getClassList</result>
+			<result name="LIST">/jsp/class/class_list.jsp</result>
+			<result name="DETAIL">/jsp/class/class_detail.jsp</result>
+		</action>
+		
+		<action name="TestActionContextAction" class="com.bjsxt.action.TestActionContextAction">
+			<result name="SUCCESS">/index.jsp</result>
+		</action>
+		
+    </package>  
+</struts>  

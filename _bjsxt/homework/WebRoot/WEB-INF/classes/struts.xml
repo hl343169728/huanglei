@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+    "http://struts.apache.org/dtds/struts-2.1.dtd">
+
+<struts>  
+	
+	<constant name="struts.i18n.encoding" value="utf-8" />
+    <package name="default"  namespace="/" extends="struts-default">  
+    
+		<interceptors>
+    		<!-- 用户自定义的拦截器 -->
+    		<interceptor name="LoginInter" class="com.bjsxt.interceptor.LoginInteceptor"></interceptor>
+    		<interceptor-stack name="ccc">
+    			<!-- 计时拦截器 -->
+    			<interceptor-ref name="timer"></interceptor-ref>
+    			<interceptor-ref name="LoginInter"></interceptor-ref>
+    			<interceptor-ref name="defaultStack"></interceptor-ref>
+    		</interceptor-stack>
+    	</interceptors>
+    	
+    	<default-interceptor-ref name="ccc"></default-interceptor-ref>
+    	
+    	<!-- 全局的 -->
+    	<global-results>
+    		<result name="welcome">/welcome.jsp</result>
+    		<result name="login">/jsp/user/user_login.jsp</result>
+    	</global-results>
+		
+		<action name="StudentAction" class="com.bjsxt.action.StudentAction">
+			<result name="list" type="redirect">StudentAction!list</result>
+			<result name="success">/jsp/student/student_list.jsp</result>
+		</action>
+		
+		<action name="HomeworkAction" class="com.bjsxt.action.HomeworkAction">
+			<result name="list" type="redirect">HomeworkAction!list</result>
+			<result name="success">/jsp/homework/homework_list.jsp</result>
+		</action>
+		
+		<action name="UserAction" class="com.bjsxt.action.UserAction">
+			<result name="success">/success.jsp</result>
+			<result name="welcomeTeacher">/jsp/teacher/teacher_welcome.jsp</result>
+			<result name="welcomeStudent">/jsp/student/student_welcome.jsp</result>
+		</action>
+		
+		<action name="TeacherAction" class="com.bjsxt.action.TeacherAction">
+			
+		</action>
+    </package>  
+</struts>  

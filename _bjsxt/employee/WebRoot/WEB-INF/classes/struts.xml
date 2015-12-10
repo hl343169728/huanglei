@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+    "http://struts.apache.org/dtds/struts-2.1.dtd">
+
+<struts>  
+	
+	<constant name="struts.i18n.encoding" value="utf-8" />
+    <package name="default"  namespace="/" extends="struts-default">  
+    
+		<action name="EmployeeAction" class="com.bjsxt.action.EmployeeAction">
+			<result name="list" type="redirect">EmployeeAction!list</result>
+			<result name="success">/jsp/employee/employee_list.jsp</result>
+			<result name="update">/jsp/employee/employee_update.jsp</result>
+		</action>
+		
+    </package>  
+</struts>  
