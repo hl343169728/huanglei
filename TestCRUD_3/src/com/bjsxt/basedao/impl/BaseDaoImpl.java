@@ -34,12 +34,10 @@ public class BaseDaoImpl<Entity> implements BaseDao<Entity>{
 		String sql = "insert into " + clazz.getSimpleName() + " values(null";
 		//获取clazz类所声明的属性 去 拼接sql语句
 		Field[] fs = clazz.getDeclaredFields();
-		//System.out.println(fs.length);
 		for(int i = 1 ; i < fs.length; i ++){
 			sql += ",?";
 		}
 		sql = sql + ")";
-		//System.out.println(sql);
 		PreparedStatement ps = DBUtils.getState(conn, sql);
 		//ps.setString(1, user.getName());  // id name age descrition
 		for(int i = 1 ; i < fs.length; i ++){
@@ -69,14 +67,12 @@ public class BaseDaoImpl<Entity> implements BaseDao<Entity>{
 			 sql += fs[i].getName() + "=?,";
 		 }
 		 sql = sql.substring(0, sql.length()-1) + " where id =?";
-		 //System.out.println(sql);
 		 PreparedStatement ps = DBUtils.getState(conn, sql);
 		 for(int i = 1 ; i < fs.length ; i++){ 
 				String methodName = "get" + Character.toUpperCase(fs[i].getName().charAt(0)) + fs[i].getName().substring(1);
 				Method m = clazz.getMethod(methodName);
 				ps.setObject(i, m.invoke(entity));  			 
 		 }
-		 //getId
 		 Method m2 = clazz.getMethod("getId");
 		 ps.setObject(fs.length, m2.invoke(entity));
 		 ps.executeUpdate();
@@ -122,7 +118,6 @@ public class BaseDaoImpl<Entity> implements BaseDao<Entity>{
 				//User u = new User();
 				//u.setName(rs.getString("name"));
 				String methodName = "set" + Character.toUpperCase(fs[i].getName().charAt(0)) + fs[i].getName().substring(1);
-				//System.out.println(methodName); 
 				Method m = clazz.getMethod(methodName, fs[i].getType());
 				//u.setAge(rs.getInt("age"));
 				m.invoke(entity, rs.getObject(fs[i].getName()));

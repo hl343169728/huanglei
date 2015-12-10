@@ -66,8 +66,7 @@ public class EmployeeServlet extends HttpServlet {
 				response.sendRedirect("jsp/facade/work.jsp");
 			} else {
 				request.setAttribute("error", "用户名或密码不正确！");
-				request.getRequestDispatcher("index.jsp").forward(request,
-						response);
+				request.getRequestDispatcher("index.jsp").forward(request, response);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
