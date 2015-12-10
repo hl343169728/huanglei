@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="css/mui.min.css">
+		<style type="text/css">
+			.wh64{
+	    		width: 64px;
+	    		height: 64px;
+	    	}
+		</style>
+	</head>
+	<body>
+		<!-- 中间内容 -->
+		<div class="mui-content">
+			<div id="slider" class="mui-slider">
+				<div class="mui-slider-group mui-slider-loop">
+					<!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
+					<div class="mui-slider-item mui-slider-item-duplicate">
+						<a href="#">
+							<img src="images/yuantiao.jpg">
+							<p class="mui-slider-title">静静看这世界</p>
+						</a>
+					</div>
+					<div class="mui-slider-item">
+						<a href="#">
+							<img src="images/shuijiao.jpg">
+							<p class="mui-slider-title">幸福就是可以一起睡觉</p>
+						</a>
+					</div>
+					<div class="mui-slider-item">
+						<a href="#">
+							<img src="images/muwu.jpg">
+							<p class="mui-slider-title">想要一间这样的木屋，静静的喝咖啡</p>
+						</a>
+					</div>
+					<div class="mui-slider-item">
+						<a href="#">
+							<img src="images/cbd.jpg">
+							<p class="mui-slider-title">Color of SIP CBD</p>
+						</a>
+					</div>
+					<div class="mui-slider-item">
+						<a href="#">
+							<img src="images/yuantiao.jpg">
+							<p class="mui-slider-title">静静看这世界</p>
+						</a>
+					</div>
+					<!-- 额外增加的一个节点(循环轮播：最后一个节点是第一张轮播) -->
+					<div class="mui-slider-item mui-slider-item-duplicate">
+						<a href="#">
+							<img src="images/shuijiao.jpg">
+							<p class="mui-slider-title">幸福就是可以一起睡觉</p>
+						</a>
+					</div>
+				</div>
+				<div class="mui-slider-indicator mui-text-right">
+					<div class="mui-indicator mui-active"></div>
+					<div class="mui-indicator"></div>
+					<div class="mui-indicator"></div>
+					<div class="mui-indicator"></div>
+				</div>
+			</div>
+		</div>
+		<div class="mui-content-padded">
+			<ul class="mui-table-view mui-grid-view mui-grid-9 ">
+		        <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+		        	<a id="lost_back" href="#">
+		                <span class="mui-icon"><img src="images/lost_back.png" class="wh64"></span>
+		                <div class="mui-media-body">失物招领</div>
+		        	</a>
+		        </li>
+		        <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+		        	<a id="love_charity" href="#">
+		                <span class="mui-icon"><img src="images/love_charity.png" class="wh64"></span>
+		                <div class="mui-media-body">爱心公益</div>
+		        	</a>
+		        </li>
+		        <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+		        	<a id="love_transfer" href="#">
+		                <span class="mui-icon"><img src="images/love_pass.png" class="wh64"></span>
+		                <div class="mui-media-body">爱心传递</div>
+		        	</a>
+		        </li>
+		        <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+		        	<a id="culture_pioneer" href="#">
+		                <span class="mui-icon"><img src="images/pioneer.png" class="wh64"></span>
+		                <div class="mui-media-body">文明先锋</div>
+		        	</a>
+		        </li>
+		        <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+		        	<a href="#">
+		                <span class="mui-icon"><img src="images/diary.png" class="wh64"></span>
+		                <div class="mui-media-body">好人日记</div>
+		        	</a>
+		        </li>
+		        <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+		        	<a href="#">
+		                <span class="mui-icon"><img src="images/integral.png" class="wh64"></span>
+		                <div class="mui-media-body">好人积分</div>
+		        	</a>
+		        </li>
+		   	</ul> 	
+		</div>
+	</body>
+	<script src="js/mui.min.js"></script>
+	<script type="text/javascript" charset="utf-8">
+		mui.init();
+		// 图片轮播
+		mui("#slider").slider({
+			interval: 5000 
+		});
+		
+		// 遗失招领
+		document.getElementById("lost_back").addEventListener('tap', function() {
+			mui.openWindow({
+				url: 'lost_found.html',
+				id:'lost_found'
+			});
+		});
+		
+		// 爱心公益
+		document.getElementById("love_charity").addEventListener('tap', function() {
+			mui.openWindow({
+				url: 'love_charity.html',
+				id:'love_charity'
+			});
+		});
+		
+		// 爱心传递
+		document.getElementById("love_transfer").addEventListener('tap', function() {
+			mui.openWindow({
+				url: 'love_transfer.html',
+				id:'love_transfer'
+			});
+		});
+		
+		// 文明先锋
+		document.getElementById("culture_pioneer").addEventListener('tap', function() {
+			mui.openWindow({
+				url: 'culture_pioneer.html',
+				id:'culture_pioneer'
+			});
+		});
+</script>
+</html>
