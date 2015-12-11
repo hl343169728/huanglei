@@ -1,0 +1,11 @@
+一、学员管理
+（1）、学员列表
+http://localhost:8089/cs/StudentAction!getStudentList
+（2）、学员新增
+http://localhost:8089/cs/jsp/student/student_add.jsp
+
+二、班级管理
+（1）、班级新增
+http://localhost:8089/cs/jsp/class/class_add.jsp
+（2）、班级列表
+http://localhost:8089/cs/ClzAction!getClassList
