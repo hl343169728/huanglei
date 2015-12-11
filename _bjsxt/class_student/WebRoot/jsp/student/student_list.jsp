@@ -11,7 +11,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>My JSP 'student_list.jsp' starting page</title>
+    <title>学生列表</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -68,10 +68,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    	 		<td>${temp.age }</td>
 	    	 		<td>${temp.srow }</td>
 	    	 		<td>${temp.scol }</td>
-	    	 		<td>
-	    	 		
-	    	 			<img src="${temp.imagePath}" />
-	    	 		</td>
+	    	 		<td><img src="${temp.imagePath}" /></td>
 	    	 		<td>
 	    	 			<a href=StudentAction!preUpdate?id=${temp.id}>修改</a> | <a href=StudentAction!del?id=${temp.id}>删除</a>
 	    	 		</td>
