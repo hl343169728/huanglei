@@ -13,6 +13,7 @@ public class Pagination {
 	 * 数据库查询得出
 	 */
 	private int total ; 				//    总记录数 totalCount
+	@SuppressWarnings("rawtypes")
 	private List rows ;					// 　 本页的数据列表record
 	/**
 	 * 经过计算得出
@@ -34,6 +35,7 @@ public class Pagination {
 	 * @param rows
 	 * @param recordList
 	 */
+	@SuppressWarnings("rawtypes")
 	public Pagination(int currentPage, int pageSize, int total, List rows) {
 		this.currentPage = currentPage;
 		this.pageSize = pageSize;
@@ -79,10 +81,12 @@ public class Pagination {
 		this.total = total;
 	}
 
+	@SuppressWarnings("rawtypes")
 	public List getRows() {
 		return rows;
 	}
 
+	@SuppressWarnings("rawtypes")
 	public void setRows(List rows) {
 		this.rows = rows;
 	}

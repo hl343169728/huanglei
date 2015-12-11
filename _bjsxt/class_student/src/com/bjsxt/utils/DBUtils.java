@@ -11,7 +11,6 @@ import java.util.Properties;
 
 
 public class DBUtils {
-
 	
 	//静态的集合hashtable的子类
 	private static Properties props = new Properties();
@@ -34,7 +33,6 @@ public class DBUtils {
 		}
 	}
 	
-	
 	/**
 	 * 获得数据库连接
 	 * @return
@@ -53,13 +51,11 @@ public class DBUtils {
 		return conn;
 	}
 	
-	
 	public static PreparedStatement getStat(Connection conn , String sql){
 		PreparedStatement ps = null;
 		try {
 			 ps = conn.prepareStatement(sql);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return ps;
@@ -75,7 +71,6 @@ public class DBUtils {
 		}	
 	}
 	
-	
 	public static void close(PreparedStatement ps){
 		if(ps != null){
 			try {
@@ -86,7 +81,6 @@ public class DBUtils {
 		}	
 	}
 	
-	
 	public static void close(ResultSet rs){
 		if(rs != null){
 			try {
@@ -96,6 +90,5 @@ public class DBUtils {
 			}
 		}	
 	}
-	
 	
 }

@@ -19,8 +19,10 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 	/**
 	 * 公共Class类全限命名对象
 	 */
+	@SuppressWarnings("rawtypes")
 	protected Class clazz ;	
 	
+	@SuppressWarnings("rawtypes")
 	public BaseDaoImpl(){
 		/**
 		 * 带有真实类型参数的返回值对象
@@ -125,6 +127,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 	/**
 	 * reflect实现公共查询所有方法
 	 */
+	@SuppressWarnings("rawtypes")
 	public List<T> findAll()  throws Exception {
 		Connection conn = DBUtils.createConn();	
 		String sql = "select * from " +clazz.getSimpleName();
@@ -157,6 +160,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 	 * @param params
 	 * @return
 	 */
+	@SuppressWarnings("rawtypes")
 	public  List<T> queryListForParams(String sql,Object[] params ) throws Exception{
 		Connection conn  = DBUtils.createConn();
 		PreparedStatement ps = null;
