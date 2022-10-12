@@ -18,7 +18,7 @@
 		<spring-data-jpa.version>1.1.0.RELEASE</spring-data-jpa.version>
 		<cxf.version>2.6.0</cxf.version>
 		<jersey.version>1.12</jersey.version>
-		<shiro.version>1.2.0</shiro.version>
+		<shiro.version>1.10.0</shiro.version>
 		<activemq.version>5.5.1</activemq.version>
 		<quartz.version>2.1.5</quartz.version>
 		<ehcache.version>2.5.2</ehcache.version>
